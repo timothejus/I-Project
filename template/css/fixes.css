@@ -1,0 +1,32 @@
+/* Zorgt ervoor dat de elementen in de dropdown-lijst niet geclipt worden door de navbar op kleine schermen */
+#loginNav {
+	overflow: visible;
+}
+
+/* Zorgt dat de dropdown-lijst niet naar een nieuwe regel verspringt. */
+.selectmenu {
+	display: inline-block;
+}
+
+/* Zorgt dat de placeholder in de dropdown-lijst niet in de lijst zit */
+.hide {
+	display: none;
+}
+
+/* Zorgt dat de homepagina items niet groot worden door een te hoge foto */
+img.img-thumbnail-overview {
+	max-height: 200px;
+}
+
+img.img-thumbnail-primary {
+	max-height: 250px;
+}
+
+a:link.panelheader-link, a:visited.panelheader-link {
+	color: inherit;
+}
+
+a:hover.panelheader-link {
+	color: inherit;
+	text-decoration: underline;
+}
