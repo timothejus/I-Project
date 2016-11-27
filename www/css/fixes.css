@@ -22,6 +22,10 @@ img.img-thumbnail-primary {
 	max-height: 250px;
 }
 
+img.img-thumbnail-secondary {
+	max-height: 100px;
+}
+
 a:link.panelheader-link, a:visited.panelheader-link {
 	color: inherit;
 }

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-select.min.css" rel="stylesheet">
+
+    <!-- Kleine CSS fixes -->
+    <link href="css/fixes.css" rel="stylesheet">
+
+    <title>Home</title>
+</head>
+<body>
+
+<!-- Scripts voor extra functionaliteit van Bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+
+<!-- Navbar containers -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <!-- Navbar logo -->
+        <div class="navbar-header">
+            <img class="navbar-brand" src="images/logo.jpg" alt="EenmaalAndermaal">
+            <button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Inklappend menu voor kleine schermen -->
+        <div class="collapse navbar-collapse" id="loginNav">
+
+            <!-- Zoekbalk/filters -->
+            <div class="navbar-left">
+                <form class="navbar-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Zoek">
+                        <div class="selectmenu">
+                            <select class="form-control selectpicker">
+                                <option class="hide" value="" disabled selected>Categorieen</option>
+                                <option value="cat1">Categorie 1</option>
+                                <option value="cat2">Categorie 2</option>
+                                <option value="cat3">Categorie 3</option>
+                                <option value="cat4">Categorie 4</option>
+                                <option value="cat5">Categorie 5</option>
+                                <option value="cat6">Categorie 6</option>
+                                <option value="cat7">Categorie 7</option>
+                                <option value="cat8">Categorie 8</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Login/registreer/help knoppen -->
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Log in</a></li>
+                    <li><a href="#">Registreer</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- Main container -->
+<div class="container">
+    <div class="row">
+
+        <!-- View image -->
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" class="panelheader-link">Product something</a></div>
+                <div class="panel-body text-center">
+                    <img src="images/box.png" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
+                </div>
+                <div class="panel-body text-center">
+                    <img src="images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+                    <img src="images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+                    <img src="images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+                    <img src="images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6">
+            <!--Product beschikbaarheid-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel-heading">
+                        <h4 class="text-center text-danger">Dit product is nog maar 0:00:20 beschikbaar!</h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seller/biedingen information -->
+            <div class="row">
+
+                <!--Seller information-->
+                <div class="col-sm-4">
+                    <h5 class="panelheader-link"><b>Aanbieder</b></h5>
+                    <ul>
+                        <li>T. Hendriksen</li>
+                        <li>Loddero 12</li>
+                        <li>6981HK Doesburg<br></li>
+                    </ul><br>
+
+                    <button type="button" class="btn btn-primary btn-md">Geef Feedback</button><br>
+                    <br>
+                    <h5><b>Verzending</b></h5>
+                    <p>Ophalen of verzending (6,75 (PostNL))</p>
+                    <br>
+
+                </div>
+
+                <!--Biedingen-->
+                <div class="col-sm-8">
+                <div class="panel-heading"><b>Geboden</b></div>
+                <table class="table table-responsive">
+                    <tr>
+                        <th>Naam</th>
+                        <th>Geboden</th>
+                        <th>Datum</th>
+                    </tr><tr>
+                        <td>S. Scheffer</td>
+                        <td>€20,00</td>
+                        <td>27-11</td>
+                    </tr><tr>
+                        <td>C. Rasing</td>
+                        <td>€15,00</td>
+                        <td>26-11</td>
+                    </tr><tr>
+                        <td>J. Brouwer</td>
+                        <td>€13,00</td>
+                        <td>26-11</td>
+                    </tr><tr>
+                        <td>C. Verhoeven</td>
+                        <td>€10,00</td>
+                        <td>25-11</td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+
+            <!--Bod Plaatsen-->
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-inline">
+                        <label for="bod">Uw Bod:</label>
+                        <input type="text" class="form-control" id="bod">
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--product information-->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+            <div class="panel-heading"><a href="#" class="panelheader-link">Product information</a></div>
+                <div>
+                    <b>Beschrijving</b><br>
+                    Some random information about a product that is not important. Also i would't buy this product because this doesn't work at all.
+                    <br><br>
+                    <b>Kenmerken</b>
+                    <ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <span class="text-left">Product nummer: 743045728340</span>
+        </div>
+        <div class="col-sm-6">
+            <div class="text-muted text-right"><a><span class="glyphicon glyphicon-warning-sign"></span>  Report veiling</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <footer class="footer text-right">
+        <span class="text-muted">&copy; 2016 Ubera</span>
+    </footer>
+</div>
+
+</body>
+</html>
