@@ -24,7 +24,7 @@ function geefProductGroot () {
 					<tr>
 						<th class="text-center">&euro;<?=$prijs?></th>
 						<th class="text-danger text-center"><?=$resttijd?></th>
-						<th class="text-center"><a href="#" class="btn btn-xs btn-danger">Bied</a></th>
+						<th class="text-center"><a href="" class="btn btn-xs btn-danger">Bied</a></th>
 					</tr>
 				</table>
 			</div>
