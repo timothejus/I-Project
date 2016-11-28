@@ -1,4 +1,7 @@
-<?php require ("scripts/product_klein.php"); ?>
+<?php
+require ("scripts/product_groot.php");
+require ("scripts/product_klein.php");
+?>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -82,25 +85,7 @@
 			<!-- Product van de dag -->
 			<div class="row">
 
-				<div class="col-sm-6 col-sm-offset-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4><a href="#" class="panelheader-link">Product van de dag</a></h4>
-						</div>
-						<div class="panel-body text-center">
-							<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
-						</div>
-						<div class="panel-footer">
-							<table class="table table-responsive">
-								<tr>
-									<th class="text-center">&euro;100,-</th>
-									<th class="text-danger text-center">0:39:20</th>
-									<th class="text-center"><a href="#" class="btn btn-xs btn-danger">Bied</a></th>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
+				<?php geefProductGroot (); ?>
 
 			</div>
 
