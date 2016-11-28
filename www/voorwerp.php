@@ -51,7 +51,7 @@
         //properties
         public function getVoorwerpnummer()
         {
-            return this->$this->voorwerpnummer;
+            return $this->voorwerpnummer;
         }
 
         public function getTitel(){
@@ -59,7 +59,7 @@
         }
 
         public function getBeschrijving(){
-	        return this->$this->beschrijving;
+	        return $this->beschrijving;
         }
 
         public function getStartprijs(){
