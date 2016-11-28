@@ -22,6 +22,11 @@ img.img-thumbnail-primary {
 	max-height: 250px;
 }
 
+img.img-thumbnail-secondary {
+	max-height: 100px;
+}
+
+/* Zorgt dat de link leesbaar blijft bij panel-heading */
 a:link.panelheader-link, a:visited.panelheader-link {
 	color: inherit;
 }
@@ -29,4 +34,9 @@ a:link.panelheader-link, a:visited.panelheader-link {
 a:hover.panelheader-link {
 	color: inherit;
 	text-decoration: underline;
+}
+
+/* Verticale spacing tussen rijen */
+.top-buffer {
+	margin-top: 16px;
 }
