@@ -26,6 +26,7 @@
         private $rubriek;
 
 
+		//construcor
         function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$betalingsinstructie,$betalingsinstructie,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$verkoper,$koper,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$rubriek)
         {
             $this->$voorwerpnummer = $voorwerpnummer;
@@ -47,8 +48,76 @@
             $this->$verkoopPrijs = $verkoopPrijs;
         }
 
+        //properties
         public function getVoorwerpnummer()
         {
             return this->$this->voorwerpnummer;
         }
+
+        public function getTitel(){
+	        return $this->titel;
+        }
+
+        public function getBeschrijving(){
+	        return this->$this->beschrijving;
+        }
+
+        public function getStartprijs(){
+        	return $this->startprijs;
+        }
+
+        public function getBetalingswijze(){
+        	return $this->betalingswijze;
+        }
+
+	    public function getBetalingsInstructie(){
+		    return $this->betalingsinstructie;
+	    }
+
+	    public function getPlaatsnaam(){
+		    return $this->plaatsnaam;
+	    }
+
+	    public function getLand(){
+		    return $this->land;
+	    }
+
+	    public function getLooptijd(){
+		    return $this->looptijd;
+	    }
+
+	    public function getLooptijdBegindagTijdstip(){
+		    return $this->looptijdBegindagTijdstip;
+	    }
+
+	    public function getVerzendkosten(){
+		    return $this->verzendkosten;
+	    }
+
+	    public function getVerzendInstructies(){
+		    return $this->verzendInstructies;
+	    }
+
+	    public function getVerkoper(){
+		    return $this->verkoper;
+	    }
+
+	    public function getKoper(){
+		    return $this->koper;
+	    }
+
+	    public function getLooptijdEindedag(){
+		    return $this->looptijdEindeDag;
+	    }
+
+	    public function getVeilingGesloten(){
+		    return $this->looptijdEindeDag;
+	    }
+
+	    public function getVerkoopprijs(){
+		    return $this->verkoopPrijs;
+	    }
+
+	    //functies
+
     }
