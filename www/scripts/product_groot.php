@@ -10,6 +10,7 @@ function geefProductGroot () {
 	$plaatje = '../www/images/box.png';
 	$prijs = '6,50';
 	$resttijd = '00:39:20';
+
 	?>
 	<div class="col-sm-6 col-sm-offset-3">
 		<div class="panel panel-primary">
