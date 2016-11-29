@@ -38,7 +38,7 @@ require ("scripts/header.php");
 	<div class="row">
 
 		<?php
-		// SQL query voor alle info behalve de aflooptijd.
+		// SQL query voor alle info behalve de aflooptijd. Alle producten waar op geboden is worden weergegeven.
 		$sql = "SELECT * FROM Voorwerp INNER JOIN Bod ON Voorwerp.Voorwerpnummer=Bod.Voorwerp WHERE Bod.Bodbedrag = (SELECT MAX (Bodbedrag) FROM Bod WHERE Bod.Voorwerp=Voorwerp.Voorwerpnummer)";
 
 		// Loop voor alle producten
