@@ -1,7 +1,15 @@
 <?php
 require ("scripts/login.php");
-if (isset($_GET["login"]) && isset($_GET["wachtwoord"])){
-	login($_GET["login"],$_GET["wachtwoord"]);
+if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != ""){
+	if (login($_GET["login"],$_GET["password"]) == true) {
+		header("refresh:0;url=index.php");
+
+	} elseif (login($_GET["login"],$_GET["password"]) == true) {
+
+	}
+	else {
+		echo "Uw gebruikersnaam of wachtwoord is verkeerd";
+	}
 }
 
 ?>
@@ -91,20 +99,22 @@ if (isset($_GET["login"]) && isset($_GET["wachtwoord"])){
 				<div class="col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading"><a href="#" class="panelheader-link">Inloggen</a></div>
-						<form action="login.php" method="post">
-							<div class="panel-body">
+						<form action='login.php' method='get'>
+							<div class='panel-body'>
 								Gebruikersnaam
-								<input type="text" class="form-control" name="login"><br/>
+								<input type='text' class='form-control' name='login' value='<?php if(isset($_GET['login'])) {
+									echo $_GET['login'];
+								}?>'><br/>
 								Wachtwoord
-								<input type="password" class="form-control" name="password">
+								<input type='password' class='form-control' name='password'>
 							</div>
-							<div class="panel-footer">
-								<div class="row">
-									<div class="col-sm-6">
-										<button type="submit" class="btn btn-default">Login</button>
+							<div class='panel-footer'>
+								<div class='row'>
+									<div class='col-sm-6'>
+										<button type='submit' class='btn btn-default'>Login</button>
 									</div>
-									<div class="col-sm-6 text-right">
-										<a href="#">Wachtwoord vergeten?</a>
+									<div class='col-sm-6 text-right'>
+										<a href='#'>Wachtwoord vergeten?</a>
 									</div>
 								</div>
 							</div>

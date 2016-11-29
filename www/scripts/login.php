@@ -11,7 +11,10 @@ function login($login, $wachtwoord){
 	$stmt->execute();
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
-		$achternaam = $row['Achternaam'];
+			$achternaam = $row['Achternaam'];
+	}
+	if (!isset($achternaam)){
+		return false;
 	}
 	$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
 	$stmt = $dbh->prepare($sql);
