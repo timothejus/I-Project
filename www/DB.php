@@ -7,9 +7,9 @@
  * Time: 10:49
  */
 
-class DB
-{
-	public function getVoorwerpen()
+
+
+	function getVoorwerpen()
 	{
 		$voorwerpen = array();
 
@@ -31,9 +31,9 @@ class DB
 				$voorwerpen[] = $voorwerp;
 			}
 		}
-
-		echo $voorwerpen;
+		print_r($voorwerpen);
 		return $voorwerpen;
 
 	}
-}
+
+	?>

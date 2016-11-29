@@ -7,6 +7,7 @@
  */
 
 function geefProductKlein () {
+
 	$titel = 'Titel';
 	$plaatje = '../www/images/box.png';
 	$prijs = '6,50';

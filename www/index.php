@@ -3,9 +3,8 @@ require("scripts/product_groot.php");
 require("scripts/product_klein.php");
 require("scripts/header.php");
 require("mssql.inc.php");
+require ("DB.php");
 
-$db = new DB();
-$db->getVoorwerpen();
 
 ?>
 <!-- Hoofdpagina container -->
