@@ -28,7 +28,7 @@
 
 
 		//construcor
-        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$betalingsinstructie,$betalingsinstructie,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$verkoper,$koper,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$rubriek)
+        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$betalingsinstructie,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$verkoper,$koper,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$rubriek)
         {
             $this->$voorwerpnummer = $voorwerpnummer;
             $this->$titel = $titel;
@@ -120,5 +120,41 @@
 	    }
 
 	    //functies
+
+	    public function getVoorwerpen()
+	    {
+		   /* $query = query("SELECT * FROM deelnemers WHERE deelnemerID=:id", array(
+			    "id" => $deelnemerID
+		    ));
+		   */
+
+		   $DB = getConnection();
+		   $DB->query("SELECT * FROM Voorwerp");
+		    # setting the fetch mode
+		    $DB->setFetchMode(PDO::FETCH_ASSOC);
+
+		    while($row = $DB->fetch()) {
+		    	$voorwerp = new Voorwerp($row["Voorwerpnummer"],$row["Titel"],$row["Beschrijving"],$row["Startprijs"],$row["Betalingswijze"],$row["Betalingsinstructie"],);
+
+		    }
+
+
+
+		    if ($query->rowCount() > 0) {
+
+		    }
+		    else {
+			    die("deelnemer not found!");
+		    }
+	    }
+
+	    private function fill(array $row)
+	    {
+		    $this->voorwerpnummer = $row["Voorwerpnummer"];
+		    $this->titel = $row["Titel"]);
+		    $this->beschrijving = $row["Beschrijving"];
+		    $this->startprijs = $row["Startprijs"];
+
+	    }
 
     }
