@@ -2,6 +2,10 @@
 require("scripts/product_groot.php");
 require("scripts/product_klein.php");
 require("scripts/header.php");
+require("mssql.inc.php");
+require ("DB.php");
+
+
 ?>
 <!-- Hoofdpagina container -->
 <div class="container">
