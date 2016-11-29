@@ -1,11 +1,10 @@
 <?php
+session_start();
 require ("scripts/login.php");
 if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != ""){
 	if (login($_GET["login"],$_GET["password"]) == true) {
 		header("refresh:0;url=index.php");
-
-	} elseif (login($_GET["login"],$_GET["password"]) == true) {
-
+		$_SESSION["user"] = $_GET["login"];
 	}
 	else {
 		echo "Uw gebruikersnaam of wachtwoord is verkeerd";
@@ -76,7 +75,6 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 							</div>
 						</form>
 					</div>
-
 					<!-- Login/registreer/help knoppen -->
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
@@ -90,7 +88,7 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 
 			</div>
 		</nav>
-
+		<?php if (!isset($_SESSION["user"])) { ?>
 		<div class="container">
 
 			<!--inloggen-->
@@ -119,6 +117,7 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 								</div>
 							</div>
 						</form>
+
 					</div>
 				</div>
 
@@ -141,6 +140,8 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 			</div>
 
 		</div>
+		<?php }
+		else { echo "u bent al ingelogd"; } ?>
 
 		<div class="container">
 			<footer class="footer text-right">
