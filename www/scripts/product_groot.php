@@ -26,4 +26,4 @@ function geefProductGroot ($titel, $plaatje, $prijs, $resttijd) {
 			</div>
 		</div>
 	</div>
-	<?php } ?>
+<?php } ?>
