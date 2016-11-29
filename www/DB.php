@@ -6,32 +6,30 @@
  * Date: 29-11-2016
  * Time: 10:49
  */
-
+require ("voorwerp.php");
 
 
 	function getVoorwerpen()
 	{
 		$voorwerpen = array();
 
-		//Controleer of er conversaties bestaat in DB
-		$query = query("SELECT * FROM Voorwerp ");
+		try {
+			$dbh = getConnection();
+			$sql = "SELECT * FROM Voorwerp";
 
-		/*
-		//Controleer of er conversaties bestaat in DB
-		$query = query("SELECT * FROM Voorwerp WHERE eplanningID=:eplanningID", array(
-			"eplanningID" => $eplanningID
-		));*/
+			$stmt = $dbh->prepare($sql);
+			$stmt->execute();
 
-
-		if ($query->rowCount() > 0)
-		{
-			foreach ($query as $row)
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC))
 			{
-				$voorwerp = new Voorwerp($row["voorwerpnummer"],$row["titel"],$row["beschrijving"],$row["startprijs"],$row["betalingswijze"],$row["betalingsinstructie"],$row["plaatsnaam"],$row["land"],$row["looptijd"],$row["looptijdBegindagTijdstip"],$row["verzendkosten"],$row["verzendInstructies"],$row["verkoper"],$row["koper"],$row["looptijdEindeDag"],$row["veilingGesloten"],$row["verkoopPrijs"],$row["rubriek"]);
+				$voorwerp = new Voorwerp($row["Voorwerpnummer"],$row["Titel"],$row["Beschrijving"],$row["Startprijs"],$row["Betalingswijze"],$row["Plaatsnaam"],$row["Land"],$row["Looptijd"],$row["LooptijdBeginDagTijdstip"],$row["VerzendKosten"],$row["VerzendInstructies"],$row["LooptijdEindeDagTijdstip"],$row["VeilingGesloten"],$row["VerkoopPrijs"]);
 				$voorwerpen[] = $voorwerp;
+
+
 			}
+		} catch (PDOException $e) {
+			echo 'Connection failed: ' . $e->getMessage();
 		}
-		print_r($voorwerpen);
 		return $voorwerpen;
 
 	}

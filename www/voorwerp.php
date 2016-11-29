@@ -8,7 +8,6 @@
         private $beschrijving;
         private $startprijs;
         private $betalingswijze;
-        private $betalingsinstructie;
         private $plaatsnaam;
         private $land;
         private $looptijd;
@@ -28,25 +27,23 @@
 
 
 		//construcor
-        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$betalingsinstructie,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$verkoper,$koper,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$rubriek)
+        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs)
         {
-            $this->$voorwerpnummer = $voorwerpnummer;
-            $this->$titel = $titel;
-            $this->$beschrijving = $beschrijving;
-            $this->$startprijs = $startprijs;
-            $this->$betalingswijze = $betalingswijze;
-            $this->$betalingsinstructie = $betalingsinstructie;
-            $this->$plaatsnaam = $plaatsnaam;
-            $this->$land = $land;
-            $this->$looptijd = $looptijd;
-            $this->$looptijdBegindagTijdstip = $looptijdBegindagTijdstip;
-            $this->$verzendkosten = $verzendkosten;
-            $this->$verzendInstructies = $verzendInstructies;
-            $this->$verkoper = $verkoper;
-            $this->$koper = $koper;
-            $this->$looptijdEindeDag = $looptijdEindeDag;
-            $this->$veilingGesloten = $veilingGesloten;
-            $this->$verkoopPrijs = $verkoopPrijs;
+            $this->voorwerpnummer = $voorwerpnummer;
+            $this->titel = $titel;
+            $this->beschrijving = $beschrijving;
+            $this->startprijs = $startprijs;
+            $this->betalingswijze = $betalingswijze;
+
+            $this->plaatsnaam = $plaatsnaam;
+            $this->land = $land;
+            $this->looptijd = $looptijd;
+            $this->looptijdBegindagTijdstip = $looptijdBegindagTijdstip;
+            $this->verzendkosten = $verzendkosten;
+            $this->verzendInstructies = $verzendInstructies;
+            $this->looptijdEindeDag = $looptijdEindeDag;
+            $this->veilingGesloten = $veilingGesloten;
+            $this->verkoopPrijs = $verkoopPrijs;
         }
 
         //properties
@@ -121,7 +118,9 @@
 
 	    //functies
 
+		public function printVoorwerp(){
 
+		}
 
 
     }
