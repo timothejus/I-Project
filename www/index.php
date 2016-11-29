@@ -21,4 +21,4 @@ require("scripts/header.php");
 
 	</div>
 </div>
-<?php require ("scripts/footer.php");
+<?php require ("scripts/footer.php"); ?>
