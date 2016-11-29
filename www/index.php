@@ -13,7 +13,7 @@ require("scripts/login.php")
 	<!-- Product van de dag -->
 	<div class="row">
 
-		<?php geefProductGroot(); ?>
+		<?php geefProductGroot ("Titel", "images/box.png", "6,50", "00:39:20"); ?>
 
 	</div>
 
@@ -21,7 +21,7 @@ require("scripts/login.php")
 	<div class="row">
 
 		<!-- Product 1 -->
-		<?php geefProductKlein(); ?>
+		<?php geefProductKlein ("Titel", "images/box.png", "6,50", "00:39:20"); ?>
 
 	</div>
 </div>
