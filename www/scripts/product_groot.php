@@ -5,12 +5,7 @@
  * Date: 28-11-2016
  * Time: 14:13
  */
-function geefProductGroot () {
-	$titel = 'Product van de dag';
-	$plaatje = '../www/images/box.png';
-	$prijs = '6,50';
-	$resttijd = '00:39:20';
-
+function geefProductGroot ($titel, $plaatje, $prijs, $resttijd) {
 	?>
 	<div class="col-sm-6 col-sm-offset-3">
 		<div class="panel panel-primary">

@@ -6,13 +6,7 @@
  * Time: 13:37
  */
 
-function geefProductKlein () {
-
-	$titel = 'Titel';
-	$plaatje = '../www/images/box.png';
-	$prijs = '6,50';
-	$resttijd = '00:39:20';
-
+function geefProductKlein ($titel, $plaatje, $prijs, $resttijd) {
 	?>
 	<div class="col-sm-3">
 		<div class="panel panel-default">
