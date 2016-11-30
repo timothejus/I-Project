@@ -10,7 +10,7 @@
 require ("scripts/product_groot.php");
 require ("scripts/product_klein.php");
 require ("scripts/format_time.php");
-require  ("DB.php");
+require("scripts/DB.php");
 
 // Maak een connectie met de database.
 $dsn = "sqlsrv:Server=192.168.0.20;Database=EenmaalAndermaal";

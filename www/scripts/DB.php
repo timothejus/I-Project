@@ -8,7 +8,7 @@
  */
 require("voorwerp.php");
 require("mssql.inc.php");
-require ("Bod.php");
+require("Bod.php");
 
 
 function getVoorwerpen()
