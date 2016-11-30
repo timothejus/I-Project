@@ -204,7 +204,7 @@ class Voorwerp
 	}
 
 
-	public function geefProductKlein($plaatje, $prijs, $resttijd)
+	public function geefProductKlein($plaatje, $resttijd)
 	{
 		$ret = "
 				<div class='col-sm-3'>
@@ -216,7 +216,7 @@ class Voorwerp
 						<div class='panel-footer'>
 							<table class='table table-responsive'>
 								<tr>
-									<th class='text-center'>&euro;" . $prijs . "</th>
+									<th class='text-center'>&euro;" . $this->startprijs . "</th>
 									<th class='text-danger text-center'>" . $resttijd . "</th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
