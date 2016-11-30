@@ -29,7 +29,7 @@ require ("scripts/header.php");
 	<div class="row">
 
 		<?php
-		// Product van de dag is nu nog een placeholder
+		$ProductGroot = ProductGroot();
 		geefProductGroot ("Titel", "images/box.png", "6,50", "00:39:20");
 		?>
 

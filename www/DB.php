@@ -34,4 +34,20 @@ require ("voorwerp.php");
 
 	}
 
+function ProductGroot(){
+	$dsn = 'sqlsrv:server=192.168.0.20;Database=EenmaalAndermaal';
+	$user = 'sa';
+	$password = 'iproject4';
+	$dbh = new PDO($dsn, $user, $password);
+
+	$sql = "SELECT Voorwerp FROM ProductVanDeDag WHERE ProductVanDag=(:datum)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':datum', date("Y-m-d"), PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		$ProductVanDag = $row["Voorwerp"];
+	}
+}
+
 	?>
