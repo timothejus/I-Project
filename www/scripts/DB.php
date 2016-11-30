@@ -126,7 +126,8 @@ V.Verkoper,
 V.LooptijdEindeDagTijdstip,
 V.VeilingGesloten,
 V.VerkoopPrijs,
-LDN.Land
+LDN.Land,
+DATEDIFF (second, getDate (), V.LooptijdEindeDagTijdstip) AS ResterendeSeconden  
 
 FROM Voorwerp V
 
@@ -156,7 +157,8 @@ WHERE V.Voorwerpnummer =" . $voorwerpNummer . ";";
 				$row["Koper"],
 				$row["LooptijdEindeDagTijdstip"],
 				$row["VeilingGesloten"],
-				$row["VerkoopPrijs"]
+				$row["VerkoopPrijs"],
+				$row["ResterendeSeconden"]
 			);
 		}
 	} catch (PDOException $e) {

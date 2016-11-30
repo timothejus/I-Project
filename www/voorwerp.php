@@ -24,6 +24,7 @@ class Voorwerp
 	private $afbeeldingen;
 	//rubriek
 	private $rubriek;
+	private $resterendeSeconden;
 
 
 	//construcor
@@ -44,7 +45,8 @@ class Voorwerp
 		$koper,
 		$looptijdEindeDag,
 		$veilingGesloten,
-		$verkoopPrijs
+		$verkoopPrijs,
+		$resterendeSeconden
 	)
 	{
 		$this->voorwerpnummer = $voorwerpnummer;
@@ -64,6 +66,7 @@ class Voorwerp
 		$this->looptijdEindeDag = $looptijdEindeDag;
 		$this->veilingGesloten = $veilingGesloten;
 		$this->verkoopPrijs = $verkoopPrijs;
+		$this->resterendeSeconden = $resterendeSeconden;
 
 		//$this->verkoper = $this->fillVerkoper($verkopernummer);
 
@@ -178,6 +181,16 @@ class Voorwerp
 
 	public function setAfbeeldingen($afbeeldingen){
 		$this->afbeeldingen =$afbeeldingen;
+	}
+
+	public function getResterendeSeconden()
+	{
+		return $this->resterendeSeconden;
+	}
+
+	public function setResterendeSeconden($resterendeSeconden)
+	{
+		$this->resterendeSeconden = $resterendeSeconden;
 	}
 
 	private function fillVerkoper($verkoopnummer)
