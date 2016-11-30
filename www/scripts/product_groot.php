@@ -5,6 +5,8 @@
  * Date: 28-11-2016
  * Time: 14:13
  */
+
+// Geeft het product van de dag weer
 function geefProductGroot ($titel, $plaatje, $prijs, $resttijd) {
 	?>
 	<div class="col-sm-6 col-sm-offset-3">

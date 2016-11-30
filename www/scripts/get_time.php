@@ -6,6 +6,7 @@
  * Time: 12:09
  */
 
+// Haalt het aantal resterende seconden op voordat de bieding is afgelopen.
 function get_time ($voorwerpNummer) {
 	$dsn = "sqlsrv:Server=192.168.0.20;Database=EenmaalAndermaal";
 	$user = "sa";
