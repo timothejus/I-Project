@@ -191,4 +191,6 @@ ORDER BY B.Bodbedrag DESC;";
 	return $Biedingen ? $Biedingen : null;
 }
 
+
+
 ?>

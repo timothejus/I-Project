@@ -6,15 +6,20 @@
  * Date: 30-11-2016
  * Time: 10:50
  */
+
+require("scripts/mssql.inc.php");
+
 class Bod
 {
+	private $voorwerpnummer;
 	private $bodbedrag;
 	private $gebruiker;
 	private $bodDagTijdstip;
 
 	//constructor
-	function __construct($bodbedrag,$gebruiker,$bodDagTijdstip)
+	function __construct($voorwerpnummer,$bodbedrag,$gebruiker,$bodDagTijdstip)
 	{
+		$this->voorwerpnummer = $voorwerpnummer;
 		$this->bodbedrag = $bodbedrag;
 		$this->gebruiker = $gebruiker;
 		$this->bodDagTijdstip = $bodDagTijdstip;
@@ -33,23 +38,22 @@ class Bod
 		return $this->bodDagTijdstip;
 	}
 
+	public function getVoorwerpNummer(){
+
+	}
+
 	//functies
 	public function plaatsBod(){
 		try {
 			$dbh = getConnection();
-			$sql = "SELECT * FROM Voorwerp";
 
-			$stmt = $dbh->prepare($sql);
-			$stmt->execute();
-
-			while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				$voorwerp = new Voorwerp($row["Voorwerpnummer"], $row["Titel"], $row["Beschrijving"], $row["Startprijs"], $row["Betalingswijze"], $row["Plaatsnaam"], $row["Land"], $row["Looptijd"], $row["LooptijdBeginDagTijdstip"], $row["VerzendKosten"], $row["VerzendInstructies"], $row["LooptijdEindeDagTijdstip"], $row["VeilingGesloten"], $row["VerkoopPrijs"]);
-				$voorwerpen[] = $voorwerp;
+			$STH = $dbh->query("INSERT INTO Bod (voorwerp, Bodbedrag, Gebruiker) value (:voorwerp, :Bodbedrag, :Gebruiker)");
+			$STH->execute((array)$this);
 
 
 			}
-		} catch (PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();
+		 catch (PDOException $e) {
+			echo 'Error: ' . $e->getMessage();
 		}
 	}
 }
