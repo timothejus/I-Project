@@ -212,20 +212,20 @@ class Voorwerp
 	}
 
 
-	public function geefProductKlein($plaatje, $resttijd)
+	public function geefProductKlein()
 	{
 		$ret = "
 				<div class='col-sm-3'>
 					<div class='panel panel-default'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
 							<div class='panel-body text-center'>
-								<img src='" . $plaatje . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
+								<img src='" . $this->afbeeldingen[0] . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
 							</div>
 						<div class='panel-footer'>
 							<table class='table table-responsive'>
 								<tr>
 									<th class='text-center'>&euro;" . $this->startprijs . "</th>
-									<th class='text-danger text-center'>" . $resttijd . "</th>
+									<th class='text-danger text-center'>" . format_time ($this->resterendeSeconden) . "</th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
 							</table>
