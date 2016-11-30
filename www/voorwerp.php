@@ -183,6 +183,14 @@ class Voorwerp
 		$this->afbeeldingen =$afbeeldingen;
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getAfbeeldingen()
+	{
+		return $this->afbeeldingen;
+	}
+
 	public function getResterendeSeconden()
 	{
 		return $this->resterendeSeconden;

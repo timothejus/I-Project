@@ -33,7 +33,7 @@ function getProductPagina ($voorwerpNummer) {
 			<div class="panel panel-default">
 				<div class="panel-heading"><a href="#" class="panelheader-link"><?=$voorwerp->getTitel();?></a></div>
 				<div class="panel-body text-center">
-					<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
+					<img src="<?=$voorwerp->getAfbeeldingen()[0];?>" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
 				</div>
 
 				<div class="panel-body text-center">
