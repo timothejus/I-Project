@@ -5,6 +5,8 @@
  * Date: 28-11-2016
  * Time: 13:37
  */
+
+// Geeft een kleine product box op
 function geefProductKlein ($titel, $plaatje, $prijs, $resttijd) {
 	?>
 	<div class="col-sm-3">
