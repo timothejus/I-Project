@@ -10,7 +10,7 @@ function getProductPagina ($voorwerpNummer) {
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
 
-	<script src="js/timer.js" data-count="<?php echo get_time ($voorwerp->getVoorwerpnummer()); ?>" data-id="timer"></script>
+	<script src="js/timer.js" data-count="<?php echo $voorwerp->getResterendeSeconden(); ?>" data-id="timer"></script>
 	<div class="row">
 
 		<!-- Categorie pager -->
@@ -154,7 +154,6 @@ function getProductPagina ($voorwerpNummer) {
 			</div>
 		</div>
 
-	</div>
 	</div>
 
 <?php } ?>
