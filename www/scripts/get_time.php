@@ -18,7 +18,7 @@ function get_time ($voorwerpNummer) {
 			$tijd = $row2 [0];
 		}
 	}
-	return format_time ($row2);
+	return $row2;
 }
 
 ?>
