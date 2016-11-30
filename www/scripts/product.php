@@ -52,7 +52,7 @@ function getProductPagina ($voorwerpNummer) {
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel-heading">
-						<h4 class="text-center text-danger">Dit product is nog maar tot <span id="timer"></span> beschikbaar!</h4>
+						<h4 class="text-center">Dit product is nog maar <span id="timer" class="text-danger"></span> beschikbaar!</h4>
 					</div>
 				</div>
 			</div>
@@ -84,10 +84,16 @@ function getProductPagina ($voorwerpNummer) {
 							<?php
 							$biedingen = $voorwerp->getBiedingen();
 							foreach($biedingen as $bod) {
+								$datum =
+									date_parse ($bod->getBodDagTijdstip()) ['day'] . "-" .
+									date_parse ($bod->getBodDagTijdstip()) ['month'] . " " .
+									date_parse ($bod->getBodDagTijdstip()) ['hour'] . ":" .
+									date_parse ($bod->getBodDagTijdstip()) ['minute'] . ":" .
+									date_parse ($bod->getBodDagTijdstip()) ['second'];
 								echo "<tr>
 								<td>". $bod->getGebruiker()."</td>
 								<td>".$bod->getBodBedrag()."</td>
-								<td>".$bod->getBodDagTijdstip()."</td>
+								<td>".$datum."</td>
 							</tr>";
 							}
 							?>

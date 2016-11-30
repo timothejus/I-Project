@@ -8,7 +8,7 @@ function formatTime(seconds) {
 	if (h < 10) h = "0" + h;
 	if (m < 10) m = "0" + m;
 	if (s < 10) s = "0" + s;
-	return h + ":" + m + ":" + s;
+	return h + "u " + m + "m " + s + "s";
 }
 
 var scripts = document.getElementsByTagName('script');
