@@ -99,7 +99,7 @@ function getProduct($voorwerpNummer)
 	$voorwerp =  getProductData($voorwerpNummer);
 
 	$voorwerp->setBiedingen(getBiedingen($voorwerpNummer));
-	//$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen($voorwerpNummer));
+	$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen($voorwerpNummer));
 
 	return $voorwerp;
 }
@@ -172,7 +172,8 @@ function getBiedingen($voorwerpNummer){
 	try {
 		$dbh = getConnection();
 
-		$sql = "SELECT 
+		$sql = "SELECT
+B.Voorwerp,
 B.Bodbedrag, 
 GB.Gebruikersnaam, 
 B.BodDagTijdStip
@@ -184,13 +185,32 @@ ORDER BY B.Bodbedrag DESC;";
 
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$Bod = new Bod($row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
+			$Bod = new Bod($row["Voorwerp"],$row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
 			$Biedingen[] = $Bod;
 		}
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
 	return $Biedingen ? $Biedingen : null;
+}
+
+function getVoorwerpAfbeeldingen($voorwerpNummer){
+	$afbeeldingen = Array();
+	try {
+		$dbh = getConnection();
+
+		$sql = "SELECT filenaam FROM Bestand WHERE voorwerp = " . $voorwerpNummer . ";";
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$afbeeldingen[] = $row["filenaam"];
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+	return $afbeeldingen ? $afbeeldingen : null;
 }
 
 ?>
