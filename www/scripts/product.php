@@ -92,7 +92,7 @@ function getProductPagina ($voorwerpNummer) {
 									date_parse ($bod->getBodDagTijdstip()) ['second'];
 								echo "<tr>
 								<td>". $bod->getGebruiker()."</td>
-								<td>&euro;".number_format ($bod->getBodBedrag(), 2, ",", ".")."</td>
+								<td>&euro;" . number_format ($bod->getBodBedrag(), 2, ",", ".")."</td>
 								<td>".$datum."</td>
 							</tr>";
 							}
