@@ -17,8 +17,7 @@ function getVoorwerpen()
 
 	try {
 		$dbh = getConnection();
-		$sql = "
-			SELECT
+		$sql = "			SELECT
 V.Voorwerpnummer,
 V.Titel,
 V.Startprijs,
@@ -36,13 +35,13 @@ V.LooptijdEindeDagTijdstip,
 V.VeilingGesloten,
 V.VerkoopPrijs,
 LDN.Land,
+(SELECT TOP 1 filenaam FROM Bestand WHERE voorwerp = V.Voorwerpnummer)AS filenaam,
 DATEDIFF (second, getDate (), V.LooptijdEindeDagTijdstip) AS ResterendeSeconden 
 
 FROM Voorwerp V
 
 INNER JOIN Landen LDN ON V.Land = LDN.ISO
-INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
-";
+INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze;";
 
 
 		$stmt = $dbh->prepare($sql);
@@ -69,6 +68,7 @@ INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
 				$row["VerkoopPrijs"],
 				$row["ResterendeSeconden"]
 			);
+			$voorwerp->setAfbeeldingen($row['filenaam']);
 			$voorwerpen[] = $voorwerp;
 
 
