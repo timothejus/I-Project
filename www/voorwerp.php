@@ -2,7 +2,6 @@
 
     class Voorwerp
     {
-
         private $voorwerpnummer;
         private $titel;
         private $beschrijving;
@@ -19,7 +18,6 @@
         private $looptijdEindeDag;
         private $veilingGesloten;
         private $verkoopPrijs;
-
         //afbeeldingen
         private $afbeeldingen;
         //rubriek
@@ -27,14 +25,13 @@
 
 
 		//construcor
-        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs)
+        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$verkopernummer)
         {
             $this->voorwerpnummer = $voorwerpnummer;
             $this->titel = $titel;
             $this->beschrijving = $beschrijving;
             $this->startprijs = $startprijs;
             $this->betalingswijze = $betalingswijze;
-
             $this->plaatsnaam = $plaatsnaam;
             $this->land = $land;
             $this->looptijd = $looptijd;
@@ -44,6 +41,10 @@
             $this->looptijdEindeDag = $looptijdEindeDag;
             $this->veilingGesloten = $veilingGesloten;
             $this->verkoopPrijs = $verkoopPrijs;
+
+            $this->verkoper = $this->fillVerkoper($verkopernummer);
+
+
         }
 
         //properties
@@ -116,11 +117,48 @@
 		    return $this->verkoopPrijs;
 	    }
 
+	    public function setKoper($kopernummer){
+	    	$this->koper = $this->fillKoper($kopernummer);
+	    }
+
 	    //functies
 
 		public function printVoorwerp(){
 
 		}
+
+		private function fillVerkoper($verkoopnummer){
+
+		}
+
+		private function fillKoper($kopernummer){
+
+		}
+
+
+	    public function geefProductKlein ($plaatje, $prijs, $resttijd) {
+		    $ret = "
+				<div class='col-sm-3'>
+					<div class='panel panel-default'>
+						<div class='panel-heading'><a href='product_detail.php?voorwerpnummer=".$this->voorwerpnummer."' class='panelheader-link'>".$this->titel."</a></div>
+							<div class='panel-body text-center'>
+								<img src='".$plaatje."' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
+							</div>
+						<div class='panel-footer'>
+							<table class='table table-responsive'>
+								<tr>
+									<th class='text-center'>&euro;".$prijs."</th>
+									<th class='text-danger text-center'>".$resttijd."</th>
+									<th class='text-center'><a href='product_detail.php?voorwerpnummer=".$this->voorwerpnummer."' class='btn btn-xs btn-danger'>Bied</a></th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+      ";
+	    }
+
+
 
 
     }
