@@ -116,10 +116,11 @@ function getProductPagina ($voorwerpNummer) {
 				<div class="col-sm-8">
 					<div class="form-inline">
 						<h5><b>Uw Bod:</b></h5>
-						<div class="form-group-sm">
-							<input type="text" class="form-control">
-							<button type="button" class="form-control btn btn-danger btn-sm">Plaats bod</button>
-						</div>
+						<form class="form-group-sm" action="productDetailPagina.php" method="get">
+							<input name="voorwerpNummer" value="<?=$voorwerp->getVoorwerpnummer()?>" hidden>
+							<input type="text" class="form-control" name="bedrag">
+							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
+						</form>
 					</div>
 				</div>
 

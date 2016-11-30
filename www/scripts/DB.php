@@ -127,7 +127,7 @@ V.LooptijdEindeDagTijdstip,
 V.VeilingGesloten,
 V.VerkoopPrijs,
 LDN.Land,
-ResterendeSeconden AS DATEDIFF(second, getDate (), V.LooptijdBeginDagTijdstip) 
+DATEDIFF (second, getDate (), V.LooptijdEindeDagTijdstip) AS ResterendeSeconden  
 
 FROM Voorwerp V
 
