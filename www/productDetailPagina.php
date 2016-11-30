@@ -16,6 +16,22 @@ $voorwerpNummer = $_GET['voorwerpNummer'];
 // Include de header
 require ("scripts/header.php");
 
+// Parse het meegegeven bedrag
+if (isset ($_GET ['bedrag'])) {
+	// Bedrag is ingesteld
+	echo "isset: ja<br/>";
+	if ($_GET ['bedrag'] == "") {
+		// Bedrag is ingesteld maar niet ingevuld
+		echo "isleeg: ja";
+	} else {
+		// Bedrag is ingesteld en ingevuld
+		echo "isleeg: nee";
+	}
+} else {
+	// Bedrag is niet ingesteld
+	echo "isset: nee";
+}
+
 ?>
 <!-- Hoofdpagina container -->
 <div class="container">
