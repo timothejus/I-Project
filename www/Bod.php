@@ -8,25 +8,19 @@
  */
 class Bod
 {
-	private $voorwerp;
 	private $bodbedrag;
 	private $gebruiker;
 	private $bodDagTijdstip;
 
 	//constructor
-	function __construct($voorwerp,$bodbedrag,$gebruiker,$bodDagTijdstip)
+	function __construct($bodbedrag,$gebruiker,$bodDagTijdstip)
 	{
-		$this->voorwerpnummer = $voorwerp;
 		$this->bodbedrag = $bodbedrag;
 		$this->gebruiker = $gebruiker;
 		$this->bodDagTijdstip = $bodDagTijdstip;
 	}
 
 	//properties
-	public function getVoorwerpnummer(){
-		return $this->voorwerpnummer;
-	}
-
 	public function getBodbedrag(){
 		return $this->bodbedrag;
 	}

@@ -81,26 +81,16 @@ function getProductPagina ($voorwerpNummer) {
 							<th>Geboden</th>
 							<th>Datum</th>
 						</tr>
-						<tr>
-							<td>S. Scheffer</td>
-							<td>€20,00</td>
-							<td>27-11</td>
-						</tr>
-						<tr>
-							<td>C. Rasing</td>
-							<td>€15,00</td>
-							<td>26-11</td>
-						</tr>
-						<tr>
-							<td>J. Brouwer</td>
-							<td>€13,00</td>
-							<td>26-11</td>
-						</tr>
-						<tr>
-							<td>C. Verhoeven</td>
-							<td>€10,00</td>
-							<td>25-11</td>
-						</tr>
+							<?php
+							$biedingen = $voorwerp->getBiedingen();
+							foreach($biedingen as $bod) {
+								echo "<tr>
+								<td>". $bod->getGebruiker()."</td>
+								<td>".$bod->getBodBedrag()."</td>
+								<td>".$bod->getBodDagTijdstip()."</td>
+							</tr>";
+							}
+							?>
 					</table>
 				</div>
 			</div>

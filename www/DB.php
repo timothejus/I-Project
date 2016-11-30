@@ -6,36 +6,37 @@
  * Date: 29-11-2016
  * Time: 10:49
  */
-require ("voorwerp.php");
-require ("mssql.inc.php");
+require("voorwerp.php");
+require("mssql.inc.php");
+require ("Bod.php");
 
 
-	function getVoorwerpen()
-	{
-		$voorwerpen = array();
+function getVoorwerpen()
+{
+	$voorwerpen = array();
 
-		try {
-			$dbh = getConnection();
-			$sql = "SELECT * FROM Voorwerp";
+	try {
+		$dbh = getConnection();
+		$sql = "SELECT * FROM Voorwerp";
 
-			$stmt = $dbh->prepare($sql);
-			$stmt->execute();
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
 
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-			{
-				$voorwerp = new Voorwerp($row["Voorwerpnummer"],$row["Titel"],$row["Beschrijving"],$row["Startprijs"],$row["Betalingswijze"],$row["Plaatsnaam"],$row["Land"],$row["Looptijd"],$row["LooptijdBeginDagTijdstip"],$row["VerzendKosten"],$row["VerzendInstructies"],$row["LooptijdEindeDagTijdstip"],$row["VeilingGesloten"],$row["VerkoopPrijs"]);
-				$voorwerpen[] = $voorwerp;
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp($row["Voorwerpnummer"], $row["Titel"], $row["Beschrijving"], $row["Startprijs"], $row["Betalingswijze"], $row["Plaatsnaam"], $row["Land"], $row["Looptijd"], $row["LooptijdBeginDagTijdstip"], $row["VerzendKosten"], $row["VerzendInstructies"], $row["LooptijdEindeDagTijdstip"], $row["VeilingGesloten"], $row["VerkoopPrijs"]);
+			$voorwerpen[] = $voorwerp;
 
 
-			}
-		} catch (PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();
 		}
-		return $voorwerpen;
-
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
 	}
+	return $voorwerpen;
 
-function ProductGroot(){
+}
+
+function ProductGroot()
+{
 	$dsn = 'sqlsrv:server=192.168.0.20;Database=EenmaalAndermaal';
 	$user = 'sa';
 	$password = 'iproject4';
@@ -45,20 +46,27 @@ function ProductGroot(){
 	$stmt = $dbh->prepare($sql);
 	$stmt->bindParam(':datum', date("Y-m-d"), PDO::PARAM_INT);
 	$stmt->execute();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		$ProductVanDag = $row["Voorwerp"];
 	}
 }
 
-	function getProduct($voorwerpNummer)
-	{
-		$voorwerp = "";
-		try {
-			$dbh = getConnection();
+function getProduct($voorwerpNummer)
+{
+	$voorwerp =  getProductData($voorwerpNummer);
 
-			$sql = " 
-SELECT 
+	$voorwerp->setBiedingen(getBiedingen($voorwerpNummer));
+	//$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen($voorwerpNummer));
+
+	return $voorwerp;
+}
+
+function getProductData($voorwerpNummer){
+	try {
+		$dbh = getConnection();
+
+		$sql = "
+SELECT
 V.Voorwerpnummer,
 V.Titel,
 V.Startprijs,
@@ -83,35 +91,60 @@ INNER JOIN Landen LDN ON V.Land = LDN.ISO
 INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
 
 WHERE V.Voorwerpnummer =" . $voorwerpNummer . ";";
-			$stmt = $dbh->prepare($sql);
-			$stmt->execute();
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
 
 
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$voorwerp = new Voorwerp(
-					$row["Voorwerpnummer"],
-					$row["Titel"],
-					$row["Beschrijving"],
-					$row["Startprijs"],
-					$row["Betalingswijze"],
-					$row["Betalingsinstructie"],
-					$row["Plaatsnaam"],
-					$row["Land"],
-					$row["Looptijd"],
-					$row["LooptijdBeginDagTijdstip"],
-					$row["VerzendKosten"],
-					$row["VerzendInstructies"],
-					$row["Verkoper"],
-					$row["Koper"],
-					$row["LooptijdEindeDagTijdstip"],
-					$row["VeilingGesloten"],
-					$row["VerkoopPrijs"]
-				);
-			}
-		} catch (PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"],
+				$row["Beschrijving"],
+				$row["Startprijs"],
+				$row["Betalingswijze"],
+				$row["Betalingsinstructie"],
+				$row["Plaatsnaam"],
+				$row["Land"],
+				$row["Looptijd"],
+				$row["LooptijdBeginDagTijdstip"],
+				$row["VerzendKosten"],
+				$row["VerzendInstructies"],
+				$row["Verkoper"],
+				$row["Koper"],
+				$row["LooptijdEindeDagTijdstip"],
+				$row["VeilingGesloten"],
+				$row["VerkoopPrijs"]
+			);
 		}
-		return $voorwerp;
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
 	}
+	return $voorwerp ? $voorwerp : null;
+}
 
-	?>
+function getBiedingen($voorwerpNummer){
+	$Biedingen = Array();
+	try {
+		$dbh = getConnection();
+
+		$sql = "SELECT 
+B.Bodbedrag, 
+GB.Gebruikersnaam, 
+B.BodDagTijdStip
+FROM Bod B
+INNER JOIN Gebruiker GB ON B.Gebruiker = GB.Gebruikersnaam WHERE B.Voorwerp =" . $voorwerpNummer . ";";
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$Bod = new Bod($row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
+			$Biedingen[] = $Bod;
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+	return $Biedingen ? $Biedingen : null;
+}
+
+?>
