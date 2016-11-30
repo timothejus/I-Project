@@ -47,8 +47,11 @@ class Bod
 		try {
 			$dbh = getConnection();
 
+			# the data we want to insert
+			$data = array( 'voorwerp' => $this->voorwerpnummer, 'Bodbedrag' => $this->bodbedrag, 'Gebruiker' => $this->gebruiker );
+
 			$STH = $dbh->query("INSERT INTO Bod (voorwerp, Bodbedrag, Gebruiker) value (:voorwerp, :Bodbedrag, :Gebruiker)");
-			$STH->execute((array)$this);
+			$STH->execute((array)$data);
 
 
 			}
