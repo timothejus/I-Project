@@ -132,7 +132,8 @@ B.Bodbedrag,
 GB.Gebruikersnaam, 
 B.BodDagTijdStip
 FROM Bod B
-INNER JOIN Gebruiker GB ON B.Gebruiker = GB.Gebruikersnaam WHERE B.Voorwerp =" . $voorwerpNummer . ";";
+INNER JOIN Gebruiker GB ON B.Gebruiker = GB.Gebruikersnaam WHERE B.Voorwerp = " . $voorwerpNummer . "
+ORDER BY B.Bodbedrag DESC;";
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
 
