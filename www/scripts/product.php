@@ -8,7 +8,6 @@ require("DB.php");
 
 function getProductPagina ($voorwerpNummer) {
 	$voorwerp = getProduct($voorwerpNummer);
-	echo $voorwerp->getResterendeSeconden();
 	?>
 
 	<script src="js/timer.js" data-count="<?php echo get_time ($voorwerp->getVoorwerpnummer()); ?>" data-id="timer"></script>
