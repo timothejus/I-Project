@@ -37,10 +37,10 @@ function getProductPagina ($voorwerpNummer) {
 				</div>
 
 				<div class="panel-body text-center">
-					<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="../www/images/box.png" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="<?=$voorwerp->getAfbeeldingen()[0];?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="<?=$voorwerp->getAfbeeldingen()[1];?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="<?=$voorwerp->getAfbeeldingen()[2];?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="<?=$voorwerp->getAfbeeldingen()[3];?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
 				</div>
 			</div>
 
