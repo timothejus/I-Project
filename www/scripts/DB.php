@@ -35,7 +35,8 @@ V.Verkoper,
 V.LooptijdEindeDagTijdstip,
 V.VeilingGesloten,
 V.VerkoopPrijs,
-LDN.Land
+LDN.Land,
+DATEDIFF (second, getDate (), V.LooptijdEindeDagTijdstip) AS ResterendeSeconden 
 
 FROM Voorwerp V
 
@@ -65,7 +66,8 @@ INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
 				$row["Koper"],
 				$row["LooptijdEindeDagTijdstip"],
 				$row["VeilingGesloten"],
-				$row["VerkoopPrijs"]
+				$row["VerkoopPrijs"],
+				$row["ResterendeSeconden"]
 			);
 			$voorwerpen[] = $voorwerp;
 
