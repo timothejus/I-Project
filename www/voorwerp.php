@@ -7,6 +7,7 @@
         private $beschrijving;
         private $startprijs;
         private $betalingswijze;
+	    private $betalingsinstructie;
         private $plaatsnaam;
         private $land;
         private $looptijd;
@@ -25,31 +26,50 @@
 
 
 		//construcor
-        function __construct($voorwerpnummer,$titel,$beschrijving,$startprijs,$betalingswijze,$plaatsnaam,$land,$looptijd,$looptijdBegindagTijdstip,$verzendkosten,$verzendInstructies,$looptijdEindeDag,$veilingGesloten,$verkoopPrijs,$verkopernummer)
-        {
+        function __construct(
+        	$voorwerpnummer,
+            $titel,
+            $beschrijving,
+            $startprijs,
+            $betalingswijze,
+	        $betalingsinstructie,
+            $plaatsnaam,
+            $land,
+            $looptijd,
+            $looptijdBegindagTijdstip,
+            $verzendkosten,
+            $verzendInstructies,
+            $verkoper,
+            $koper,
+            $looptijdEindeDag,
+            $veilingGesloten,
+            $verkoopPrijs
+        ){
             $this->voorwerpnummer = $voorwerpnummer;
             $this->titel = $titel;
             $this->beschrijving = $beschrijving;
             $this->startprijs = $startprijs;
             $this->betalingswijze = $betalingswijze;
+            $this->betalingsinstructie = $betalingsinstructie;
             $this->plaatsnaam = $plaatsnaam;
             $this->land = $land;
             $this->looptijd = $looptijd;
             $this->looptijdBegindagTijdstip = $looptijdBegindagTijdstip;
             $this->verzendkosten = $verzendkosten;
             $this->verzendInstructies = $verzendInstructies;
+            $this->verkoper = $verkoper;
+	        $this->koper = $koper;
             $this->looptijdEindeDag = $looptijdEindeDag;
             $this->veilingGesloten = $veilingGesloten;
             $this->verkoopPrijs = $verkoopPrijs;
 
-            $this->verkoper = $this->fillVerkoper($verkopernummer);
+            //$this->verkoper = $this->fillVerkoper($verkopernummer);
 
 
         }
 
         //properties
-        public function getVoorwerpnummer()
-        {
+        public function getVoorwerpnummer(){
             return $this->voorwerpnummer;
         }
 
@@ -140,7 +160,7 @@
 		    $ret = "
 				<div class='col-sm-3'>
 					<div class='panel panel-default'>
-						<div class='panel-heading'><a href='product_detail.php?voorwerpnummer=".$this->voorwerpnummer."' class='panelheader-link'>".$this->titel."</a></div>
+						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=".$this->voorwerpnummer."' class='panelheader-link'>".$this->titel."</a></div>
 							<div class='panel-body text-center'>
 								<img src='".$plaatje."' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
 							</div>
@@ -149,7 +169,7 @@
 								<tr>
 									<th class='text-center'>&euro;".$prijs."</th>
 									<th class='text-danger text-center'>".$resttijd."</th>
-									<th class='text-center'><a href='product_detail.php?voorwerpnummer=".$this->voorwerpnummer."' class='btn btn-xs btn-danger'>Bied</a></th>
+									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=".$this->voorwerpnummer."' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
 							</table>
 						</div>

@@ -54,11 +54,11 @@ require ("scripts/header.php");
 			// Tijd wordt geparsed door format_time
 			$tijd = format_time ($tijd);
 
-			//$voorwerp = new Voorwerp (1,"d","d","d","d","d","d","d","d","d","d","d","d","d","d");
-			//echo $voorwerp -> geefProductKlein ("images/box.png",10,$tijd);
+			$voorwerp = new Voorwerp (1,"d","d","d","d","d","d","d","d","d","d","d","d","d","d","d","d");
+			echo $voorwerp -> geefProductKlein ("images/box.png",10,$tijd);
 
 			// Product wordt weergegeven met de juiste informatie (image moet nog in de database geimplementeerd worden!)
-			geefProductKlein ($row ['Titel'], "images/box.png", $row ['Bodbedrag'], $tijd);
+			//geefProductKlein ($row ['Titel'], "images/box.png", $row ['Bodbedrag'], $tijd);
 		}
 		?>
 

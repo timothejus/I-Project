@@ -5,7 +5,6 @@
  * Date: 28-11-2016
  * Time: 13:37
  */
-
 function geefProductKlein ($titel, $plaatje, $prijs, $resttijd) {
 	?>
 	<div class="col-sm-3">
@@ -19,7 +18,7 @@ function geefProductKlein ($titel, $plaatje, $prijs, $resttijd) {
 					<tr>
 						<th class="text-center">&euro;<?=$prijs?></th>
 						<th class="text-danger text-center"><?=$resttijd?></th>
-						<th class="text-center"><a href="#" class="btn btn-xs btn-danger">Bied</a></th>
+						<th class="text-center"><a href="../productDetailPagina.php?voorwerpNummer=1" class="btn btn-xs btn-danger">Bied</a></th>
 					</tr>
 				</table>
 			</div>

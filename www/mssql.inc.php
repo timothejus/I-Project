@@ -16,7 +16,6 @@ function getConnection()
 
 		$conn = new PDO("sqlsrv:Server=$db_host;Database=$db_name",$db_username,$db_password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		echo "test";
 	} catch (PDOException  $e) {
 		echo "Error: " . $e;
 	} catch (PDOException $e) {
