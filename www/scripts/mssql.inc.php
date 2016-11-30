@@ -26,6 +26,7 @@ function getConnection()
 
 }
 
+
 function query($query, $parameters = null)
 {
 	$db = getConnection();

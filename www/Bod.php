@@ -7,7 +7,7 @@
  * Time: 10:50
  */
 
-require("scripts/mssql.inc.php");
+//require("scripts/mssql.inc.php");
 
 class Bod
 {
