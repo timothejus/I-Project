@@ -17,13 +17,56 @@ function getVoorwerpen()
 
 	try {
 		$dbh = getConnection();
-		$sql = "SELECT * FROM Voorwerp";
+		$sql = "
+			SELECT
+V.Voorwerpnummer,
+V.Titel,
+V.Startprijs,
+V.Beschrijving,
+BTW.Betalingswijze,
+BTW.Betalingsinstructie,
+V.Plaatsnaam,
+V.Koper,
+V.Looptijd,
+V.LooptijdBeginDagTijdstip,
+V.VerzendKosten,
+V.VerzendInstructies,
+V.Verkoper,
+V.LooptijdEindeDagTijdstip,
+V.VeilingGesloten,
+V.VerkoopPrijs,
+LDN.Land
+
+FROM Voorwerp V
+
+INNER JOIN Landen LDN ON V.Land = LDN.ISO
+INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
+";
+
 
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$voorwerp = new Voorwerp($row["Voorwerpnummer"], $row["Titel"], $row["Beschrijving"], $row["Startprijs"], $row["Betalingswijze"], $row["Plaatsnaam"], $row["Land"], $row["Looptijd"], $row["LooptijdBeginDagTijdstip"], $row["VerzendKosten"], $row["VerzendInstructies"], $row["LooptijdEindeDagTijdstip"], $row["VeilingGesloten"], $row["VerkoopPrijs"]);
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"],
+				$row["Beschrijving"],
+				$row["Startprijs"],
+				$row["Betalingswijze"],
+				$row["Betalingsinstructie"],
+				$row["Plaatsnaam"],
+				$row["Land"],
+				$row["Looptijd"],
+				$row["LooptijdBeginDagTijdstip"],
+				$row["VerzendKosten"],
+				$row["VerzendInstructies"],
+				$row["Verkoper"],
+				$row["Koper"],
+				$row["LooptijdEindeDagTijdstip"],
+				$row["VeilingGesloten"],
+				$row["VerkoopPrijs"]
+			);
 			$voorwerpen[] = $voorwerp;
 
 

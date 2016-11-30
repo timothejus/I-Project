@@ -43,6 +43,8 @@ require ("scripts/header.php");
 		// SQL query voor alle info behalve de aflooptijd. Alle producten waar op geboden is worden weergegeven.
 		$sql = "SELECT * FROM Voorwerp INNER JOIN Bod ON Voorwerp.Voorwerpnummer=Bod.Voorwerp WHERE Bod.Bodbedrag = (SELECT MAX (Bodbedrag) FROM Bod WHERE Bod.Voorwerp=Voorwerp.Voorwerpnummer)";
 
+		$tijd = "";
+
 		// Loop voor alle producten
 		foreach ($conn -> query ($sql) as $row) {
 
@@ -56,17 +58,19 @@ require ("scripts/header.php");
 			$tijd = format_time ($tijd);
 
 
-			$voorwerpen = getVoorwerpen();
 
-			foreach ($voorwerpen as $voorwerp) {
-				echo $voorwerp->geefProductKlein("images/box.png",10,$tijd);
-			}
 
 			//$voorwerp = new Voorwerp (1,"d","d","d","d","d","d","d","d","d","d","d","d","d","d","d","d");
 			//echo $voorwerp -> geefProductKlein ("images/box.png",10,$tijd);
 
 			// Product wordt weergegeven met de juiste informatie (image moet nog in de database geimplementeerd worden!)
 			//geefProductKlein ($row ['Titel'], "images/box.png", $row ['Bodbedrag'], $tijd);
+		}
+
+		$voorwerpen = getVoorwerpen();
+
+		foreach ($voorwerpen as $voorwerp) {
+			echo $voorwerp->geefProductKlein("images/box.png",10,$tijd);
 		}
 		?>
 
