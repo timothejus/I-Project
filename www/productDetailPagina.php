@@ -8,8 +8,11 @@
 
 // Haalt de benodigde functies op (product v/d dag, klein product en de time formatter)
 require ("scripts/product.php");
+//require ("Bod.php");
 require ("scripts/format_time.php");
 require ("scripts/get_time.php");
+
+session_start ();
 
 $voorwerpNummer = $_GET['voorwerpNummer'];
 
@@ -26,6 +29,8 @@ if (isset ($_GET ['bedrag'])) {
 	} else {
 		// Bedrag is ingesteld en ingevuld
 		echo "isleeg: nee";
+		$nieuwbod = new Bod ($voorwerpNummer, $_GET ['bedrag'], "Lisaxx16", "eoijwoij");
+		$nieuwbod -> plaatsBod ();
 	}
 } else {
 	// Bedrag is niet ingesteld

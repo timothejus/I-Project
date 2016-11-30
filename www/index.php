@@ -40,6 +40,7 @@ require ("scripts/header.php");
 
 		<?php
 
+		/*
 		// SQL query voor alle info behalve de aflooptijd. Alle producten waar op geboden is worden weergegeven.
 		$sql = "SELECT * FROM Voorwerp INNER JOIN Bod ON Voorwerp.Voorwerpnummer=Bod.Voorwerp WHERE Bod.Bodbedrag = (SELECT MAX (Bodbedrag) FROM Bod WHERE Bod.Voorwerp=Voorwerp.Voorwerpnummer)";
 
@@ -57,13 +58,13 @@ require ("scripts/header.php");
 			// Tijd wordt geparsed door format_time
 			$tijd = format_time ($tijd);
 		}
-
+		*/
 		//Haal voorwerpen op voor homepagina
 		$voorwerpen = getVoorwerpen();
 
 		//loop door de array voorwerpen en laat de voorwerpen zien
 		foreach ($voorwerpen as $voorwerp) {
-			echo $voorwerp->geefProductKlein("images/box.png",10,$tijd);
+			echo $voorwerp->geefProductKlein();
 		}
 		?>
 
