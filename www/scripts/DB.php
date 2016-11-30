@@ -83,7 +83,8 @@ V.Verkoper,
 V.LooptijdEindeDagTijdstip,
 V.VeilingGesloten,
 V.VerkoopPrijs,
-LDN.Land
+LDN.Land,
+ResterendeSeconden AS DATEDIFF(second, getDate (), V.LooptijdBeginDagTijdstip) 
 
 FROM Voorwerp V
 
@@ -113,7 +114,8 @@ WHERE V.Voorwerpnummer =" . $voorwerpNummer . ";";
 				$row["Koper"],
 				$row["LooptijdEindeDagTijdstip"],
 				$row["VeilingGesloten"],
-				$row["VerkoopPrijs"]
+				$row["VerkoopPrijs"],
+				$row["ResterendeSeconden"]
 			);
 		}
 	} catch (PDOException $e) {
