@@ -113,6 +113,9 @@ function getProductPagina ($voorwerpNummer) {
 
 				<!-- Bod plaatsen -->
 				<div class="col-sm-8">
+					<?php
+					if (isset ($_SESSION ['user'])) {
+					?>
 					<div class="form-inline">
 						<h5><b>Uw Bod:</b></h5>
 						<form class="form-group-sm" action="productDetailPagina.php" method="get">
@@ -121,6 +124,9 @@ function getProductPagina ($voorwerpNummer) {
 							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
 						</form>
 					</div>
+					<?php } else { ?>
+					<p class="text-muted text-center">Log in om te kunnen bieden</p>
+					<?php } ?>
 				</div>
 
 			</div>
