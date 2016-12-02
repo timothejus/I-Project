@@ -12,12 +12,6 @@ require ("scripts/product_klein.php");
 require ("scripts/format_time.php");
 require("scripts/DB.php");
 
-// Maak een connectie met de database.
-$dsn = "sqlsrv:Server=192.168.0.20;Database=EenmaalAndermaal";
-$user = "sa";
-$pass = "iproject4";
-$conn = new PDO ($dsn, $user, $pass);
-
 // Include de header
 require ("scripts/header.php");
 

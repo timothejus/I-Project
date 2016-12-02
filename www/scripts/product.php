@@ -115,6 +115,7 @@ function getProductPagina ($voorwerpNummer) {
 						<h5><b>Uw Bod:</b></h5>
 						<form class="form-group-sm" action="productDetailPagina.php" method="get">
 							<input name="voorwerpNummer" value="<?=$voorwerp->getVoorwerpnummer()?>" hidden>
+							<input name="hoogsteBod" value="<?=$voorwerp->getBiedingen()[0]?>" hidden>
 							<input type="text" class="form-control" name="bedrag">
 							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
 						</form>
