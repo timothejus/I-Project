@@ -1,5 +1,8 @@
 <?php
 require ("scripts/header.php");
+?>
+<div class="container">
+<?php
 require ("scripts/login.php");
 if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != ""){
 	if (login($_GET["login"],$_GET["password"]) == true) {
@@ -7,13 +10,20 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 		$_SESSION["user"] = $_GET["login"];
 	}
 	else {
-		echo "Uw gebruikersnaam of wachtwoord is verkeerd";
+?>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="alert alert-danger text-center">
+					Gebruikersnaam/wachtwoord verkeerd
+				</div>
+			</div>
+		</div>
+<?php
 	}
 }
 ?>
 
 		<?php if (!isset($_SESSION["user"])) { ?>
-		<div class="container">
 
 			<!--inloggen-->
 			<div class="row">
@@ -21,7 +31,7 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 				<div class="col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading"><a href="#" class="panelheader-link">Inloggen</a></div>
-						<form action='login.php' method='get'>
+						<form action='login.php' method='get' class="form-group" style="margin-bottom: 0px;">
 							<div class='panel-body'>
 								Gebruikersnaam
 								<input type='text' class='form-control' name='login' value='<?php if(isset($_GET['login'])) {
