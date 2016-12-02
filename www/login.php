@@ -64,8 +64,24 @@ if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" &&
 			</div>
 
 		</div>
-		<?php }
-		else { echo "u bent al ingelogd"; } ?>
+		<?php
+		} else {
+		?>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="panel panel-default text-center">
+						<div class="panel-body">
+							<h4>U bent al ingelogd!</h4>
+						</div>
+						<div class="panel-footer"><a href="index.php">Terug naar de homepagina</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<?php } ?>
 
 		<div class="container">
 			<footer class="footer text-right">
