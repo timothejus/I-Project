@@ -44,20 +44,24 @@ class Bod
 
 	//functies
 	public function plaatsBod(){
-		try {
-			$dbh = getConnection();
 
-			# the data we want to insert
-			$data = array( 'voorwerp' => $this->voorwerpnummer, 'Bodbedrag' => $this->bodbedrag, 'Gebruiker' => $this->gebruiker );
+		$insertQuery = query("INSERT INTO Bod (Voorwerp, Bodbedrag, Gebruiker) value (:voorwerp, :Bodbedrag, :Gebruiker)", array(
+			"voorwerp" => $this->voorwerpnummer, "Bodbedrag" => $this->bodbedrag,"Gebruiker" => $this->gebruiker));
 
-			$STH = $dbh->query("INSERT INTO Bod (voorwerp, Bodbedrag, Gebruiker) value (:voorwerp, :Bodbedrag, :Gebruiker)");
-			$STH->execute((array)$data);
+		try
+		{
+			$db = getConnection();
+			$stmt = $db->prepare($insertQuery);
+			$stmt->execute();
 
-
-			}
-		 catch (PDOException $e) {
-			echo 'Error: ' . $e->getMessage();
+			$db = null;
 		}
+		catch(PDOException $e)
+		{
+			die($e->getCode());
+		}
+
+
 	}
 }
 

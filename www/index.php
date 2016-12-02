@@ -39,26 +39,6 @@ require ("scripts/header.php");
 	<div class="row">
 
 		<?php
-
-		/*
-		// SQL query voor alle info behalve de aflooptijd. Alle producten waar op geboden is worden weergegeven.
-		$sql = "SELECT * FROM Voorwerp INNER JOIN Bod ON Voorwerp.Voorwerpnummer=Bod.Voorwerp WHERE Bod.Bodbedrag = (SELECT MAX (Bodbedrag) FROM Bod WHERE Bod.Voorwerp=Voorwerp.Voorwerpnummer)";
-
-		$tijd = "";
-
-		// Loop voor alle producten
-		foreach ($conn -> query ($sql) as $row) {
-
-			// Query en loop voor de aflooptijd per product in seconden
-			$sql2 = "SELECT DATEDIFF (second, getDate (), LooptijdEindeDagTijdstip) FROM Voorwerp WHERE Voorwerpnummer = " . $row ['Voorwerpnummer'] . ";";
-			foreach ($conn -> query ($sql2) as $row2) {
-				$tijd = $row2 [0];
-			}
-
-			// Tijd wordt geparsed door format_time
-			$tijd = format_time ($tijd);
-		}
-		*/
 		//Haal voorwerpen op voor homepagina
 		$voorwerpen = getVoorwerpen();
 
