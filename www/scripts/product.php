@@ -60,7 +60,7 @@ function getProductPagina ($voorwerpNummer) {
 			<!-- Verkoper/biedingen informatie -->
 			<div class="row">
 
-				<!-- Verkoper informatie -->
+				<!-- Verkoper/verzend informatie -->
 				<div class="col-sm-4">
 					<h5><b>Aanbieder</b></h5>
 					<ul class="list-group">
@@ -69,7 +69,10 @@ function getProductPagina ($voorwerpNummer) {
 						<li class="list-group-item"><?=$voorwerp->getLand();?><br></li>
 					</ul>
 					<button type="button" class="btn btn-primary btn-md">Geef Feedback</button>
-					<br>
+					<br><br>
+					<h5><b><?=$voorwerp->getVerzendInstructies();?></b></h5>
+					<p class="text-muted">Ophalen of verzending:<br/>
+						<?=$voorwerp->getVerzendkosten();?> </p>
 				</div>
 
 				<!-- Biedingen -->
@@ -103,16 +106,8 @@ function getProductPagina ($voorwerpNummer) {
 
 			<div class="row">
 
-				<!-- Verzendinformatie -->
-				<div class="col-sm-4">
-					<h5><b><?=$voorwerp->getVerzendInstructies();?></b></h5>
-					<p class="text-muted">Ophalen of verzending:<br/>
-						<?=$voorwerp->getVerzendkosten();?> </p>
-					<br>
-				</div>
-
 				<!-- Bod plaatsen -->
-				<div class="col-sm-8">
+				<div class="col-sm-8 col-sm-offset-4">
 					<?php
 					if (isset ($_SESSION ['user'])) {
 					?>
