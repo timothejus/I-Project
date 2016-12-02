@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (isset($_GET["uitloggen"])){
+	session_destroy();
+	header("refresh:0;url=../www/index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 	<head>
@@ -26,8 +35,10 @@
 
 				<!-- Navbar logo -->
 				<div class="navbar-header">
-					<img class="navbar-brand" src="../www/images/logo.jpg" alt="EenmaalAndermaal">
-					<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
+					<a href="../www/index.php">
+					<img class="navbar-left" style="height: 52px" src="../www/images/logo 1.1.png" alt="EenmaalAndermaal">
+					</a>
+						<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -60,15 +71,25 @@
 						</form>
 					</div>
 
+					<?php if(!isset($_SESSION["user"])){ ?>
 					<!-- Login/registreer/help knoppen -->
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
-							<li><a href="#">Log in</a></li>
+							<li><a href="../www/login.php">Log in</a></li>
 							<li><a href="#">Registreer</a></li>
 							<li><a href="#">Help</a></li>
 						</ul>
 					</div>
-
+				<?php }
+					else {?>
+					<div class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li><a>Mijn account</a></li>
+							<li><a href="?uitloggen"">Uitloggen</a></li>
+							<li><a href="#">Help</a></li>
+						</ul>
+					</div>
+					<?php }?>
 				</div>
 
 			</div>
