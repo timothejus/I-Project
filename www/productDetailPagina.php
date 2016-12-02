@@ -12,8 +12,6 @@ require ("scripts/product.php");
 require ("scripts/format_time.php");
 require ("scripts/get_time.php");
 
-session_start ();
-
 $voorwerpNummer = $_GET['voorwerpNummer'];
 
 // Include de header

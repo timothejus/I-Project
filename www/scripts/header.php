@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_GET["uitloggen"])){
 	session_destroy();
-	header("refresh:0;url=../www/index.php");
+	header("Location: ../www/index.php");
 }
 ?>
 

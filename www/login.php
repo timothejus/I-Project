@@ -3,7 +3,7 @@ require ("scripts/header.php");
 require ("scripts/login.php");
 if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != ""){
 	if (login($_GET["login"],$_GET["password"]) == true) {
-		header("refresh:0;url=index.php");
+		header("Location: index.php");
 		$_SESSION["user"] = $_GET["login"];
 	}
 	else {
