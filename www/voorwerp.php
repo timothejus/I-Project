@@ -206,7 +206,6 @@ class Voorwerp{
 			$bedrag = $this->startprijs;
 		}else {$bedrag = $this->hoogsteBod;}
 		$ret = "
-				
 				<div class='col-sm-3'>
 					<div class='panel panel-default'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
@@ -247,7 +246,7 @@ class Voorwerp{
 							<tr>
 								<th class=\"text-center\">&euro;".$bedrag."</th>
 								<th class=\"text-danger text-center\"><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
-								<th class=\"text-center\"><a href=\"\" class=\"btn btn-xs btn-danger\">Bied</a></th>
+								<th class=\"text-center\"><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class=\"btn btn-xs btn-danger\">Bied</a></th>
 							</tr>
 						</table>
 					</div>

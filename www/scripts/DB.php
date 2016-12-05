@@ -24,7 +24,8 @@ V.LooptijdEindeDagTijdstip,
 (SELECT TOP 1 Bodbedrag FROM Bod WHERE Voorwerp = V.Voorwerpnummer ORDER BY Bodbedrag DESC) AS hoogsteBod,
 V.Startprijs,
 (SELECT TOP 1 filenaam FROM Bestand WHERE voorwerp = V.Voorwerpnummer)AS afbeelding
-FROM Voorwerp V";
+FROM Voorwerp V 
+WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDeDag PVVD WHERE PVVD.voorwerp = V.Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af'));";
 
 		$stmt = $dbh->prepare($sql);
 		$stmt->execute();
@@ -36,6 +37,7 @@ FROM Voorwerp V";
 				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
 				$row["LooptijdEindeDagTijdstip"], '', '', ''
 			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
 			$voorwerp->setAfbeeldingen($row['afbeelding']);
 			$voorwerpen[] = $voorwerp;
 		}
@@ -48,6 +50,7 @@ FROM Voorwerp V";
 
 function getProductGroot()
 {
+	$voorwerp = null;
 	$dsn = 'sqlsrv:server=192.168.0.20;Database=EenmaalAndermaal';
 	$user = 'sa';
 	$password = 'iproject4';
