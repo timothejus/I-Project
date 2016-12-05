@@ -9,8 +9,6 @@ require("DB.php");
 function getProductPagina ($voorwerpNummer) {
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
-
-	<script src="js/timer.js" data-count="<?php echo $voorwerp->getResterendeSeconden(); ?>" data-id="timer"></script>
 	<div class="row">
 
 		<!-- Categorie pager -->
@@ -47,12 +45,15 @@ function getProductPagina ($voorwerpNummer) {
 		</div>
 
 		<div class="col-sm-6">
-
+			<script src="../js/timer.js" data-id="countdown"></script>
 			<!-- Product beschikbaarheid -->
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel-heading">
-						<h4 class="text-center">Dit product is nog maar <span id="timer" class="text-danger"></span> beschikbaar!</h4>
+						<h4 class="text-center">Dit product is nog maar
+							<span id="timer">
+								<script type=\"text/javascript\">setTimer("timer",'"<?=$voorwerp->getLooptijdEindedag()?> "');</script>
+							</span> beschikbaar!</h4>
 					</div>
 				</div>
 			</div>
