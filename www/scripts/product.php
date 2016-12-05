@@ -86,19 +86,26 @@ function getProductPagina ($voorwerpNummer) {
 						</tr>
 							<?php
 							$biedingen = $voorwerp->getBiedingen();
+							$counter = 0;
 							foreach($biedingen as $bod) {
+								if ($counter == 6) {break;}
 								$datum =
+									"<div class='col-md-4' style='padding: 0px;'>" .
 									date_parse ($bod->getBodDagTijdstip()) ['day'] . "-" .
 									date_parse ($bod->getBodDagTijdstip()) ['month'] . " " .
+									"</div><div class='col-md-4' style='padding: 0px;'>" .
 									date_parse ($bod->getBodDagTijdstip()) ['hour'] . ":" .
-									date_parse ($bod->getBodDagTijdstip()) ['minute'] . ":" .
-									date_parse ($bod->getBodDagTijdstip()) ['second'];
+									sprintf ("%02d", date_parse ($bod->getBodDagTijdstip()) ['minute']) . ":" .
+									sprintf ("%02d", date_parse ($bod->getBodDagTijdstip()) ['second']) .
+									"</div>";
 								echo "<tr>
 								<td>". $bod->getGebruiker()."</td>
 								<td>&euro;" . number_format ($bod->getBodBedrag(), 2, ",", ".")."</td>
 								<td>".$datum."</td>
-							</tr>";
+								</tr>";
+								$counter++;
 							}
+							echo "\n";
 							?>
 					</table>
 				</div>
@@ -115,7 +122,7 @@ function getProductPagina ($voorwerpNummer) {
 						<h5><b>Uw Bod:</b></h5>
 						<form class="form-group-sm" action="productDetailPagina.php" method="get">
 							<input name="voorwerpNummer" value="<?=$voorwerp->getVoorwerpnummer()?>" hidden>
-							<input name="hoogsteBod" value="<?=$voorwerp->getBiedingen()[0]?>" hidden>
+							<input name="hoogsteBod" value="<?=$voorwerp->getBiedingen()[0]->getBodbedrag()?>" hidden>
 
 							<input type="text" class="form-control" name="bedrag">
 							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
