@@ -82,8 +82,11 @@ WHERE PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af')
 function getProduct($voorwerpNummer)
 {
 	$voorwerp =  getProductData($voorwerpNummer);
+	$biedingen = getBiedingen($voorwerpNummer);
 
-	$voorwerp->setBiedingen(getBiedingen($voorwerpNummer));
+	if ($biedingen != null) {
+		$voorwerp->setBiedingen($biedingen);
+	}
 	$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen($voorwerpNummer));
 
 	return $voorwerp;

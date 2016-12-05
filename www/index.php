@@ -30,15 +30,24 @@ require ("scripts/header.php");
 	</div>
 
 	<!-- Overige producten -->
+	<script src="js/timer.js" data-id="countdown"></script>
 	<div class="row">
-		<script src="js/timer.js" data-id="countdown"></script>
 		<?php
 		//Haal voorwerpen op voor homepagina
 		$voorwerpen = getVoorwerpen();
 
+		$counter = 1;
+
 		//loop door de array voorwerpen en laat de voorwerpen zien
 		foreach ($voorwerpen as $voorwerp) {
+			if ($counter%4 == 1) {
+				echo "<div class='row'>\n";
+			}
 			echo $voorwerp->geefProductKlein();
+			if ($counter%4 == 0) {
+				echo "</div>\n";
+			}
+			$counter++;
 		}
 		?>
 

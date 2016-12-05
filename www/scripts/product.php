@@ -77,6 +77,7 @@ function getProductPagina ($voorwerpNummer) {
 
 				<!-- Biedingen -->
 				<div class="col-sm-8">
+					<?php if ($voorwerp->getBiedingen() != null){ ?>
 					<h5><b>Geboden</b></h5>
 					<table class="table table-responsive">
 						<tr>
@@ -109,13 +110,23 @@ function getProductPagina ($voorwerpNummer) {
 							?>
 					</table>
 					<?php
+					} else {
+					?>
+						<h5 class="text-muted">Er zijn nog geen biedingen.</h5>
+					<?php
+					}
 					if (isset ($_SESSION ['user'])) {
+						if ($voorwerp->getBiedingen() == null) {
+							$hoogsteBod = 0;
+						} else {
+							$hoogsteBod = $voorwerp->getBiedingen()[0]->getBodbedrag();
+						}
 					?>
 					<div class="form-inline">
 						<h5><b>Uw Bod:</b></h5>
 						<form class="form-group-sm" action="productDetailPagina.php" method="get">
 							<input name="voorwerpNummer" value="<?=$voorwerp->getVoorwerpnummer()?>" hidden>
-							<input name="hoogsteBod" value="<?=$voorwerp->getBiedingen()[0]->getBodbedrag()?>" hidden>
+							<input name="hoogsteBod" value="<?=$hoogsteBod?>" hidden>
 
 							<input type="text" class="form-control" name="bedrag">
 							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
