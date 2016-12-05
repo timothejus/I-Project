@@ -49,10 +49,10 @@ if (isset ($_GET ['bedrag']) && isset ($_GET ['hoogsteBod'])) {
 		) {
 			$nieuwbod = new Bod ($voorwerpNummer, $bodBedrag, $_SESSION['user'], "");
 			$nieuwbod->plaatsBod();
-		} else if (!is_float ($bodBedrag)) {
-			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is geen geldig getal!</div></div></div>';
-		} else {
+		} else if (is_float ($bodBedrag) || is_numeric ($bodBedrag)) {
 			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is te laag!</div></div></div>';
+		} else {
+			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is geen geldig getal!</div></div></div>';
 		}
 	} else {
 		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is te laag!</div></div></div>';
