@@ -108,13 +108,6 @@ function getProductPagina ($voorwerpNummer) {
 							echo "\n";
 							?>
 					</table>
-				</div>
-			</div>
-
-			<div class="row">
-
-				<!-- Bod plaatsen -->
-				<div class="col-sm-8 col-sm-offset-4">
 					<?php
 					if (isset ($_SESSION ['user'])) {
 					?>
