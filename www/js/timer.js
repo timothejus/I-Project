@@ -1,26 +1,41 @@
 /**
- * Created by DevServer on 30-11-2016.
+ * Created by Tim Hendriksen on 2-12-2016.
  */
-function formatTime(seconds) {
-	var h = Math.floor(seconds / 3600),
-		m = Math.floor(seconds / 60) % 60,
-		s = seconds % 60;
-	if (h < 10) h = "0" + h;
-	if (m < 10) m = "0" + m;
-	if (s < 10) s = "0" + s;
-	return h + "u " + m + "m " + s + "s";
+function setTimer(elem_id, date) {
+// set the date we're counting down to
+    var target_date = new Date(date).getTime();
+    // variables for time units
+    var days, hours, minutes, seconds;
+    // get tag element
+
+    var countDownElem = document.getElementById(elem_id);
+    //update the tag with id "countdown" every 1 second
+    setInterval(function () {
+        // find the amount of "seconds" between now and target
+        var current_date = new Date().getTime();
+        var seconds_left = (target_date - current_date) / 1000;
+        // do some time calculations
+        days = parseInt(seconds_left / 86400);
+        seconds_left = seconds_left % 86400;
+        hours = parseInt(seconds_left / 3600);
+        seconds_left = seconds_left % 3600;
+        minutes = parseInt(seconds_left / 60);
+        seconds = parseInt(seconds_left % 60);
+        // format countdown string + set tag value
+        if(days == 0){
+            if(hours == 0) {
+                if (minutes == 0) {
+                    countDownElem.innerHTML = seconds + "s";
+                }else{
+                    countDownElem.innerHTML = minutes + "m " + seconds + "s";
+                }
+            }else{
+                countDownElem.innerHTML =  hours + "h " + minutes + "m " + seconds + "s";
+            }
+        }else{
+            countDownElem.innerHTML = days + "d " + hours + ":" + minutes + ":" + seconds;
+        }
+
+    }, 1000);
 }
 
-var scripts = document.getElementsByTagName('script');
-var lastScript = scripts [scripts.length - 1];
-var scriptName = lastScript;
-
-var count = scriptName.getAttribute('data-count');
-var id = scriptName.getAttribute ('data-id');
-var counter = setInterval(timer, 1000);
-
-function timer() {
-	count--;
-	if (count < 0) return clearInterval(counter);
-	document.getElementById(id).innerHTML = formatTime(count);
-}

@@ -73,7 +73,7 @@ class Voorwerp
 
 	}
 
-	//properties
+	//Getters & Setters
 	public function getVoorwerpnummer()
 	{
 		return $this->voorwerpnummer;
@@ -164,13 +164,6 @@ class Voorwerp
 		$this->koper = $this->fillKoper($kopernummer);
 	}
 
-	//functies
-
-	public function printVoorwerp()
-	{
-
-	}
-
 	public function setBiedingen(array $biedingen){
 		$this->biedingen = $biedingen;
 	}
@@ -183,9 +176,6 @@ class Voorwerp
 		$this->afbeeldingen =$afbeeldingen;
 	}
 
-	/**
-	 * @return mixed
-	 */
 	public function getAfbeeldingen()
 	{
 		return $this->afbeeldingen;
@@ -201,20 +191,11 @@ class Voorwerp
 		$this->resterendeSeconden = $resterendeSeconden;
 	}
 
-	private function fillVerkoper($verkoopnummer)
-	{
-
-	}
-
-	private function fillKoper($kopernummer)
-	{
-
-	}
-
-
+	//Functions
 	public function geefProductKlein()
 	{
 		$ret = "
+				
 				<div class='col-sm-3'>
 					<div class='panel panel-default'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
@@ -225,7 +206,7 @@ class Voorwerp
 							<table class='table table-responsive'>
 								<tr>
 									<th class='text-center'>&euro;" . $this->startprijs . "</th>
-									<th class='text-danger text-center'>" . format_time ($this->resterendeSeconden) . "</th>
+									<th class='text-danger text-center'><i id='".$this->voorwerpnummer."'></i><script type=\"text/javascript\">setTimer(". $this->voorwerpnummer . ",'". $this->looptijdBegindagTijdstip ."');</script></th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
 							</table>
@@ -235,6 +216,4 @@ class Voorwerp
       ";
 		return $ret;
 	}
-
-
 }
