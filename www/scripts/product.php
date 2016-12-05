@@ -70,9 +70,15 @@ function getProductPagina ($voorwerpNummer) {
 					</ul>
 					<button type="button" class="btn btn-primary btn-md">Geef Feedback</button>
 					<br><br>
-					<h5><b><?=$voorwerp->getVerzendInstructies();?></b></h5>
-					<p class="text-muted">Ophalen of verzending:<br/>
-						<?=$voorwerp->getVerzendkosten();?> </p>
+					<h5><b>Startprijs</b></h5>
+					<p class="text-muted">&euro;<?=number_format ($voorwerp->getStartprijs(), 2, ",", ".")?></p>
+					<h5><b>Ophalen of verzending</b></h5>
+					<p class="text-muted"><?=$voorwerp->getVerzendInstructies();?><br/>
+						<?php
+						if ($voorwerp->getVerzendkosten() != 0) {
+							echo "&euro;" . number_format ($voorwerp->getVerzendkosten(), 2, ",", ".");
+						}
+						?> </p>
 				</div>
 
 				<!-- Biedingen -->
@@ -117,10 +123,35 @@ function getProductPagina ($voorwerpNummer) {
 					}
 					if (isset ($_SESSION ['user'])) {
 						if ($voorwerp->getBiedingen() == null) {
-							$hoogsteBod = 0;
+							$hoogsteBod = $voorwerp->getStartprijs();
 						} else {
 							$hoogsteBod = $voorwerp->getBiedingen()[0]->getBodbedrag();
 						}
+					if (
+							$hoogsteBod >= 1 &&
+							$hoogsteBod < 50
+					) {
+						$minimaalBod = $hoogsteBod + 0.5;
+					} else if (
+							$hoogsteBod >= 50 &&
+							$hoogsteBod < 500
+					) {
+						$minimaalBod = $hoogsteBod + 1;
+					} else if (
+							$hoogsteBod >= 500 &&
+							$hoogsteBod < 1000
+					) {
+						$minimaalBod = $hoogsteBod + 5;
+					} else if (
+							$hoogsteBod >= 1000 &&
+							$hoogsteBod < 5000
+					) {
+						$minimaalBod = $hoogsteBod + 10;
+					} else if (
+							$hoogsteBod >= 5000
+					) {
+						$minimaalBod = $hoogsteBod + 50;
+					}
 					?>
 					<div class="form-inline">
 						<h5><b>Uw Bod:</b></h5>
@@ -130,6 +161,7 @@ function getProductPagina ($voorwerpNummer) {
 
 							<input type="text" class="form-control" name="bedrag">
 							<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
+							<div class="text-muted">Minimaal bod: &euro;<?=number_format ($minimaalBod, 2, ",", ".")?></div>
 						</form>
 					</div>
 					<?php } else { ?>
