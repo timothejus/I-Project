@@ -31,7 +31,7 @@ require ("scripts/header.php");
 
 	<!-- Overige producten -->
 	<div class="row">
-
+		<script src="js/timer.js" data-id="countdown"></script>
 		<?php
 		//Haal voorwerpen op voor homepagina
 		$voorwerpen = getVoorwerpen();
