@@ -1,7 +1,7 @@
 <?php
 
-class Voorwerp
-{
+class Voorwerp{
+
 	private $voorwerpnummer;
 	private $titel;
 	private $beschrijving;
@@ -25,6 +25,7 @@ class Voorwerp
 	//rubriek
 	private $rubriek;
 	private $resterendeSeconden;
+	private $hoogsteBod;
 
 
 	//construcor
@@ -164,16 +165,19 @@ class Voorwerp
 		$this->koper = $this->fillKoper($kopernummer);
 	}
 
-	public function setBiedingen(array $biedingen){
+	public function setBiedingen(array $biedingen)
+	{
 		$this->biedingen = $biedingen;
 	}
 
-	public function getBiedingen(){
+	public function getBiedingen()
+	{
 		return $this->biedingen;
 	}
 
-	public function setAfbeeldingen($afbeeldingen){
-		$this->afbeeldingen =$afbeeldingen;
+	public function setAfbeeldingen($afbeeldingen)
+	{
+		$this->afbeeldingen = $afbeeldingen;
 	}
 
 	public function getAfbeeldingen()
@@ -191,9 +195,16 @@ class Voorwerp
 		$this->resterendeSeconden = $resterendeSeconden;
 	}
 
+	public function setHoogsteBod($hoogsteBod){
+		$this->hoogsteBod = $hoogsteBod;
+	}
+
 	//Functions
 	public function geefProductKlein()
 	{
+		if($this->hoogsteBod == null) {
+			$bedrag = $this->startprijs;
+		}else {$bedrag = $this->hoogsteBod;}
 		$ret = "
 				
 				<div class='col-sm-3'>
@@ -205,14 +216,43 @@ class Voorwerp
 						<div class='panel-footer'>
 							<table class='table table-responsive'>
 								<tr>
-									<th class='text-center'>&euro;" . $this->startprijs . "</th>
-									<th class='text-danger text-center'><i id='".$this->voorwerpnummer."'></i><script type=\"text/javascript\">setTimer(". $this->voorwerpnummer . ",'". $this->looptijdBegindagTijdstip ."');</script></th>
+									<th class='text-center'>&euro;" . $bedrag . "</th>
+									<th class='text-danger text-center'><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
 							</table>
 						</div>
 					</div>
 				</div>
+      ";
+		return $ret;
+	}
+
+	public function geefProductgroot()
+	{
+		if($this->hoogsteBod == null) {
+			$bedrag = $this->startprijs;
+		}else {$bedrag = $this->hoogsteBod;}
+		$ret = "	
+			<div class=\"col-sm-6 col-sm-offset-3\">
+				<div class=\"panel panel-primary\">
+					<div class=\"panel-heading\">
+						<h4><a href=\"#\" class=\"panelheader-link\">".$this->titel."</a></h4>
+					</div>
+					<div class=\"panel-body text-center\">
+						<img src='" . $this->afbeeldingen . "' class=\"img-thumbnail img-responsive img-thumbnail-primary\" alt=\"img\"><br/>
+					</div>
+					<div class=\"panel-footer\">
+						<table class=\"table table-responsive\">
+							<tr>
+								<th class=\"text-center\">&euro;".$bedrag."</th>
+								<th class=\"text-danger text-center\"><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
+								<th class=\"text-center\"><a href=\"\" class=\"btn btn-xs btn-danger\">Bied</a></th>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
       ";
 		return $ret;
 	}

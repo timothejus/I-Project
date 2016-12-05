@@ -23,8 +23,8 @@ require ("scripts/header.php");
 	<div class="row">
 
 		<?php
-		//$ProductGroot = ProductGroot();
-		geefProductGroot ("Titel", "images/box.png", "6,50", "00:39:20");
+		$voorwerp = getProductGroot();
+		echo $voorwerp -> geefProductGroot();
 		?>
 
 	</div>
