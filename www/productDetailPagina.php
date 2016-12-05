@@ -13,10 +13,10 @@ require ("scripts/format_time.php");
 require ("scripts/get_time.php");
 
 $voorwerpNummer = $_GET['voorwerpNummer'];
-$bodBedrag = $_GET['bedrag'];
-$Bod = $_GET['hoogsteBod'];
-$hoogsteBod = $Bod->getBodbedrag();
-echo $hoogsteBod;
+//$bodBedrag = $_GET['bedrag'];
+//$Bod = $_GET['hoogsteBod'];
+//$hoogsteBod = $Bod->getBodbedrag();
+//echo $hoogsteBod;
 
 // Include de header
 require ("scripts/header.php");
@@ -32,8 +32,8 @@ if (isset ($_GET ['bedrag'])) {
 		// Bedrag is ingesteld en ingevuld
 		echo "isleeg: nee";
 		if($bodBedrag > $hoogsteBod + 1){
-			$nieuwbod = new Bod ($voorwerpNummer, $bodBedrag, $_SESSION['user'], "");
-			$nieuwbod -> plaatsBod ();
+			//$nieuwbod = new Bod ($voorwerpNummer, $bodBedrag, $_SESSION['user'], "");
+			//$nieuwbod -> plaatsBod ();
 		}
 		else{
 			echo "bod te laag!";
