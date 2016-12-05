@@ -215,7 +215,7 @@ class Voorwerp{
 						<div class='panel-footer'>
 							<table class='table table-responsive'>
 								<tr>
-									<th class='text-center'>&euro;" . $bedrag . "</th>
+									<th class='text-center'>&euro;" . number_format ($bedrag, 2, ",", ".") . "</th>
 									<th class='text-danger text-center'><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
@@ -244,7 +244,7 @@ class Voorwerp{
 					<div class=\"panel-footer\">
 						<table class=\"table table-responsive\">
 							<tr>
-								<th class=\"text-center\">&euro;".$bedrag."</th>
+								<th class=\"text-center\">&euro;".number_format ($bedrag, 2, ",", ".")."</th>
 								<th class=\"text-danger text-center\"><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
 								<th class=\"text-center\"><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class=\"btn btn-xs btn-danger\">Bied</a></th>
 							</tr>

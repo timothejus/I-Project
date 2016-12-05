@@ -17,6 +17,7 @@ require ("scripts/header.php");
 
 ?>
 <!-- Hoofdpagina container -->
+<script src="js/timer.js" data-id="countdown"></script>
 <div class="container">
 
 	<!-- Product van de dag -->
@@ -30,7 +31,6 @@ require ("scripts/header.php");
 	</div>
 
 	<!-- Overige producten -->
-	<script src="js/timer.js" data-id="countdown"></script>
 	<div class="row">
 		<?php
 		//Haal voorwerpen op voor homepagina
