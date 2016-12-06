@@ -8,8 +8,6 @@
 
 // Haalt de benodigde functies op (product v/d dag, klein product en de time formatter)
 require("scripts/product.php");
-require("scripts/format_time.php");
-require("scripts/get_time.php");
 
 $voorwerpNummer = $_GET['voorwerpNummer'];
 if (isset ($_GET ['bedrag'])) {

@@ -53,6 +53,7 @@ function getProductPagina ($voorwerpNummer) {
 						<h4 class="text-center">Dit product is nog maar
 							<span id="timer">
 								<script type=\"text/javascript\">setTimer("timer",'"<?=$voorwerp->getLooptijdEindedag()?> "');</script>
+								<?php echo $voorwerp->getLooptijdEindedag()?>
 							</span> beschikbaar!</h4>
 					</div>
 				</div>

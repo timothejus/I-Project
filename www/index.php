@@ -7,9 +7,6 @@
  */
 
 // Haalt de benodigde functies op (product v/d dag, klein product en de time formatter)
-require ("scripts/product_groot.php");
-require ("scripts/product_klein.php");
-require ("scripts/format_time.php");
 require("scripts/DB.php");
 
 // Include de header
