@@ -184,7 +184,7 @@ function getProductPagina($voorwerpNummer)
 								<div class="text-muted">Minimaal bod: &euro;<?= number_format($minimaalBod, 2, ",", ".") ?></div>
 							</form>
 						</div>
-					<?php} else { ?>
+					<?php } else { ?>
 						<p class="text-muted text-center">Log in om te kunnen bieden</p>
 					<?php } ?>
 				</div>

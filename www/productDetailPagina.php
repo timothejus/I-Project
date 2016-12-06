@@ -11,7 +11,11 @@ require("scripts/product.php");
 
 $voorwerpNummer = $_GET['voorwerpNummer'];
 if (isset ($_GET ['bedrag'])) {
-	$bodBedrag = str_replace(',', '.', $_GET['bedrag']);
+	if (substr_count ($_GET ['bedrag'], ".") && substr_count ($_GET ['bedrag'], ",")) {
+		$bodBedrag = str_replace (',', '.', str_replace ('.', '', $_GET ['bedrag']));
+	} else {
+		$bodBedrag = str_replace(',', '.', $_GET['bedrag']);
+	}
 }
 if (isset ($_GET ['hoogsteBod'])) {
 	$hoogsteBod = $_GET ['hoogsteBod'];
