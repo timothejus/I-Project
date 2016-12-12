@@ -138,8 +138,9 @@ FROM Voorwerp V
 INNER JOIN Landen LDN ON V.Land = LDN.ISO
 INNER JOIN Betalingswijzen BTW ON V.Betalingswijze = BTW.Betalingswijze
 
-WHERE V.Voorwerpnummer =" . $voorwerpNummer . ";";
+WHERE V.Voorwerpnummer =(:voorwerp);";
 		$stmt = $dbh->prepare($sql);
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
 		$stmt->execute();
 
 
@@ -186,9 +187,10 @@ B.Bodbedrag,
 GB.Gebruikersnaam, 
 B.BodDagTijdStip
 FROM Bod B
-INNER JOIN Gebruiker GB ON B.Gebruiker = GB.Gebruikersnaam WHERE B.Voorwerp = " . $voorwerpNummer . "
+INNER JOIN Gebruiker GB ON B.Gebruiker = GB.Gebruikersnaam WHERE B.Voorwerp = (:voorwerp)
 ORDER BY B.Bodbedrag DESC;";
 		$stmt = $dbh->prepare($sql);
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
 		$stmt->execute();
 
 
@@ -209,10 +211,15 @@ ORDER BY B.Bodbedrag DESC;";
 function getVoorwerpAfbeeldingen($voorwerpNummer){
 	$afbeeldingen = Array();
 	try {
+		//database connection
 		$dbh = getConnection();
-
-		$sql = "SELECT filenaam FROM Bestand WHERE voorwerp = " . $voorwerpNummer . ";";
+		//sql with named placeholder
+		$sql = "SELECT filenaam FROM Bestand WHERE voorwerp = (:voorwerp);";
+		//prepare statement
 		$stmt = $dbh->prepare($sql);
+		//bind parameters named placeholder to variable
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
+		//execute statement
 		$stmt->execute();
 
 
