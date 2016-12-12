@@ -22,9 +22,11 @@ require ("scripts/header.php");
 
 		<?php
 		$voorwerp = getProductGroot();
-		echo $voorwerp -> geefProductGroot();
+		//Als er geen voorwerp van de dag wordt opggehaald laat dan toch de website zien.
+		if(isset($voorwerp)) {
+			echo $voorwerp->geefProductGroot();
+		}
 		?>
-
 	</div>
 
 	<!-- Overige producten -->
@@ -33,6 +35,7 @@ require ("scripts/header.php");
 		//Haal voorwerpen op voor homepagina
 		$voorwerpen = getVoorwerpen();
 
+		//creeër een counter zodat de producten op de pagina maar vier breed zijn.
 		$counter = 1;
 
 		//loop door de array voorwerpen en laat de voorwerpen zien

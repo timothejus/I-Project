@@ -20,10 +20,7 @@ class Voorwerp{
 	private $veilingGesloten;
 	private $verkoopPrijs;
 	private $biedingen;
-	//afbeeldingen
 	private $afbeeldingen;
-	//rubriek
-	private $rubriek;
 	private $resterendeSeconden;
 	private $hoogsteBod;
 
@@ -197,6 +194,11 @@ class Voorwerp{
 
 	public function setHoogsteBod($hoogsteBod){
 		$this->hoogsteBod = $hoogsteBod;
+	}
+
+	public function getHoogsteBod()
+	{
+		return $this->hoogsteBod;
 	}
 
 	//Functions

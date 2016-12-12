@@ -2,9 +2,10 @@
 
 /**
  * Created by IntelliJ IDEA.
- * User: jipbr
+ * User: Jip Brouwer
  * Date: 28-11-2016
  * Time: 14:40
+ * Class user
  */
 class user
 {
@@ -20,7 +21,19 @@ class user
 	private $mailadres;
 	private $isVerkoper;
 
-	//Constructor
+	/**
+	 * user constructor.
+	 * @param $gebruikersnaam
+	 * @param $voornaam
+	 * @param $achternaam
+	 * @param $adresregel1
+	 * @param $postcode
+	 * @param $plaatsnaam
+	 * @param $land
+	 * @param $geboortenaam
+	 * @param $mailadres
+	 * @param $isVerkoper
+	 */
 	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$isVerkoper)
 	{
 		$this->gebruikersnaam = $gebruikersnaam;
@@ -35,49 +48,164 @@ class user
 		$this->isVerkoper = $isVerkoper;
 	}
 
-	public function getGebruikersnaam(){
+	/**
+	 * @return mixed
+	 */
+	public function getGebruikersnaam()
+	{
 		return $this->gebruikersnaam;
 	}
 
-	public function getVoornaam(){
+	/**
+	 * @param mixed $gebruikersnaam
+	 */
+	public function setGebruikersnaam($gebruikersnaam)
+	{
+		$this->gebruikersnaam = $gebruikersnaam;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getVoornaam()
+	{
 		return $this->voornaam;
 	}
 
-	public function getAchternaam(){
+	/**
+	 * @param mixed $voornaam
+	 */
+	public function setVoornaam($voornaam)
+	{
+		$this->voornaam = $voornaam;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAchternaam()
+	{
 		return $this->achternaam;
 	}
 
-	public function getAdresregel1(){
+	/**
+	 * @param mixed $achternaam
+	 */
+	public function setAchternaam($achternaam)
+	{
+		$this->achternaam = $achternaam;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAdresregel1()
+	{
 		return $this->adresregel1;
 	}
 
-	public function getPostcode(){
+	/**
+	 * @param mixed $adresregel1
+	 */
+	public function setAdresregel1($adresregel1)
+	{
+		$this->adresregel1 = $adresregel1;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPostcode()
+	{
 		return $this->postcode;
 	}
 
-	public function getPlaatsnaam(){
+	/**
+	 * @param mixed $postcode
+	 */
+	public function setPostcode($postcode)
+	{
+		$this->postcode = $postcode;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPlaatsnaam()
+	{
 		return $this->plaatsnaam;
 	}
 
-	public function getLand(){
+	/**
+	 * @param mixed $plaatsnaam
+	 */
+	public function setPlaatsnaam($plaatsnaam)
+	{
+		$this->plaatsnaam = $plaatsnaam;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getLand()
+	{
 		return $this->land;
 	}
 
-	public function getGeboortenaam(){
+	/**
+	 * @param mixed $land
+	 */
+	public function setLand($land)
+	{
+		$this->land = $land;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getGeboortenaam()
+	{
 		return $this->geboortenaam;
 	}
 
-	public function getMailadres(){
+	/**
+	 * @param mixed $geboortenaam
+	 */
+	public function setGeboortenaam($geboortenaam)
+	{
+		$this->geboortenaam = $geboortenaam;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getMailadres()
+	{
 		return $this->mailadres;
 	}
 
-	public function getIsVerkoper(){
+	/**
+	 * @param mixed $mailadres
+	 */
+	public function setMailadres($mailadres)
+	{
+		$this->mailadres = $mailadres;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getIsVerkoper()
+	{
 		return $this->isVerkoper;
 	}
 
-
-
-
-
+	/**
+	 * @param mixed $isVerkoper
+	 */
+	public function setIsVerkoper($isVerkoper)
+	{
+		$this->isVerkoper = $isVerkoper;
+	}
 
 }
