@@ -98,6 +98,3 @@ require("scripts/header.php");
 			<span class="text-muted">&copy; 2016 Ubera</span>
 		</footer>
 	</div>
-
-	</body>
-	</html>
