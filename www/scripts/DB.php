@@ -1,16 +1,18 @@
 <?php
 
 /**
- * Created by IntelliJ IDEA.
- * User: jipbr
+ * User: Jip Brouwer
  * Date: 29-11-2016
  * Time: 10:49
  */
+
 require("voorwerp.php");
 require("mssql.inc.php");
 require("Bod.php");
 
-
+/**
+ * @return array|Voorwerp
+ */
 function getVoorwerpen()
 {
 	$voorwerpen = array();
@@ -48,6 +50,9 @@ WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDeDag PVVD WHERE P
 
 }
 
+/**
+ * @return Voorwerp|Voorwerp
+ */
 function getProductGroot()
 {
 	$voorwerp = null;
@@ -82,6 +87,10 @@ WHERE PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af')
 	return $voorwerp;
 }
 
+/**
+ * @param $voorwerpNummer
+ * @return Voorwerp|Voorwerp
+ */
 function getProduct($voorwerpNummer)
 {
 	$voorwerp =  getProductData($voorwerpNummer);
@@ -95,6 +104,10 @@ function getProduct($voorwerpNummer)
 	return $voorwerp;
 }
 
+/**
+ * @param $voorwerpNummer
+ * @return Voorwerp|Voorwerp
+ */
 function getProductData($voorwerpNummer){
 	try {
 		$dbh = getConnection();
@@ -158,6 +171,10 @@ WHERE V.Voorwerpnummer =" . $voorwerpNummer . ";";
 	return $voorwerp ? $voorwerp : null;
 }
 
+/**
+ * @param $voorwerpNummer
+ * @return array|Bod
+ */
 function getBiedingen($voorwerpNummer){
 	$Biedingen = Array();
 	try {
@@ -185,6 +202,10 @@ ORDER BY B.Bodbedrag DESC;";
 	return $Biedingen ? $Biedingen : null;
 }
 
+/**
+ * @param $voorwerpNummer
+ * @return array
+ */
 function getVoorwerpAfbeeldingen($voorwerpNummer){
 	$afbeeldingen = Array();
 	try {
@@ -203,5 +224,3 @@ function getVoorwerpAfbeeldingen($voorwerpNummer){
 	}
 	return $afbeeldingen ? $afbeeldingen : null;
 }
-
-?>

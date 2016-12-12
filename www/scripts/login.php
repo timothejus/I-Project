@@ -1,4 +1,9 @@
 <?php
+/**
+ * @param $login
+ * @param $wachtwoord
+ * @return bool
+ */
 function login($login, $wachtwoord){
 	$dsn = 'sqlsrv:server=192.168.0.20;Database=EenmaalAndermaal';
 	$user = 'sa';
