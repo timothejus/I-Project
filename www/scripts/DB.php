@@ -231,3 +231,23 @@ function getVoorwerpAfbeeldingen($voorwerpNummer){
 	}
 	return $afbeeldingen ? $afbeeldingen : null;
 }
+
+function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
+
+	try
+	{
+		$db = getConnection();
+		$stmt = $db->prepare("INSERT INTO Bod(Voorwerp,Bodbedrag,Gebruiker)VALUES (:Voorwerp,:Bodbedrag,:Gebruiker)");
+		$stmt->bindParam("Voorwerp", $voorwerp);
+		$stmt->bindParam("Bodbedrag", $bodbedrag);
+		$stmt->bindParam("Gebruiker", $gebruiker);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}

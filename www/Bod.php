@@ -1,5 +1,7 @@
 <?php
 
+require ("scripts/DB.php");
+
 /**
  * Created by IntelliJ IDEA.
  * User: jipbr
@@ -44,47 +46,7 @@ class Bod
 
 	//functies
 	public function plaatsBod(){
-
-
-
-		try
-		{
-			$db = getConnection();
-			$stmt = $db->prepare("INSERT INTO Bod(Voorwerp,Bodbedrag,Gebruiker)VALUES (:Voorwerp,:Bodbedrag,:Gebruiker)");
-			$stmt->bindParam("Voorwerp", $this->voorwerpnummer);
-			$stmt->bindParam("Bodbedrag", $this->bodbedrag);
-			$stmt->bindParam("Gebruiker", $this->gebruiker);
-
-			$stmt->execute();
-			$db = null;
-		}
-		catch(PDOException $e)
-		{
-			echo $e->getMessage();
-			echo $e->errorInfo;
-		}
-
-
-
-
-		/*
-		$insertQuery = query("INSERT INTO Bod (Voorwerp, Bodbedrag, Gebruiker) value (:voorwerp, :Bodbedrag, :Gebruiker)", array(
-			"voorwerp" => $this->voorwerpnummer, "Bodbedrag" => $this->bodbedrag,"Gebruiker" => $this->gebruiker));
-
-		try
-		{
-			$db = getConnection();
-			$stmt = $db->prepare($insertQuery);
-			$stmt->execute();
-
-			$db = null;
-		}
-		catch(PDOException $e)
-		{
-			die($e->getCode());
-		}
-*/
-
+		plaatsBod($this->voorwerpnummer,$this->bodbedrag,$this->gebruiker);
 	}
 }
 

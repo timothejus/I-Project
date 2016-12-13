@@ -1,3 +1,90 @@
+<?php
+if (!empty($_GET["username"]) &&
+	!empty($_GET["password"]) &&
+	!empty($_GET["password2"]) &&
+	!empty($_GET["fname"]) &&
+	!empty($_GET["lname"]) &&
+	!empty($_GET["day"]) &&
+	!empty($_GET["month"]) &&
+	!empty($_GET["year"]) &&
+	!empty($_GET["street"]) &&
+	!empty($_GET["street2"]) &&
+	!empty($_GET["postcode"]) &&
+	!empty($_GET["place"]) &&
+	!empty($_GET["telephone"]) &&
+	!empty($_GET["question"]) &&
+	!empty($_GET["answer"])){
+	registreren(
+		$_get["username"],
+		$_get["password"],
+		$_get["password2"],
+		$_get["fname"],
+		$_get["lname"],
+		$_get["day"],
+		$_get["month"],
+		$_get["year"],
+		$_get["street"],
+		$_get["street2"],
+		$_get["postcode"],
+		$_get["place"],
+		$_get["telephone"],
+		$_get["question"],
+		$_get["answer"]
+		);
+} else if (!empty($_GET["username"]) &&
+	!empty($_GET["password"]) &&
+	!empty($_GET["password2"]) &&
+	!empty($_GET["fname"]) &&
+	!empty($_GET["lname"]) &&
+	!empty($_GET["day"]) &&
+	!empty($_GET["month"]) &&
+	!empty($_GET["year"]) &&
+	!empty($_GET["street"]) &&
+	!empty($_GET["postcode"]) &&
+	!empty($_GET["place"]) &&
+	!empty($_GET["telephone"]) &&
+	!empty($_GET["question"]) &&
+	!empty($_GET["answer"])){
+
+}
+
+function registreren(
+	$username,
+	$password,
+	$password2,
+	$fname,
+	$lname,
+	$day,
+	$month,
+	$year,
+	$street,
+	$street2,
+	$postcode,
+	$place,
+	$telephone,
+	$question,
+	$answer
+){
+	try
+	{
+		$db = getConnection();
+		$stmt = $db->prepare("INSERT INTO Gebruiker()VALUES (:Voorwerp,:Bodbedrag,:Gebruiker)");
+		$stmt->bindParam("Voorwerp", $this->voorwerpnummer);
+		$stmt->bindParam("Bodbedrag", $this->bodbedrag);
+		$stmt->bindParam("Gebruiker", $this->gebruiker);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 	<head>
@@ -83,10 +170,9 @@
 				<div class="col-sm-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">Registratieformulier</div>
-						<form action="registratie.html" method="get">
+						<form action="registratie.php" method="get">
 							<div class="panel-body">
 								<div class="col-sm-6">
-									<form class="form-group">
 										Gebruikersnaam
 										<input type="text" class="form-control" name="username"><br/>
 										Wachtwoord
@@ -125,7 +211,6 @@
 										Antwoord *
 										<input type="text" class="form-control" name="answer"><br/>
 										Captcha *
-									</form>
 								</div>
 							</div>
 							<div class="panel-footer">
