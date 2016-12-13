@@ -50,6 +50,35 @@ WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDeDag PVVD WHERE P
 
 }
 
+function getVoorwerpen2()
+{
+	$voorwerpen = array();
+
+	try {
+		$dbh = getConnection();
+		$sql = "EXEC spKrijgVoorwerpen";
+
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"], '',
+				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
+				$row["LooptijdEindeDagTijdstip"], '', '', ''
+			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
+			$voorwerp->setAfbeeldingen($row['afbeelding']);
+			$voorwerpen[] = $voorwerp;
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+	return $voorwerpen;
+
+}
+
 /**
  * @return Voorwerp|Voorwerp
  */
@@ -61,17 +90,7 @@ function getProductGroot()
 	$password = 'iproject4';
 	$dbh = new PDO($dsn, $user, $password);
 
-	$sql = "SELECT
-V.Voorwerpnummer,
-V.Titel, 
-V.LooptijdEindeDagTijdstip,
-V.Startprijs,
-(SELECT TOP 1 Bodbedrag FROM Bod WHERE Voorwerp = V.Voorwerpnummer ORDER BY Bodbedrag DESC) AS hoogsteBod,
-(SELECT TOP 1 filenaam FROM Bestand WHERE voorwerp = V.Voorwerpnummer ) AS afbeelding
-FROM ProductVanDeDag PVVD 
-JOIN Voorwerp V ON PVVD.Voorwerp = V.Voorwerpnummer
-WHERE PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af')
-;";
+	$sql = "exec sp_getDing :nr";
 	$stmt = $dbh->prepare($sql);
 	$stmt->execute();
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
