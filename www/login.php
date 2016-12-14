@@ -42,7 +42,7 @@ require("scripts/header.php");
 					<div class='panel-footer'>
 						<div class='row'>
 							<div class='col-sm-6'>
-								<button type='submit' class='btn btn-default'>Login</button>
+								<button type='submit' class='btn btn-primary'>Login</button>
 							</div>
 							<div class='col-sm-6 text-right'>
 								<a href='#'>Wachtwoord vergeten?</a>
@@ -66,7 +66,7 @@ require("scripts/header.php");
 					</ul>
 				</div>
 				<div class="panel-footer">
-					<button type="button" class="btn btn-default">Registreren</button>
+					<button type="button" class="btn btn-primary">Registreren</button>
 				</div>
 			</div>
 		</div>
