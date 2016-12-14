@@ -40,3 +40,12 @@ a:hover.panelheader-link {
 .top-buffer {
 	margin-top: 16px;
 }
+
+a:link.catlink {
+	color: rgb(67,119,119);
+}
+a:hover.catlink {
+}
+a:visited.catlink {
+	color: rgb(67,119,119);
+}

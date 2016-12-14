@@ -208,8 +208,8 @@ class Voorwerp{
 			$bedrag = $this->startprijs;
 		}else {$bedrag = $this->hoogsteBod;}
 		$ret = "
-				<div class='col-sm-3'>
-					<div class='panel panel-default'>
+				<div class='col-sm-4'>
+					<div class='panel panel-primary'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
 							<div class='panel-body text-center'>
 								<img src='" . $this->afbeeldingen . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
@@ -234,27 +234,22 @@ class Voorwerp{
 		if($this->hoogsteBod == null) {
 			$bedrag = $this->startprijs;
 		}else {$bedrag = $this->hoogsteBod;}
-		$ret = "	
-			<div class=\"col-sm-6 col-sm-offset-3\">
-				<div class=\"panel panel-primary\">
-					<div class=\"panel-heading\">
-						<h4><a href=\"#\" class=\"panelheader-link\">".$this->titel."</a></h4>
-					</div>
-					<div class=\"panel-body text-center\">
-						<img src='" . $this->afbeeldingen . "' class=\"img-thumbnail img-responsive img-thumbnail-primary\" alt=\"img\"><br/>
-					</div>
-					<div class=\"panel-footer\">
-						<table class=\"table table-responsive\">
-							<tr>
-								<th class=\"text-center\">&euro;".number_format ($bedrag, 2, ",", ".")."</th>
-								<th class=\"text-danger text-center\"><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
-								<th class=\"text-center\"><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class=\"btn btn-xs btn-danger\">Bied</a></th>
-							</tr>
-						</table>
-					</div>
+		$ret = '
+		<div class="panel panel-default">
+			<div class="panel-body" style="background: linear-gradient(to left, rgb(243,134,48), rgb(255,255,255));">
+				<div class="col-sm-5">
+					<h2>Product van de dag</h2><br/>
+					<h4><a href="productDetailPagina.php?voorwerpNummer=' . $this->voorwerpnummer . '">' . $this->titel . '</a></h4>
+					<p class="lead"><b>&euro;' . number_format ($bedrag, 2, ",", ".") . '</b><br/>
+					<span id="' . $this->voorwerpnummer . '" class="text-danger"></span><script type="text/javascript">setTimer("' . $this->voorwerpnummer . '", "' . $this->looptijdEindeDag . '");</script></p><br/><br/>
+					<a class="btn btn-primary btn-lg" href="productDetailPagina.php?voorwerpNummer=' . $this->voorwerpnummer . '">Bied nu!</a>
+				</div>
+				<div class="col-sm-7 text-right">
+					<img class="img-thumbnail" src="' . $this->afbeeldingen . '">
 				</div>
 			</div>
-      ";
+		</div>
+		';
 		return $ret;
 	}
 }

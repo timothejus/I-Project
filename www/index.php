@@ -22,7 +22,7 @@ require ("scripts/header.php");
 
 		<?php
 		$voorwerp = getProductGroot();
-		//Als er geen voorwerp van de dag wordt opggehaald laat dan toch de website zien.
+		//Als er geen voorwerp van de dag wordt opgehaald laat dan toch de website zien.
 		if(isset($voorwerp)) {
 			echo $voorwerp->geefProductGroot();
 		}
@@ -31,25 +31,48 @@ require ("scripts/header.php");
 
 	<!-- Overige producten -->
 	<div class="row">
-		<?php
-		//Haal voorwerpen op voor homepagina
-		$voorwerpen = getVoorwerpen();
+		<div class="col-sm-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">Rubrieken</div>
+				<div class="panel-body">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+						<li><a href="" class="catlink">Categorie</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div class="panel panel-default"><div class="panel-heading text-center"><h3 class="text-danger">Laatste kans!</h3></div><div class="panel-body">
+			<?php
+			//Haal voorwerpen op voor homepagina
+			$voorwerpen = getVoorwerpen();
 
-		//creeër een counter zodat de producten op de pagina maar vier breed zijn.
-		$counter = 1;
+			//creeër een counter zodat de producten op de pagina maar vier breed zijn.
+			$counter = 1;
 
-		//loop door de array voorwerpen en laat de voorwerpen zien
-		foreach ($voorwerpen as $voorwerp) {
-			if ($counter%4 == 1) {
-				echo "<div class='row'>\n";
+			//loop door de array voorwerpen en laat de voorwerpen zien
+			foreach ($voorwerpen as $voorwerp) {
+				if ($counter%3 == 1) {
+					echo "<div class='row'>\n";
+				}
+				echo $voorwerp->geefProductKlein();
+				if ($counter%3 == 0) {
+					echo "</div>\n";
+				}
+				$counter++;
 			}
-			echo $voorwerp->geefProductKlein();
-			if ($counter%4 == 0) {
-				echo "</div>\n";
-			}
-			$counter++;
-		}
-		?>
+			?>
+			</div>
+		</div>
 
 	</div>
 
