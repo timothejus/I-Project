@@ -1,4 +1,5 @@
 <?php
+require "scripts/mssql.inc.php";
 if (!empty($_GET["username"]) &&
 	!empty($_GET["password"]) &&
 	!empty($_GET["password2"]) &&
@@ -11,25 +12,27 @@ if (!empty($_GET["username"]) &&
 	!empty($_GET["street2"]) &&
 	!empty($_GET["postcode"]) &&
 	!empty($_GET["place"]) &&
+	!empty($_GET["land"]) &&
 	!empty($_GET["telephone"]) &&
 	!empty($_GET["question"]) &&
-	!empty($_GET["answer"])){
+	!empty($_GET["answer"])
+	&& $_GET["password"] === $_GET["password2"]){
 	registreren(
-		$_get["username"],
-		$_get["password"],
-		$_get["password2"],
-		$_get["fname"],
-		$_get["lname"],
-		$_get["day"],
-		$_get["month"],
-		$_get["year"],
-		$_get["street"],
-		$_get["street2"],
-		$_get["postcode"],
-		$_get["place"],
-		$_get["telephone"],
-		$_get["question"],
-		$_get["answer"]
+		$_GET["username"],
+		$_GET["password"],
+		$_GET["fname"],
+		$_GET["lname"],
+		$_GET["day"],
+		$_GET["month"],
+		$_GET["year"],
+		$_GET["street"],
+		$_GET["street2"],
+		$_GET["postcode"],
+		$_GET["place"],
+		$_GET["land"],
+		$_GET["telephone"],
+		$_GET["question"],
+		$_GET["answer"]
 		);
 } else if (!empty($_GET["username"]) &&
 	!empty($_GET["password"]) &&
@@ -46,12 +49,38 @@ if (!empty($_GET["username"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])){
 
+} else if (!empty($_GET["username"])){
+
+	require "scripts/PHPMailAutoload.php";
+	require "scripts/phpmailer.php";
+	require "scripts/smtp.php";
+
+	$mail = new PHPMailer(); // create a new object
+	$mail->isSMTP(); // enable SMTP
+	$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+	$mail->SMTPAuth = true; // authentication enabled
+	$mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
+	$mail->Host = "smtp.gmail.com";
+	$mail->Port = 587; // or 587
+	$mail->isHTML(true);
+	$mail->Username = "noreacteenmaalandermaal@gmail.com";
+	$mail->Password = "iproject4!";
+	$mail->setFrom("noreacteenmaalandermaal@gmail.com");
+	$mail->Subject = "Test";
+	$mail->Body = "hello";
+	$mail->addAddress("gigceez@gmail.com");
+
+	if(!$mail->send()) {
+		echo "Mailer Error: " . $mail->ErrorInfo;
+	} else {
+		echo "Message has been sent";
+	}
+// You may delete or alter these last lines reporting error messages, but beware, that if you delete the $mail->Send() part, the e-mail will not be sent, because that is the part of this code, that actually sends the e-mail.
 }
 
 function registreren(
 	$username,
 	$password,
-	$password2,
 	$fname,
 	$lname,
 	$day,
@@ -61,6 +90,7 @@ function registreren(
 	$street2,
 	$postcode,
 	$place,
+	$land,
 	$telephone,
 	$question,
 	$answer
@@ -68,21 +98,62 @@ function registreren(
 	try
 	{
 		$db = getConnection();
-		$stmt = $db->prepare("INSERT INTO Gebruiker()VALUES (:Voorwerp,:Bodbedrag,:Gebruiker)");
-		$stmt->bindParam("Voorwerp", $this->voorwerpnummer);
-		$stmt->bindParam("Bodbedrag", $this->bodbedrag);
-		$stmt->bindParam("Gebruiker", $this->gebruiker);
-
+		$date = $day."-".$month."-".$year;
+		$hashedpassword = hash('sha256', $lname . $password);
+		echo "fresh";
+		$stmt = $db->prepare("INSERT INTO Gebruiker(Gebruikersnaam, 
+											Voornaam, 
+											Achternaam, 
+											Adresregel1, 
+											Adresregel2, 
+											Postcode, 
+											Plaatsnaam, 
+											Land, 
+											Geboortedag, 
+											Mailadres, 
+											Wachtwoord, 
+											Vraag, 
+											Antwoordtekst, 
+											Verkoper)
+											VALUES (:Gebruikersnaam,
+													:Voornaam,
+													:Achternaam,
+													:Adresregel1,
+													:Adresregel2,
+													:Postcode,
+													:Plaatsnaam,
+													:Land,
+													:Geboortedag,
+													:Mailadres,
+													:Wachtwoord,
+													:Vraag,
+													:Antwoordtekst,
+													:Verkoper
+													)
+													
+												  )");
+		$stmt->bindParam("Gebruikersnaam", $username);
+		$stmt->bindParam("Voornaam", $fname);
+		$stmt->bindParam("Achternaam", $lname);
+		$stmt->bindParam("Adresregel1", $street);
+		$stmt->bindParam("Adresregel2", $street2);
+		$stmt->bindParam("Postcode", $postcode);
+		$stmt->bindParam("Plaatsnaam", $place);
+		$stmt->bindParam("Land", $land);
+		$stmt->bindParam("Geboortedag", $date);
+		$stmt->bindParam("Mailadres", $mail);
+		$stmt->bindParam("Wachtwoord", $hashedpassword);
+		$stmt->bindParam("Vraag", $question);
+		$stmt->bindParam("Andwoordtekst", $answer);
+		$stmt->bindParam("Verkoper", intval(0));
 		$stmt->execute();
 		$db = null;
 	}
 	catch(PDOException $e)
 	{
 		echo $e->getMessage();
-		echo $e->errorInfo;
 	}
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -179,6 +250,8 @@ function registreren(
 										<input type="password" class="form-control" name="password"><br/>
 										Wachtwoord herhalen
 										<input type="password" class="form-control" name="password2"><br/>
+										Emailadres
+										<input type="text" class="form-control" name="emailadres" disabled><br/>
 										Voornaam
 										<input type="text" class="form-control" name="fname"><br/>
 										Achternaam
@@ -207,7 +280,25 @@ function registreren(
 										Telefoonnummer *
 										<input type="text" class="form-control" name="telephone"><br/>
 										Geheime vraag
-										<input type="text" class="form-control" name="question"><br/>
+										<select name="question" class="form-control">
+											<?php
+											echo getQuestion();
+
+											function getQuestion(){
+												$dbh = getConnection();
+												$sql = "SELECT Vraagnummer, TekstVraag FROM Vraag";
+												$stmt = $dbh->prepare($sql);
+												$stmt->execute();
+												$ret = "";
+												while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+												{
+													$ret .=  '<option value="'.$row['Vraagnummer'].'">'.$row['TekstVraag'].'</option>';
+
+												}
+												return $ret;
+											}
+											?>
+										</select>
 										Antwoord *
 										<input type="text" class="form-control" name="answer"><br/>
 										Captcha *
