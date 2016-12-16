@@ -212,7 +212,7 @@ class Voorwerp{
 					<div class='panel panel-primary'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
 							<div class='panel-body text-center'>
-								<img src='" . $this->afbeeldingen . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
+								<img src='https://www.iproject4.icasites.nl/pics/" . $this->afbeeldingen . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
 							</div>
 						<div class='panel-footer'>
 							<table class='table table-responsive'>

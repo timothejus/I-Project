@@ -31,7 +31,7 @@ function getVoorwerpen()
 				$row["Voorwerpnummer"],
 				$row["Titel"], '',
 				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
-				$row["LooptijdEindeDagTijdstip"], '', '', ''
+				$row["Eindtijd"], '', '', ''
 			);
 			$voorwerp->setHoogsteBod($row['hoogsteBod']);
 			$voorwerp->setAfbeeldingen($row['afbeelding']);
@@ -62,7 +62,7 @@ function getProductGroot()
 			$row["Voorwerpnummer"],
 			$row["Titel"], '',
 			$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
-			$row["LooptijdEindeDagTijdstip"], '', '', ''
+			$row["Eindtijd"], '', '', ''
 		);
 		$voorwerp->setHoogsteBod($row['hoogsteBod']);
 		$voorwerp->setAfbeeldingen($row['afbeelding']);
