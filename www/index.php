@@ -7,7 +7,8 @@
  */
 
 // Haalt de benodigde functies op (product v/d dag, klein product en de time formatter)
-require("scripts/DB.php");
+require ("scripts/DB.php");
+require ("rubriek.php");
 
 // Include de header
 require ("scripts/header.php");
@@ -36,16 +37,13 @@ require ("scripts/header.php");
 				<div class="panel-heading">Rubrieken</div>
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
-						<li><a href="" class="catlink">Categorie</a></li>
+						<?php
+						$rubrieken = getHoofdrubrieken ();
+
+						foreach ($rubrieken as $row) {
+							echo '<li><a href="" class="catlink">' . $row->getNaam () . "</a></li>\n";
+						}
+						?>
 					</ul>
 				</div>
 			</div>

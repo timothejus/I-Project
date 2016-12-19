@@ -204,6 +204,30 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 	}
 }
 
+function getHoofdrubrieken () {
+
+	$rubrieken = null;
+
+	try {
+		$db = getConnection ();
+		$sql = "SELECT ID, Rubrieknaam, Parent, Volgnr FROM Rubriek WHERE parent = -1 ORDER BY Rubrieknaam ASC";
+		$stmt = $db->prepare ($sql);
+
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
+			$rubrieken [] = $rubriek;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $rubrieken ? $rubrieken : null;
+}
+
 function insertCode($code,$email){
 	try
 	{
