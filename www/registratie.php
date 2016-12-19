@@ -1,6 +1,8 @@
 <?php
 require "scripts/mssql.inc.php";
-if (!empty($_GET["username"]) &&
+require "scripts/header.php";
+if (!empty($_GET["emailadres"]) &&
+	!empty($_GET["username"]) &&
 	!empty($_GET["password"]) &&
 	!empty($_GET["password2"]) &&
 	!empty($_GET["fname"]) &&
@@ -9,7 +11,6 @@ if (!empty($_GET["username"]) &&
 	!empty($_GET["month"]) &&
 	!empty($_GET["year"]) &&
 	!empty($_GET["street"]) &&
-	!empty($_GET["street2"]) &&
 	!empty($_GET["postcode"]) &&
 	!empty($_GET["place"]) &&
 	!empty($_GET["land"]) &&
@@ -17,40 +18,28 @@ if (!empty($_GET["username"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
 	&& $_GET["password"] === $_GET["password2"]){
-	registreren(
-		$_GET["username"],
-		$_GET["password"],
-		$_GET["fname"],
-		$_GET["lname"],
-		$_GET["day"],
-		$_GET["month"],
-		$_GET["year"],
-		$_GET["street"],
-		$_GET["street2"],
-		$_GET["postcode"],
-		$_GET["place"],
-		$_GET["land"],
-		$_GET["telephone"],
-		$_GET["question"],
-		$_GET["answer"]
+	if (checkUsername($_GET["username"])) {
+		registreren(
+			$_GET["emailadres"],
+			$_GET["username"],
+			$_GET["password"],
+			$_GET["fname"],
+			$_GET["lname"],
+			$_GET["day"],
+			$_GET["month"],
+			$_GET["year"],
+			$_GET["street"],
+			$_GET["postcode"],
+			$_GET["place"],
+			$_GET["land"],
+			$_GET["question"],
+			$_GET["answer"]
 		);
-} else if (!empty($_GET["username"]) &&
-	!empty($_GET["password"]) &&
-	!empty($_GET["password2"]) &&
-	!empty($_GET["fname"]) &&
-	!empty($_GET["lname"]) &&
-	!empty($_GET["day"]) &&
-	!empty($_GET["month"]) &&
-	!empty($_GET["year"]) &&
-	!empty($_GET["street"]) &&
-	!empty($_GET["postcode"]) &&
-	!empty($_GET["place"]) &&
-	!empty($_GET["telephone"]) &&
-	!empty($_GET["question"]) &&
-	!empty($_GET["answer"])) {
+	}
 }
 
 function registreren(
+	$mail,
 	$username,
 	$password,
 	$fname,
@@ -59,65 +48,59 @@ function registreren(
 	$month,
 	$year,
 	$street,
-	$street2,
 	$postcode,
 	$place,
 	$land,
-	$telephone,
 	$question,
 	$answer
 ){
 	try
 	{
+		$verkoper = 0;
 		$db = getConnection();
-		$date = $day."-".$month."-".$year;
+		$date = $year."-".$month."-".$day;
 		$hashedpassword = hash('sha256', $lname . $password);
-		echo "fresh";
 		$stmt = $db->prepare("INSERT INTO Gebruiker(Gebruikersnaam, 
 											Voornaam, 
 											Achternaam, 
 											Adresregel1, 
-											Adresregel2, 
 											Postcode, 
 											Plaatsnaam, 
-											Land, 
-											Geboortedag, 
+											GbaCode, 
+											Geboortedatum, 
 											Mailadres, 
 											Wachtwoord, 
-											Vraag, 
+											GeheimeVraag, 
 											Antwoordtekst, 
 											Verkoper)
 											VALUES (:Gebruikersnaam,
 													:Voornaam,
 													:Achternaam,
 													:Adresregel1,
-													:Adresregel2,
 													:Postcode,
 													:Plaatsnaam,
 													:Land,
-													:Geboortedag,
+													:Geboortedatum,
 													:Mailadres,
 													:Wachtwoord,
 													:Vraag,
 													:Antwoordtekst,
 													:Verkoper
 													)
-													
-												  )");
+													");
 		$stmt->bindParam("Gebruikersnaam", $username);
 		$stmt->bindParam("Voornaam", $fname);
 		$stmt->bindParam("Achternaam", $lname);
 		$stmt->bindParam("Adresregel1", $street);
-		$stmt->bindParam("Adresregel2", $street2);
 		$stmt->bindParam("Postcode", $postcode);
 		$stmt->bindParam("Plaatsnaam", $place);
 		$stmt->bindParam("Land", $land);
-		$stmt->bindParam("Geboortedag", $date);
+		$stmt->bindParam("Geboortedatum", $date);
 		$stmt->bindParam("Mailadres", $mail);
 		$stmt->bindParam("Wachtwoord", $hashedpassword);
 		$stmt->bindParam("Vraag", $question);
-		$stmt->bindParam("Andwoordtekst", $answer);
-		$stmt->bindParam("Verkoper", intval(0));
+		$stmt->bindParam("Antwoordtekst", $answer);
+		$stmt->bindParam("Verkoper", $verkoper);
 		$stmt->execute();
 		$db = null;
 	}
@@ -126,84 +109,45 @@ function registreren(
 		echo $e->getMessage();
 	}
 }
+
+function returnNul(){
+	return "0";
+}
+
+function checkUsername($username){
+	$dbh = getConnection();
+	$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:username)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':username', $username, PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Gebruikersnaam bestaat al, kies een andere gebruikersnaam!</div></div></div>';
+		return false;
+	}
+	return true;
+}
+
 ?>
 
-<!DOCTYPE html>
-<html lang="nl">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
 
-		<link href="../www/css/bootstrap.min.css" rel="stylesheet">
-		<link href="../www/css/bootstrap-select.min.css" rel="stylesheet">
+function codeInDatabase($code){
+	$dbh = getConnection();
+	$sql = "SELECT Mailadres FROM RegistratieCode WHERE RegistratieCode=(:code)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':code', $code, PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		return $row['Mailadres'];
+	}
+}
 
-		<!-- Kleine CSS fixes -->
-		<link href="../www/css/fixes.css" rel="stylesheet">
-
-		<title>Inloggen</title>
-	</head>
-	<body>
-
-		<!-- Scripts voor extra functionaliteit van Bootstrap -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="../www/js/bootstrap.min.js"></script>
-		<script src="../www/js/bootstrap-select.min.js"></script>
-
-		<!-- Navbar containers -->
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-
-				<!-- Navbar logo -->
-				<div class="navbar-header">
-					<img class="navbar-brand" src="../www/images/logo.jpg" alt="EenmaalAndermaal">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#loginNav">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-
-				<!-- Inklappend menu voor kleine schermen -->
-				<div class="collapse navbar-collapse" id="loginNav">
-
-					<!-- Zoekbalk/filters -->
-					<div class="navbar-left">
-						<form class="navbar-form">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Zoek">
-								<div class="selectmenu">
-									<select class="form-control selectpicker">
-										<option class="hide" value="" disabled selected>Categorieen</option>
-										<option value="cat1">Categorie 1</option>
-										<option value="cat2">Categorie 2</option>
-										<option value="cat3">Categorie 3</option>
-										<option value="cat4">Categorie 4</option>
-										<option value="cat5">Categorie 5</option>
-										<option value="cat6">Categorie 6</option>
-										<option value="cat7">Categorie 7</option>
-										<option value="cat8">Categorie 8</option>
-									</select>
-								</div>
-								<button type="submit" class="btn btn-default">
-									<span class="glyphicon glyphicon-search"></span></button>
-							</div>
-						</form>
-					</div>
-
-					<!-- Login/registreer/help knoppen -->
-					<div class="navbar-right">
-						<ul class="nav navbar-nav">
-							<li><a href="#">Log in</a></li>
-							<li><a href="#">Registreer</a></li>
-							<li><a href="#">Help</a></li>
-						</ul>
-					</div>
-
-				</div>
-
-			</div>
-		</nav>
+if (isset($_GET["code"])) {
+	$mail = codeInDatabase($_GET["code"]);
+	if ($mail != "") {
+		?>
 
 		<div class="container">
 
@@ -216,64 +160,87 @@ function registreren(
 						<form action="registratie.php" method="get">
 							<div class="panel-body">
 								<div class="col-sm-6">
-										Gebruikersnaam
-										<input type="text" class="form-control" name="username"><br/>
-										Wachtwoord
-										<input type="password" class="form-control" name="password"><br/>
-										Wachtwoord herhalen
-										<input type="password" class="form-control" name="password2"><br/>
-										Emailadres
-										<input type="text" class="form-control" name="emailadres" disabled><br/>
-										Voornaam
-										<input type="text" class="form-control" name="fname"><br/>
-										Achternaam
-										<input type="text" class="form-control" name="lname"><br/>
-										Geboortedatum
-										<div class="form-inline">
-											<input type="text" pattern="^[0-9]{1,45}$" placeholder="Dag" class="form-control text-center" style="width: 72px;" name="day">
-											<input type="text" placeholder="Maand" class="form-control text-center" style="width: 72px;" name="month">
-											<input type="text" placeholder="Jaar" class="form-control text-center" style="width: 72px;" name="year">
-										</div>
-										<br/>
-										Straatnaam en huisnummer *
-										<input type="text" class="form-control" name="street"><br/>
-										Extra adresregel
-										<input type="text" class="form-control" name="street2"><br/>
-										<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
-											Postcode *
-											<input type="text" class="form-control" name="postcode"><br/>
-										</div>
-										<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
-											Plaatsnaam *
-											<input type="text" class="form-control" name="place"><br/>
-										</div>
-										Land *
-										<input type="text" class="form-control" name="land"><br/>
-										Telefoonnummer *
-										<input type="text" class="form-control" name="telephone"><br/>
-										Geheime vraag
-										<select name="question" class="form-control">
-											<?php
-											echo getQuestion();
-
-											function getQuestion(){
-												$dbh = getConnection();
-												$sql = "SELECT Vraagnummer, TekstVraag FROM Vraag";
-												$stmt = $dbh->prepare($sql);
-												$stmt->execute();
-												$ret = "";
-												while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-												{
-													$ret .=  '<option value="'.$row['Vraagnummer'].'">'.$row['TekstVraag'].'</option>';
-
-												}
-												return $ret;
+									<input type="hidden" value="<?php echo $_GET["code"]; ?>" name="code">
+									<input type="hidden" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres">
+									Gebruikersnaam
+									<input type="text" class="form-control" name="username"><br/>
+									Wachtwoord
+									<input type="password" class="form-control" name="password"><br/>
+									Wachtwoord herhalen
+									<input type="password" class="form-control" name="password2"><br/>
+									Voornaam
+									<input type="text" class="form-control" name="fname"><br/>
+									Achternaam
+									<input type="text" class="form-control" name="lname"><br/>
+									Geboortedatum
+									<div class="form-inline">
+										<input type="text" pattern="^[0-9]{1,45}$" placeholder="Dag"
+										       class="form-control text-center" style="width: 72px;" name="day">
+										<input type="text" placeholder="Maand" class="form-control text-center"
+										       style="width: 72px;" name="month">
+										<input type="text" placeholder="Jaar" class="form-control text-center"
+										       style="width: 72px;" name="year">
+									</div>
+									<br/>
+									Straatnaam en huisnummer *
+									<input type="text" class="form-control" name="street"><br/>
+									Extra adresregel
+									<input type="text" class="form-control" name="street2"><br/>
+									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
+										Postcode *
+										<input type="text" class="form-control" name="postcode"><br/>
+									</div>
+									<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
+										Plaatsnaam *
+										<input type="text" class="form-control" name="place"><br/>
+									</div>
+									Land *
+									<select name="land" class="form-control">
+										<?php
+										function getGba()
+										{
+											$dbh = getConnection();
+											$sql = "SELECT GbaCode, LandNaam FROM Land";
+											$stmt = $dbh->prepare($sql);
+											$stmt->execute();
+											$ret = "";
+											while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+												$ret .= '<option value="' . $row['GbaCode'] . '">' . $row['LandNaam'] . '</option>';
 											}
-											?>
-										</select>
-										Antwoord *
-										<input type="text" class="form-control" name="answer"><br/>
-										Captcha *
+											return $ret;
+										}
+										echo getGba();
+
+
+
+										?>
+									</select>
+									Telefoonnummer *
+									<input type="text" class="form-control" name="telephone"><br/>
+									Geheime vraag
+									<select name="question" class="form-control">
+										<?php
+										function getQuestion()
+										{
+											$dbh = getConnection();
+											$sql = "SELECT Vraagnummer, Tekstvraag FROM GeheimeVraag";
+											$stmt = $dbh->prepare($sql);
+											$stmt->execute();
+											$ret = "";
+											while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+												$ret .= '<option value="' . $row['Vraagnummer'] . '">' . $row['Tekstvraag'] . '</option>';
+											}
+											return $ret;
+										}
+										echo getQuestion();
+
+
+
+										?>
+									</select>
+									Antwoord *
+									<input type="text" class="form-control" name="answer"><br/>
+									Captcha *
 								</div>
 							</div>
 							<div class="panel-footer">
@@ -300,5 +267,9 @@ function registreren(
 			</footer>
 		</div>
 
-	</body>
-</html>
+		</body>
+		</html>
+		<?php
+	}
+}
+?>

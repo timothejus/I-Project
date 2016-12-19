@@ -5,10 +5,8 @@
  * @return bool
  */
 function login($login, $wachtwoord){
-	$dsn = 'sqlsrv:server=192.168.0.20;Database=EenmaalAndermaal';
-	$user = 'sa';
-	$password = 'iproject4';
-	$dbh = new PDO($dsn, $user, $password);
+
+	$dbh = getConnection();
 
 	$sql = "SELECT Achternaam FROM Gebruiker WHERE Gebruikersnaam=(:login)";
 	$stmt = $dbh->prepare($sql);
