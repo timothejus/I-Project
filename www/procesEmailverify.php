@@ -40,7 +40,7 @@ if (isset($_GET["email"])){
 
 }
 else{
-	echo "Er is een fout opgetreden!!";
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Gewoon niet!</div></div></div>';
 }
 
 

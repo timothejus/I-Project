@@ -1,6 +1,4 @@
 <?php
-
-// Niks
 require "scripts/mssql.inc.php";
 if (!empty($_GET["username"]) &&
 	!empty($_GET["password"]) &&
@@ -49,35 +47,7 @@ if (!empty($_GET["username"]) &&
 	!empty($_GET["place"]) &&
 	!empty($_GET["telephone"]) &&
 	!empty($_GET["question"]) &&
-	!empty($_GET["answer"])){
-
-} else if (!empty($_GET["username"])){
-
-	require "scripts/PHPMailAutoload.php";
-	require "scripts/phpmailer.php";
-	require "scripts/smtp.php";
-
-	$mail = new PHPMailer(); // create a new object
-	$mail->isSMTP(); // enable SMTP
-	$mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-	$mail->SMTPAuth = true; // authentication enabled
-	$mail->SMTPSecure = 'tls'; // secure transfer enabled REQUIRED for Gmail
-	$mail->Host = "smtp.gmail.com";
-	$mail->Port = 587; // or 587
-	$mail->isHTML(true);
-	$mail->Username = "noreacteenmaalandermaal@gmail.com";
-	$mail->Password = "iproject4!";
-	$mail->setFrom("noreacteenmaalandermaal@gmail.com");
-	$mail->Subject = "Test";
-	$mail->Body = "hello";
-	$mail->addAddress("gigceez@gmail.com");
-
-	if(!$mail->send()) {
-		echo "Mailer Error: " . $mail->ErrorInfo;
-	} else {
-		echo "Message has been sent";
-	}
-// You may delete or alter these last lines reporting error messages, but beware, that if you delete the $mail->Send() part, the e-mail will not be sent, because that is the part of this code, that actually sends the e-mail.
+	!empty($_GET["answer"])) {
 }
 
 function registreren(
