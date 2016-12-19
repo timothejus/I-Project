@@ -203,3 +203,45 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 		echo $e->errorInfo;
 	}
 }
+
+function insertCode($code,$email){
+	try
+	{
+		$db = getConnection();
+		$sql = "INSERT INTO RegistratieCode(Mailadres,RegistratieCode) VALUES  (:mailadres,:registratiecode)";
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam(':mailadres', $email, PDO::PARAM_INT);
+		$stmt->bindParam(':registratiecode', $code, PDO::PARAM_INT);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}
+
+function verify(){
+	try {
+		//database connection
+		$dbh = getConnection();
+		//sql with named placeholder
+		$sql = "SELECT * FROM RegistratieCode ";
+		//prepare statement
+		$stmt = $dbh->prepare($sql);
+		//bind parameters named placeholder to variable
+
+		//execute statement
+		$stmt->execute();
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			echo $row["Mailadres"];
+			echo $row["RegistratieCode"];
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+}
