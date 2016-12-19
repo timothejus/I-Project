@@ -230,6 +230,89 @@ function getHoofdrubrieken () {
 	return $rubrieken ? $rubrieken : null;
 }
 
+function getSubrubrieken ($parent) {
+
+	$rubrieken = null;
+
+	try {
+		$db = getConnection ();
+		$sql = "EXEC spKrijgSubRubrieken :RubriekNummer";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':RubriekNummer', $parent, PDO::PARAM_INT);
+
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
+			$rubrieken [] = $rubriek;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $rubrieken ? $rubrieken : null;
+}
+
+function getRubriek ($id) {
+
+	$rubrieken = null;
+
+	try {
+		$db = getConnection ();
+		$sql = "EXEC spKrijgRubriek :RubriekNummer";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
+
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
+			$rubrieken [] = $rubriek;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $rubrieken ? $rubrieken : null;
+}
+
+function getVoorwerpenVanRubriek ($id) {
+
+	$rubrieken = null;
+
+	try {
+		$voorwerpen = null;
+		$db = getConnection ();
+		$sql = "EXEC spKrijgVoorwerpenUitRubriek :RubriekNummer";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
+
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"], '',
+				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
+				$row["Eindtijd"], '', '', ''
+			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
+			$voorwerp->setAfbeeldingen($row['afbeelding']);
+			$voorwerpen[] = $voorwerp;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $voorwerpen ? $voorwerpen : null;
+}
+
 function insertCode($code,$email){
 	try
 	{

@@ -14,6 +14,7 @@ require ("rubriek.php");
 require ("scripts/header.php");
 
 ?>
+
 <!-- Hoofdpagina container -->
 <script src="js/timer.js" data-id="countdown"></script>
 <div class="container">
@@ -41,7 +42,7 @@ require ("scripts/header.php");
 						$rubrieken = getHoofdrubrieken ();
 
 						foreach ($rubrieken as $row) {
-							echo '<li><a href="" class="catlink">' . $row->getNaam () . "</a></li>\n";
+							echo '<li><a href="subrubriek.php?id=' . $row->getID () . '" class="catlink">' . $row->getNaam () . "</a></li>\n";
 						}
 						?>
 					</ul>

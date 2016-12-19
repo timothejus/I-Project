@@ -21,6 +21,7 @@ if (isset($_GET["uitloggen"])){
 		<link href="../www/css/fixes.css" rel="stylesheet">
 
 		<title>Home</title>
+
 	</head>
 	<body>
 
@@ -53,6 +54,7 @@ if (isset($_GET["uitloggen"])){
 						<form class="navbar-form">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Zoek">
+								<!--
 								<div class="selectmenu">
 									<select class="form-control selectpicker">
 										<option class="hide" value="" disabled selected>Categorieen</option>
@@ -66,6 +68,7 @@ if (isset($_GET["uitloggen"])){
 										<option value="cat8">Categorie 8</option>
 									</select>
 								</div>
+								-->
 								<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 							</div>
 						</form>
