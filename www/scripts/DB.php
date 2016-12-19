@@ -77,12 +77,15 @@ function getProductGroot()
 function getProduct($voorwerpNummer)
 {
 	$voorwerp =  getProductData($voorwerpNummer);
-	$biedingen = getBiedingen($voorwerpNummer);
+	$biedingen = getBiedingen((int)$voorwerpNummer);
 
 	if ($biedingen != null) {
 		$voorwerp->setBiedingen($biedingen);
 	}
-	$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen($voorwerpNummer));
+	if(isset($voorwerp)){
+		$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen((int)$voorwerpNummer));
+	}
+
 
 	return $voorwerp;
 }
@@ -92,14 +95,14 @@ function getProduct($voorwerpNummer)
  * @return Voorwerp|Voorwerp
  */
 function getProductData($voorwerpNummer){
+	$voorwerp = null;
 	try {
 		$dbh = getConnection();
 
 		$sql = "EXEC spKrijgProductData :voorwerp";
 		$stmt = $dbh->prepare($sql);
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
 		$stmt->execute();
-
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$voorwerp = new Voorwerp(
@@ -107,20 +110,19 @@ function getProductData($voorwerpNummer){
 				$row["Titel"],
 				$row["Beschrijving"],
 				$row["Startprijs"],
-				$row["Betalingswijze"],
-				$row["Betalingsinstructie"],
+				$row["Betaalwijze"],
+				$row["Betaalinstructie"],
 				$row["Plaatsnaam"],
-				$row["Land"],
+				$row["LandNaam"],
 				$row["Looptijd"],
-				$row["LooptijdBeginDagTijdstip"],
+				$row["Starttijd"],
 				$row["VerzendKosten"],
 				$row["VerzendInstructies"],
 				$row["Verkoper"],
 				$row["Koper"],
-				$row["LooptijdEindeDagTijdstip"],
+				$row["Eindtijd"],
 				$row["VeilingGesloten"],
-				$row["VerkoopPrijs"],
-				$row["ResterendeSeconden"]
+				$row["VerkoopPrijs"]
 			);
 		}
 	} catch (PDOException $e) {
@@ -137,7 +139,6 @@ function getBiedingen($voorwerpNummer){
 	$Biedingen = Array();
 	try {
 		$dbh = getConnection();
-
 		$sql = "EXEC spKrijgBiedingen :voorwerp";
 		$stmt = $dbh->prepare($sql);
 		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
@@ -148,6 +149,7 @@ function getBiedingen($voorwerpNummer){
 			$Bod = new Bod($row["Voorwerp"],$row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
 			$Biedingen[] = $Bod;
 		}
+
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
@@ -168,7 +170,7 @@ function getVoorwerpAfbeeldingen($voorwerpNummer){
 		//prepare statement
 		$stmt = $dbh->prepare($sql);
 		//bind parameters named placeholder to variable
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
 		//execute statement
 		$stmt->execute();
 
