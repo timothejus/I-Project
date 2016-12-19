@@ -7,6 +7,7 @@
  */
 
 require("scripts/header.php");
+require ("scripts/DB.php");
 
 $email = "";
 
@@ -20,7 +21,7 @@ if (isset($_GET["email"])){
 		$to=$email;
 		$subject="Activation Code For EenmaalAndermaal";
 		$from = 'jip_brouwer@hotmail.com';
-		$body='Your Activation Code is '.$code.' Please Click On This link <a href="register.php">?id='.$db_id.'&code='.$code.'</a>to activate your account.';
+		$body='Your Activation Code is '.$code.' Please Click On This link <a href="register.php">?code='.$code.'</a>to activate your account.';
 		$headers = "From:".$from;
 
 
