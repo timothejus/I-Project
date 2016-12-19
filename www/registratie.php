@@ -61,7 +61,7 @@ function registreren(
 		$date = $year."-".$month."-".$day;
 		$hashedpassword = hash('sha256', $lname . $password);
 		$stmt = $db->prepare("INSERT INTO Gebruiker(Gebruikersnaam, 
-											Voornaam, 
+											Voornaam,
 											Achternaam, 
 											Adresregel1, 
 											Postcode, 
