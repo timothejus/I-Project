@@ -79,7 +79,7 @@ if (isset($_GET["uitloggen"])){
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
 							<li><a href="../www/login.php">Log in</a></li>
-							<li><a href="#">Registreer</a></li>
+							<li><a href="../www/verifierRegistratie.php">Registreer</a></li>
 							<li><a href="#">Help</a></li>
 						</ul>
 					</div>

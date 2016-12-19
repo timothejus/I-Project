@@ -14,7 +14,7 @@ if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["postcode"]) &&
 	!empty($_GET["place"]) &&
 	!empty($_GET["land"]) &&
-	!empty($_GET["telephone"]) &&
+	!empty($_GET["telephone1"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
 	&& $_GET["password"] === $_GET["password2"]){
@@ -35,7 +35,22 @@ if (!empty($_GET["emailadres"]) &&
 			$_GET["question"],
 			$_GET["answer"]
 		);
+		for ($i = 1;$i < 10; $i++ ) {
+			if (isset($_GET["telephone" . $i])) {
+				telefoonRegistreren($_GET["telephone" . $i], $_GET["username"], $i);
+			}
+		}
 	}
+}
+
+function telefoonRegistreren($telephone,$username,$volgnr){
+	$dbh = getConnection();
+	$sql = "INSERT INTO Gebruikerstelefoon VALUES (:volgnr,:username,:telephone)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam("username", $username);
+	$stmt->bindParam("volgnr", $volgnr);
+	$stmt->bindParam("telephone", $telephone);
+	$stmt->execute();
 }
 
 function registreren(
@@ -161,24 +176,25 @@ if (isset($_GET["code"])) {
 							<div class="panel-body">
 								<div class="col-sm-6">
 									<input type="hidden" value="<?php echo $_GET["code"]; ?>" name="code">
-									<input type="hidden" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres">
+									E-mail adres
+									<input type="text" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres" readonly><br/>
 									Gebruikersnaam
-									<input type="text" class="form-control" name="username"><br/>
+									<input type="text" patter="[a-z]" class="form-control" name="username"><br/>
 									Wachtwoord
-									<input type="password" class="form-control" name="password"><br/>
+									<input type="password" pattern=".{6,}" class="form-control" name="password"><br/>
 									Wachtwoord herhalen
-									<input type="password" class="form-control" name="password2"><br/>
+									<input type="password" pattern=".{6,}" class="form-control" name="password2"><br/>
 									Voornaam
 									<input type="text" class="form-control" name="fname"><br/>
 									Achternaam
 									<input type="text" class="form-control" name="lname"><br/>
 									Geboortedatum
 									<div class="form-inline">
-										<input type="text" pattern="^[0-9]{1,45}$" placeholder="Dag"
+										<input type="text" pattern="^[0-9]{1,2}$" placeholder="Dag"
 										       class="form-control text-center" style="width: 72px;" name="day">
-										<input type="text" placeholder="Maand" class="form-control text-center"
+										<input type="text" pattern="^[0-9]{1,2}$" placeholder="Maand" class="form-control text-center"
 										       style="width: 72px;" name="month">
-										<input type="text" placeholder="Jaar" class="form-control text-center"
+										<input type="text" pattern="^[0-9]{4,4}$" placeholder="Jaar" class="form-control text-center"
 										       style="width: 72px;" name="year">
 									</div>
 									<br/>
@@ -216,7 +232,7 @@ if (isset($_GET["code"])) {
 										?>
 									</select>
 									Telefoonnummer *
-									<input type="text" class="form-control" name="telephone"><br/>
+									<input type="text" class="form-control" name="telephone1"><br/>
 									Geheime vraag
 									<select name="question" class="form-control">
 										<?php
@@ -271,5 +287,9 @@ if (isset($_GET["code"])) {
 		</html>
 		<?php
 	}
+}
+else{
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Er is geen code ingevoerd. Klik op registreren of haal de code op, op uw ingevoerde mail.</div></div></div>';
+
 }
 ?>
