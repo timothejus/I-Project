@@ -36,7 +36,7 @@ require ("scripts/header.php");
 						$rubrieken = getSubrubrieken ($_GET ['id']);
 						if ($rubrieken != null) {
 				?>
-				<div class="panel-heading text-center"><h3>Subrubrieken</h3></div>
+				<div class="panel-heading text-center"><h3>Subrubrieken binnen "<?=getRubriek ($_GET ['id'])[0]->getNaam(); ?>"</h3></div>
 				<div class="panel-body">
 					<div class="col-sm-6">
 						<ul class="nav nav-pills nav-stacked">
@@ -50,7 +50,11 @@ require ("scripts/header.php");
 							}
 
 							foreach ($arrfirsthalf as $row) {
-								echo '<li><a href="subrubriek.php?id=' . $row->getID () . '" class="catlink">' . $row->getNaam () . "</a></li>\n";
+								if (getVoorwerpenVanRubriek ($row->getID ()) != null) {
+									echo '<li><a href="subrubriek.php?id=' . $row->getID () . '">' . $row->getNaam () . " <span class='text-muted'>(" . count (getVoorwerpenVanRubriek ($row->getID ())) . ")</span></a></li>\n";
+								} else {
+									echo '<li><a href="subrubriek.php?id=' . $row->getID () . '">' . $row->getNaam () . "</a></li>\n";
+								}
 							}
 							?>
 						</ul>
@@ -59,7 +63,7 @@ require ("scripts/header.php");
 						<ul class="nav nav-pills nav-stacked">
 							<?php
 							foreach ($arrsecondhalf as $row) {
-								echo '<li><a href="subrubriek.php?id=' . $row->getID () . '" class="catlink">' . $row->getNaam () . "</a></li>\n";
+								echo '<li><a href="subrubriek.php?id=' . $row->getID () . '">' . $row->getNaam () . "</a></li>\n";
 							}
 							?>
 						</ul>

@@ -4,6 +4,9 @@
  * @param $wachtwoord
  * @return bool
  */
+
+require ("mssql.inc.php");
+
 function login($login, $wachtwoord){
 
 	$dbh = getConnection();
