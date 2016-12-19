@@ -247,24 +247,53 @@ function insertCode($code,$email){
 	}
 }
 
-function verify(){
+function verify($email){
 	try {
 		//database connection
 		$dbh = getConnection();
 		//sql with named placeholder
-		$sql = "SELECT * FROM RegistratieCode ";
+		$sql = "SELECT * FROM RegistratieCode WHERE Mailadres = (:mailadres)";
 		//prepare statement
 		$stmt = $dbh->prepare($sql);
 		//bind parameters named placeholder to variable
+		$stmt->bindParam(':mailadres', $email, PDO::PARAM_INT);
 
 		//execute statement
 		$stmt->execute();
 
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			echo $row["Mailadres"];
-			echo $row["RegistratieCode"];
+			return false;
 		}
+
+		return true;
+
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+}
+
+function verifyUser($email){
+	try {
+		//database connection
+		$dbh = getConnection();
+		//sql with named placeholder
+		$sql = "SELECT * FROM Gebruiker WHERE Mailadres = (:mailadres)";
+		//prepare statement
+		$stmt = $dbh->prepare($sql);
+		//bind parameters named placeholder to variable
+		$stmt->bindParam(':mailadres', $email, PDO::PARAM_INT);
+
+		//execute statement
+		$stmt->execute();
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			return false;
+		}
+
+		return true;
+
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
