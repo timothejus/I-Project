@@ -37,7 +37,7 @@ if (isset($_GET["uitloggen"])){
 				<!-- Navbar logo -->
 				<div class="navbar-header">
 					<a href="../www/index.php">
-					<img class="navbar-left" style="height: 80px" src="../www/images/logo 1.1.png" alt="EenmaalAndermaal">
+					<img class="navbar-left" style="height: 80px" src="../www/images/logo.png" alt="EenmaalAndermaal">
 					</a>
 						<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
 						<span class="icon-bar"></span>
