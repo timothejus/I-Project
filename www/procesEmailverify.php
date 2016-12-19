@@ -30,13 +30,14 @@ if (isset($_GET["email"])){
 		mail($to,$subject,$body,$headers);
 
 
-		echo"Er is een email met verificatiecode gestuurd naar uw emailadres.";
+		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">Er is een email met verificatiecode gestuurd naar uw emailadres.</div></div></div>';
+
 	}
 	else if(verify($email)&& !verifyUser($email)){
-		echo"Er is al een gebruiker geregistreerd met dit mailadres";
+		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Er is al een gebruiker geregistreerd met dit mailadres</div></div></div>';
 	}
 	else if(!verify($email)&& verifyUser($email)){
-		echo "U heeft al een code aangevraagd";
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">U heeft al een code aangevraagt!</div></div></div>';
 	}
 
 }
