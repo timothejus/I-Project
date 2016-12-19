@@ -192,9 +192,9 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 		$db = getConnection();
 		$sql = "EXEC spPlaatsBod :Voorwerp,:Bodbedrag,:Gebruiker";
 		$stmt = $db->prepare($sql);
-		$stmt->bindParam(':Voorwerp', $voorwerp, PDO::PARAM_INT);
-		$stmt->bindParam(':Bodbedrag', $bodbedrag, PDO::PARAM_INT);
-		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_INT);
+		$stmt->bindParam(':Voorwerp', $voorwerp, PDO::PARAM_STR);
+		$stmt->bindParam(':Bodbedrag', $bodbedrag, PDO::PARAM_STR);
+		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_STR);
 
 		$stmt->execute();
 		$db = null;
