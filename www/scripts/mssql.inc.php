@@ -16,7 +16,8 @@ function getConnection()
 		$db_name = "EenmaalAndermaal";
 
 		//SERVER VAN SCHOOL
-		/*$db_username = "iproject4";
+		/*
+		$db_username = "iproject4";
 		$db_password = "uK8VGTza";
 		$db_host = "mssql.iproject.icasites.nl";
 		$db_name = "iproject4";*/
