@@ -1,6 +1,6 @@
 <?php
 
-require ("scripts/DB.php");
+//require ("scripts/DB.php");
 
 /**
  * Created by IntelliJ IDEA.

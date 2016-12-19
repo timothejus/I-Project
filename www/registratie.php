@@ -235,7 +235,7 @@ function registreren(
 
 		<div class="container">
 
-			<!--inloggen-->
+			<!--Registreren-->
 			<div class="row">
 
 				<div class="col-sm-12">

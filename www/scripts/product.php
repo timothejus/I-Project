@@ -30,8 +30,8 @@ function getProductPagina($voorwerpNummer)
 		<!-- Foto's -->
 		<div class="col-sm-6">
 
-			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="panelheader-link"><?= $voorwerp->getTitel(); ?></a></div>
+			<div class="panel panel-primary">
+				<div class="panel-heading"><?= $voorwerp->getTitel(); ?></div>
 				<div class="panel-body text-center">
 					<img src="<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
 				</div>
@@ -199,7 +199,7 @@ function getProductPagina($voorwerpNummer)
 
 		<div class="col-sm-12 mt-1">
 			<div class="panel panel-default">
-				<div class="panel-heading"><a href="#" class="panelheader-link">Beschrijving</a></div>
+				<div class="panel-heading">Beschrijving</div>
 				<div class="panel-body">
 					<p><?= $voorwerp->getBeschrijving(); ?></p>
 				</div>

@@ -82,32 +82,54 @@
 
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-default">
-						<div class="panel-heading"><a href="#" class="panelheader-link">Inloggen</a></div>
-						<form>
+						<div class="panel-heading">Registratieformulier</div>
+						<form action="registratieform.html" method="get">
 							<div class="panel-body">
-								<div class="form-group">
-									<div class="row">
-										<div class="col-sm-9">
-											<input type="text" placeholder="Vul hier je e-mail in" class="form-control">
+									<form class="form-group">
+										Gebruikersnaam
+										<input type="text" class="form-control" name="username"><br/>
+										Wachtwoord
+										<input type="password" class="form-control" name="password"><br/>
+										Wachtwoord herhalen
+										<input type="password" class="form-control" name="password2"><br/>
+										Voornaam
+										<input type="text" class="form-control" name="fname"><br/>
+										Achternaam
+										<input type="text" class="form-control" name="lname"><br/>
+										Geboortedatum
+										<div class="form-inline">
+											<input type="text" pattern="^[0-9]{1,45}$" placeholder="Dag" class="form-control text-center" style="width: 72px;" name="day">
+											<input type="text" placeholder="Maand" class="form-control text-center" style="width: 72px;" name="month">
+											<input type="text" placeholder="Jaar" class="form-control text-center" style="width: 72px;" name="year">
 										</div>
-										<div class="col-sm-3">
-											<button class="form-control btn btn-primary">Stuur code</button>
+										<br/>
+										Straatnaam en huisnummer *
+										<input type="text" class="form-control" name="street"><br/>
+										Extra adresregel
+										<input type="text" class="form-control" name="street2"><br/>
+										<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
+											Postcode *
+											<input type="text" class="form-control" name="postcode"><br/>
 										</div>
-									</div><br/>
-									<div class="row">
-										<div class="col-sm-9">
-											<input type="text" placeholder="Vul hier je ontvangen activatiecode in" class="form-control">
+										<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
+											Plaatsnaam *
+											<input type="text" class="form-control" name="place"><br/>
 										</div>
-										<div class="col-sm-3">
-											<button class="form-control btn btn-primary">Check code</button>
-										</div>
-									</div>
-								</div>
+										Land *
+										<input type="text" class="form-control" name="land"><br/>
+										Telefoonnummer *
+										<input type="text" class="form-control" name="telephone"><br/>
+										Geheime vraag
+										<input type="text" class="form-control" name="question"><br/>
+										Antwoord *
+										<input type="text" class="form-control" name="answer"><br/>
+										Captcha *
+									</form>
 							</div>
 							<div class="panel-footer">
 								<div class="row">
 									<div class="col-sm-6">
-										<button type="button" class="btn btn-default">Naar registratieformulier</button>
+										<input type="submit" class="btn btn-default" value="Registreer">
 									</div>
 								</div>
 							</div>

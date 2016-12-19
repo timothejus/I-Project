@@ -14,7 +14,7 @@ if (isset($_GET["uitloggen"])){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="../www/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../www/css/theme.min.css" rel="stylesheet">
 		<link href="../www/css/bootstrap-select.min.css" rel="stylesheet">
 
 		<!-- Kleine CSS fixes -->
@@ -36,7 +36,7 @@ if (isset($_GET["uitloggen"])){
 				<!-- Navbar logo -->
 				<div class="navbar-header">
 					<a href="../www/index.php">
-					<img class="navbar-left" style="height: 52px" src="../www/images/logo 1.1.png" alt="EenmaalAndermaal">
+					<img class="navbar-left" style="height: 80px" src="../www/images/logo 1.1.png" alt="EenmaalAndermaal">
 					</a>
 						<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
 						<span class="icon-bar"></span>
@@ -66,7 +66,7 @@ if (isset($_GET["uitloggen"])){
 										<option value="cat8">Categorie 8</option>
 									</select>
 								</div>
-								<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+								<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 							</div>
 						</form>
 					</div>
