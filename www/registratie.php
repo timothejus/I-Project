@@ -1,4 +1,6 @@
 <?php
+
+// Niks
 require "scripts/mssql.inc.php";
 if (!empty($_GET["username"]) &&
 	!empty($_GET["password"]) &&
