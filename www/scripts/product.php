@@ -186,6 +186,7 @@ function getProductPagina($voorwerpNummer)
 						</div>
 					<?php } else { ?>
 						<p class="text-muted text-center">Log in om te kunnen bieden</p>
+						<div class="text-center"><a href="login.php" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
 					<?php } ?>
 				</div>
 
