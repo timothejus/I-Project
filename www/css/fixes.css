@@ -49,3 +49,21 @@ a:hover.catlink {
 a:visited.catlink {
 	color: rgb(67,119,119);
 }
+
+.panel-product {
+	height: 400px;
+}
+
+.panel-body-product {
+	height: 230px;
+}
+
+.panel-heading-product {
+	overflow: hidden;
+	display: block; /* or inline-block */
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	overflow: hidden;
+	height: 4.2em;
+	line-height: 1.5em;
+}
