@@ -157,6 +157,7 @@ function codeInDatabase($code){
 	{
 		return $row['Mailadres'];
 	}
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De ingevoerde code is fout!</div></div></div>';
 }
 
 function isValid($mail){
