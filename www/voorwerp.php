@@ -196,7 +196,7 @@ class Voorwerp {
 			$bedrag = $this->hoogsteBod;
 		}
 		$ret = "
-				<div class='col-sm-4'>
+				<div class='col-md-4'>
 					<div class='panel panel-primary'>
 						<div class='panel-heading'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='panelheader-link'>" . $this->titel . "</a></div>
 							<div class='panel-body text-center'>
