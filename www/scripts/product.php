@@ -12,6 +12,7 @@ function getProductPagina($voorwerpNummer)
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
 
+	<script type="text/javascript" src="js/timer.js"></script>
 	<div class="row">
 
 		<!-- Foto's -->
@@ -46,8 +47,8 @@ function getProductPagina($voorwerpNummer)
 				<div class="col-sm-12">
 					<div class="panel-heading">
 						<h4 class="text-center">Dit product is nog maar
-							<span id="timer">
-								<script type="text/javascript">setTimer("timer",'"<?= $voorwerp->getLooptijdEindedag() ?> "');</script>
+							<span id="timer" class="text-danger">
+								<script type="text/javascript">setTimer("timer",'<?= $voorwerp->getLooptijdEindedag() ?>');</script>
 							</span> beschikbaar!
 						</h4>
 					</div>
