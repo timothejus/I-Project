@@ -11,7 +11,7 @@ function getProductPagina($voorwerpNummer)
 	// Haalt het product op uit de database.
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
-	<!--<div class="row">
+	<!-- <div class="row">
 
 		<!-- Categorie pager
 		<div class="col-sm-12">
@@ -23,7 +23,7 @@ function getProductPagina($voorwerpNummer)
 			</ul>
 		</div>
 
-	</div>--!>
+	</div> -->
 
 	<div class="row">
 
@@ -33,14 +33,14 @@ function getProductPagina($voorwerpNummer)
 			<div class="panel panel-primary">
 				<div class="panel-heading"><?= $voorwerp->getTitel(); ?></div>
 				<div class="panel-body text-center">
-					<img src="<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
+					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-primary" alt="img"><br/>
 				</div>
 
 				<div class="panel-body text-center">
-					<img src="<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="<?= $voorwerp->getAfbeeldingen()[1]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="<?= $voorwerp->getAfbeeldingen()[2]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="<?= $voorwerp->getAfbeeldingen()[3]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[1]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[2]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[3]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
 				</div>
 			</div>
 

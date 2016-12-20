@@ -319,6 +319,9 @@ class Voorwerp {
 					<td>Verkoopprijs</td>
 					<td>'.$this->verkoopPrijs.'</td>
 				</tr>				
+				<tr>
+					<td>Afbeelingen</td>
+					<td>'.count ($this->afbeeldingen).'</td>
 			</table>
 		</div>
 		';

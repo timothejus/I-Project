@@ -10,6 +10,7 @@ require ("rubriek.php");
 require ("scripts/header.php");
 ?>
 
+<script src="../js/timer.js" data-id="countdown"></script>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-3">
