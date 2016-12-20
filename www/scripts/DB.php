@@ -77,13 +77,13 @@ function getProductGroot()
 function getProduct($voorwerpNummer)
 {
 	$voorwerp =  getProductData($voorwerpNummer);
-	$biedingen = getBiedingen((int)$voorwerpNummer);
+	$biedingen = getBiedingen((float)$voorwerpNummer);
 
 	if ($biedingen != null) {
 		$voorwerp->setBiedingen($biedingen);
 	}
 	if(isset($voorwerp)){
-		$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen((int)$voorwerpNummer));
+		$voorwerp->setAfbeeldingen(getVoorwerpAfbeeldingen((float)$voorwerpNummer));
 	}
 
 
