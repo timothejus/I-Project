@@ -142,7 +142,7 @@ function getProductPagina($voorwerpNummer)
 						// Laat een melding zien als er geen biedingen zijn.
 					} else {
 						?>
-						<h5 class="text-muted">Er zijn nog geen biedingen.</h5>
+						<h5 class="text-muted text-center">Er zijn nog geen biedingen.</h5>
 						<?php
 					}
 					// Laat alleen het bieformulier zien als er is ingelogd.
@@ -194,7 +194,6 @@ function getProductPagina($voorwerpNummer)
 							</form>
 						</div>
 					<?php } else { ?>
-						<p class="text-muted text-center">Log in om te kunnen bieden</p>
 						<div class="text-center"><a href="login.php" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
 					<?php } ?>
 				</div>
@@ -202,6 +201,8 @@ function getProductPagina($voorwerpNummer)
 			</div>
 
 		</div>
+
+	</div>
 
 	<!-- Productinformatie -->
 	<div class="row top-buffer">
