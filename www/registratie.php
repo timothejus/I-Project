@@ -195,15 +195,15 @@ if (isset($_GET["code"])) {
 									E-mail adres
 									<input type="text" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres" readonly><br/>
 									Gebruikersnaam
-									<input type="text" patter="[a-z]" class="form-control" name="username"><br/>
+									<input type="text" pattern="^[a-z0-9_]{5,25}$" class="form-control" name="username"><br/>
 									Wachtwoord
-									<input type="password" pattern=".{6,}" class="form-control" name="password"><br/>
+									<input type="password" pattern=".{5,64}" class="form-control" name="password"><br/>
 									Wachtwoord herhalen
-									<input type="password" pattern=".{6,}" class="form-control" name="password2"><br/>
+									<input type="password" pattern=".{5,64}" class="form-control" name="password2"><br/>
 									Voornaam
-									<input type="text" class="form-control" name="fname"><br/>
+									<input type="text" pattern="[a-zA-Z]{0,20}" class="form-control" name="fname"><br/>
 									Achternaam
-									<input type="text" class="form-control" name="lname"><br/>
+									<input type="text" pattern="[a-zA-Z\s]{0,25}" class="form-control" name="lname"><br/>
 									Geboortedatum
 									<div class="form-inline">
 										<input type="text" pattern="^[0-9]{1,2}$" placeholder="Dag"
@@ -215,16 +215,14 @@ if (isset($_GET["code"])) {
 									</div>
 									<br/>
 									Straatnaam en huisnummer *
-									<input type="text" class="form-control" name="street"><br/>
-									Extra adresregel
-									<input type="text" class="form-control" name="street2"><br/>
+									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" class="form-control" name="street"><br/>
 									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
 										Postcode *
-										<input type="text" class="form-control" name="postcode"><br/>
+										<input type="text" class="form-control" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" name="postcode"><br/>
 									</div>
 									<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
 										Plaatsnaam *
-										<input type="text" class="form-control" name="place"><br/>
+										<input type="text" class="form-control" pattern="[a-zA-Z\s]{0,30}" name="place"><br/>
 									</div>
 									Land *
 									<select name="land" class="form-control">
@@ -248,7 +246,7 @@ if (isset($_GET["code"])) {
 										?>
 									</select>
 									Telefoonnummer *
-									<input type="text" class="form-control" name="telephone1"><br/>
+									<input type="text" class="form-control" pattern="[0-9]{0,10}" name="telephone1"><br/>
 									Geheime vraag
 									<select name="question" class="form-control">
 										<?php
@@ -271,8 +269,7 @@ if (isset($_GET["code"])) {
 										?>
 									</select>
 									Antwoord *
-									<input type="text" class="form-control" name="answer"><br/>
-									Captcha *
+									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" class="form-control" name="answer"><br/>
 								</div>
 							</div>
 							<div class="panel-footer">
