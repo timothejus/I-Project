@@ -14,7 +14,7 @@ require("scripts/header.php");
 
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="panel panel-default">
-						<div class="panel-heading"><a href="#" class="panelheader-link">Verifier registreren</a></div>
+						<div class="panel-heading"><a href="#" class="panelheader-link">Verifiëren registreren</a></div>
 						<form action="procesEmailverify.php">
 							<div class="panel-body">
 								<div class="form-group">
@@ -28,7 +28,7 @@ require("scripts/header.php");
 							<div class="panel-footer">
 								<div class="row">
 									<div class="col-sm-6">
-										<button type="submit" class="btn btn-default">Verifier Email</button>
+										<button type="submit" class="btn btn-default">Verifiëren Email</button>
 									</div>
 								</div>
 							</div>
