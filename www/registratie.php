@@ -18,7 +18,7 @@ if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
 	&& $_GET["password"] === $_GET["password2"]){
-	if (checkUsername($_GET["username"])) {
+	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"])) {
 		registreren(
 			$_GET["emailadres"],
 			$_GET["username"],
@@ -43,6 +43,14 @@ if (!empty($_GET["emailadres"]) &&
 	}
 }
 
+function checkDatum($day,$month,$year){
+	if (checkdate($month,$day,$year)){
+		return true;
+	} else {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De geboortedatum klopt niet!</div></div></div>';
+		return false;
+	}
+}
 function telefoonRegistreren($telephone,$username,$volgnr){
 	$dbh = getConnection();
 	$sql = "INSERT INTO Gebruikerstelefoon VALUES (:volgnr,:username,:telephone)";
@@ -191,41 +199,41 @@ if (isset($_GET["code"])) {
 						<form action="registratie.php" method="get">
 							<div class="panel-body">
 								<div class="col-sm-6">
-									<input type="hidden" value="<?php echo $_GET["code"]; ?>" name="code">
+									<input type="hidden" value="<?php echo $_GET["code"]; ?>"  name="code">
 									E-mail adres
 									<input type="text" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres" readonly><br/>
 									Gebruikersnaam
-									<input type="text" pattern="^[a-z0-9_]{5,25}$" class="form-control" name="username"><br/>
+									<input type="text" pattern="^[a-z0-9_]{5,25}$" required="required" title="Er mogen alleen kleine letters en cijfers hier staan. er mogen 6 tot 25 tekens hier staan." class="form-control" name="username"><br/>
 									Wachtwoord
-									<input type="password" pattern=".{5,64}" class="form-control" name="password"><br/>
+									<input type="password" pattern=".{5,64}" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password"><br/>
 									Wachtwoord herhalen
-									<input type="password" pattern=".{5,64}" class="form-control" name="password2"><br/>
+									<input type="password" pattern=".{5,64}" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password2"><br/>
 									Voornaam
-									<input type="text" pattern="[a-zA-Z]{0,20}" class="form-control" name="fname"><br/>
+									<input type="text" pattern="[a-zA-Z\s]{0,20}" required="required" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. er mogen 1 tot 20 tekens hier staan." class="form-control" name="fname"><br/>
 									Achternaam
-									<input type="text" pattern="[a-zA-Z\s]{0,25}" class="form-control" name="lname"><br/>
+									<input type="text" pattern="[a-zA-Z\s]{0,25}" required="required" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. er mogen 1 tot 25 tekens hier staan." class="form-control" name="lname"><br/>
 									Geboortedatum
 									<div class="form-inline">
-										<input type="text" pattern="^[0-9]{1,2}$" placeholder="Dag"
+										<input type="text" pattern="^[0-9]{1,2}$" title="Er mogen hier alleen cijfers staan. er mogen hier 1 tot 2 tekens staan." required="required" placeholder="Dag"
 										       class="form-control text-center" style="width: 72px;" name="day">
-										<input type="text" pattern="^[0-9]{1,2}$" placeholder="Maand" class="form-control text-center"
+										<input type="text" pattern="^[0-9]{1,2}$" title="Er mogen hier alleen cijfers staan. er mogen hier 1 tot 2 tekens staan." required="required" placeholder="Maand" class="form-control text-center"
 										       style="width: 72px;" name="month">
-										<input type="text" pattern="^[0-9]{4,4}$" placeholder="Jaar" class="form-control text-center"
+										<input type="text" pattern="^[0-9]{4,4}$" title="Er mogen hier alleen cijfers staan. er mogen hier 4 tekens staan." required="required" placeholder="Jaar" class="form-control text-center"
 										       style="width: 72px;" name="year">
 									</div>
 									<br/>
 									Straatnaam en huisnummer
-									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" class="form-control" name="street"><br/>
+									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. er mogen hier 1 tot 50 tekens staan." required="required" class="form-control" name="street"><br/>
 									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
 										Postcode
-										<input type="text" class="form-control" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" name="postcode"><br/>
+										<input type="text" class="form-control" required="required" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="Zet hier een valide nederlandse postcode neer bestaande uit 4 cijfers en 2 letters" name="postcode"><br/>
 									</div>
 									<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
 										Plaatsnaam
-										<input type="text" class="form-control" pattern="[a-zA-Z\s]{0,30}" name="place"><br/>
+										<input type="text" class="form-control" required="required" pattern="[a-zA-Z\s]{0,30}" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. Er morgen hier 1 tot 30 tekens staan." name="place"><br/>
 									</div>
 									Land
-									<select name="land" class="form-control">
+									<select name="land" required="required" class="form-control">
 										<?php
 										function getGba()
 										{
@@ -246,9 +254,9 @@ if (isset($_GET["code"])) {
 										?>
 									</select><br/>
 									Telefoonnummer
-									<input type="text" class="form-control" pattern="[0-9]{0,10}" name="telephone1"><br/>
+									<input type="text" class="form-control" required="required" pattern="[0-9]{10,10}" title="er mogen hier alleen cijfers staan. Er mogen hier 10 tekens staan dus bijvoorbeeld 0612345678" name="telephone1"><br/>
 									Geheime vraag
-									<select name="question" class="form-control">
+									<select name="question" required="required" class="form-control">
 										<?php
 										function getQuestion()
 										{
@@ -269,7 +277,7 @@ if (isset($_GET["code"])) {
 										?>
 									</select>
 									Antwoord
-									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" class="form-control" name="answer"><br/>
+									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" required="required" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. Er mogen hier 1 tot 20 tekens staan." class="form-control" name="answer"><br/>
 								</div>
 							</div>
 							<div class="panel-footer">
