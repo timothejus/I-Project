@@ -159,9 +159,24 @@ function codeInDatabase($code){
 	}
 }
 
+function isValid($mail){
+	$dbh = getConnection();
+	$sql = "SELECT Mailadres FROM Gebruiker WHERE Mailadres=(:mail)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':mail', $mail);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent geregistreerd! klik op login om in te loggen!</div></div></div>';
+		return false;
+	}
+	return true;
+
+}
+
 if (isset($_GET["code"])) {
 	$mail = codeInDatabase($_GET["code"]);
-	if ($mail != "") {
+	if ($mail != "" && isValid($mail)) {
 		?>
 
 		<div class="container">
