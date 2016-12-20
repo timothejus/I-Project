@@ -10,15 +10,14 @@ function getConnection()
 {
 	try {
 		//LOKAAL
-/*
-		$db_username = "sa";
+
+		/*$db_username = "sa";
 		$db_password = "iproject4";
-		$db_host = "192.168.0.20";
-		$db_name = "EenmaalAndermaal";
-*/
+		$db_host = "10.0.2.5";
+		$db_name = "EenmaalAndermaal";*/
+
 
 		//SERVER VAN SCHOOL
-
 		$db_username = "iproject4";
 		$db_password = "uK8VGTza";
 		$db_host = "mssql.iproject.icasites.nl";

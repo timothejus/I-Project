@@ -146,7 +146,7 @@ function getBiedingen($voorwerpNummer){
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$Bod = new Bod($row["Voorwerp"],$row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
-			$Biedingen[] .= $Bod;
+			$Biedingen[] = $Bod;
 		}
 
 	} catch (PDOException $e) {
@@ -165,11 +165,11 @@ function getVoorwerpAfbeeldingen($voorwerpNummer){
 		//database connection
 		$dbh = getConnection();
 		//sql with named placeholder
-		$sql = "EXEC spKrijgVoorwerpAfbeeldingen :voorwerp";
+		$sql = "EXEC spKrijgVoorwerpAfbeeldingen :Voorwerp";
 		//prepare statement
 		$stmt = $dbh->prepare($sql);
 		//bind parameters named placeholder to variable
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
+		$stmt->bindParam(':Voorwerp', $voorwerpNummer, PDO::PARAM_STR);
 		//execute statement
 		$stmt->execute();
 
