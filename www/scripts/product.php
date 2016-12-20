@@ -11,19 +11,6 @@ function getProductPagina($voorwerpNummer)
 	// Haalt het product op uit de database.
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
-	<!-- <div class="row">
-
-		Categorie pager
-		<div class="col-sm-12">
-			<ul class="breadcrumb">
-				<li><a href="#">Hoofdcategorie</a></li>
-				<li><a href="#">Subcategorie</a></li>
-				<li><a href="#">Subcategorie</a></li>
-				<li class="active">Subcategorie</li>
-			</ul>
-		</div>
-
-	</div> -->
 
 	<div class="row">
 
@@ -38,7 +25,7 @@ function getProductPagina($voorwerpNummer)
 
 				<div class="panel-body text-center">
 					<?php
-					if (count ($voorwerp->getAfbeeldingen()) > 1) {
+					if (count ($voorwerp->getAfbeeldingen ()) > 1) {
 						$arrayslice = array_slice ($voorwerp->getAfbeeldingen (), 1, count($voorwerp->getAfbeeldingen()));
 						foreach ($arrayslice as $row) {
 							?>
@@ -110,27 +97,42 @@ function getProductPagina($voorwerpNummer)
 							$counter = 0;
 							foreach ($biedingen as $bod) {
 								// Laat maximaal 6 biedingen zien
-								if ($counter == 6) {
+								if ($counter == 4) {
 									break;
+								}
+
+								if ($counter == 0) {
+									$prefix = "<b>";
+									$pretr = " class='active'";
+									$postfix = "</b>";
+								} else {
+									$pretr = "";
+									$prefix = "";
+									$postfix = "";
 								}
 
 								// Parsed de datum en tijd op een leesbare manier.
 								$datum =
-									"<div class='col-md-4' style='padding: 0px;'>" .
+									"<div class='col-md-4' style='padding: 0px;'>" . $prefix .
 									date_parse($bod->getBodDagTijdstip()) ['day'] . "-" .
-									date_parse($bod->getBodDagTijdstip()) ['month'] . " " .
-									"</div><div class='col-md-4' style='padding: 0px;'>" .
+									date_parse($bod->getBodDagTijdstip()) ['month'] . " " . $postfix .
+									"</div><div class='col-md-4' style='padding: 0px;'>" . $prefix .
 									date_parse($bod->getBodDagTijdstip()) ['hour'] . ":" .
 									sprintf("%02d", date_parse($bod->getBodDagTijdstip()) ['minute']) . ":" .
-									sprintf("%02d", date_parse($bod->getBodDagTijdstip()) ['second']) .
+									sprintf("%02d", date_parse($bod->getBodDagTijdstip()) ['second']) . $postfix .
 									"</div>";
 
-								echo "<tr>
-								<td>" . $bod->getGebruiker() . "</td>
-								<td>&euro;" . number_format($bod->getBodBedrag(), 2, ",", ".") . "</td>
+								echo "<tr" . $pretr . ">
+								<td>" . $prefix . $bod->getGebruiker() . $postfix . "</td>
+								<td>" . $prefix . "&euro;" . number_format($bod->getBodBedrag(), 2, ",", ".") . $postfix . "</td>
 								<td>" . $datum . "</td>
 								</tr>";
 								$counter++;
+							}
+							if (count ($biedingen) > 5) {
+								?>
+								<tr><td colspan="4" class="text-muted text-center">en nog <?=count ($biedingen)-4 ?> anderen</td></tr>
+								<?php
 							}
 							echo "\n";
 							?>
