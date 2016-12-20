@@ -141,13 +141,12 @@ function getBiedingen($voorwerpNummer){
 		$dbh = getConnection();
 		$sql = "EXEC spKrijgBiedingen :voorwerp";
 		$stmt = $dbh->prepare($sql);
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_INT);
+		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
 		$stmt->execute();
-
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$Bod = new Bod($row["Voorwerp"],$row["Bodbedrag"],$row["Gebruikersnaam"],$row["BodDagTijdStip"]);
-			$Biedingen[] = $Bod;
+			$Biedingen[] .= $Bod;
 		}
 
 	} catch (PDOException $e) {
