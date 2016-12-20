@@ -214,17 +214,17 @@ if (isset($_GET["code"])) {
 										       style="width: 72px;" name="year">
 									</div>
 									<br/>
-									Straatnaam en huisnummer *
+									Straatnaam en huisnummer
 									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" class="form-control" name="street"><br/>
 									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
-										Postcode *
+										Postcode
 										<input type="text" class="form-control" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" name="postcode"><br/>
 									</div>
 									<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
-										Plaatsnaam *
+										Plaatsnaam
 										<input type="text" class="form-control" pattern="[a-zA-Z\s]{0,30}" name="place"><br/>
 									</div>
-									Land *
+									Land
 									<select name="land" class="form-control">
 										<?php
 										function getGba()
@@ -244,8 +244,8 @@ if (isset($_GET["code"])) {
 
 
 										?>
-									</select>
-									Telefoonnummer *
+									</select><br/>
+									Telefoonnummer
 									<input type="text" class="form-control" pattern="[0-9]{0,10}" name="telephone1"><br/>
 									Geheime vraag
 									<select name="question" class="form-control">
@@ -268,7 +268,7 @@ if (isset($_GET["code"])) {
 
 										?>
 									</select>
-									Antwoord *
+									Antwoord
 									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" class="form-control" name="answer"><br/>
 								</div>
 							</div>
