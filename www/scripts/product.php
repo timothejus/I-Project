@@ -13,7 +13,7 @@ function getProductPagina($voorwerpNummer)
 	?>
 	<!-- <div class="row">
 
-		<!-- Categorie pager
+		Categorie pager
 		<div class="col-sm-12">
 			<ul class="breadcrumb">
 				<li><a href="#">Hoofdcategorie</a></li>
@@ -37,10 +37,16 @@ function getProductPagina($voorwerpNummer)
 				</div>
 
 				<div class="panel-body text-center">
-					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[0]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[1]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[2]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
-					<img src="/pics/<?= $voorwerp->getAfbeeldingen()[3]; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+					<?php
+					if (count ($voorwerp->getAfbeeldingen()) > 1) {
+						$arrayslice = array_slice ($voorwerp->getAfbeeldingen (), 1, count($voorwerp->getAfbeeldingen()));
+						foreach ($arrayslice as $row) {
+							?>
+							<img src="/pics/<?= $row; ?>" class="img-thumbnail img-responsive img-thumbnail-secondary" alt="img">
+							<?php
+						}
+					}
+					?>
 				</div>
 			</div>
 
@@ -54,7 +60,7 @@ function getProductPagina($voorwerpNummer)
 					<div class="panel-heading">
 						<h4 class="text-center">Dit product is nog maar
 							<span id="timer">
-								<script type=\"text/javascript\">setTimer("timer",'"<?= $voorwerp->getLooptijdEindedag() ?> "');</script>
+								<script type="text/javascript">setTimer("timer",'"<?= $voorwerp->getLooptijdEindedag() ?> "');</script>
 							</span> beschikbaar!
 						</h4>
 					</div>
