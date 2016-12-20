@@ -139,7 +139,8 @@ function returnNul(){
 
 function checkUsername($username){
 	$dbh = getConnection();
-	$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:username)";
+	$username = strtolower($username);
+	$sql = "SELECT LOWER(Gebruikersnaam) FROM Gebruiker WHERE Gebruikersnaam=(:username)";
 	$stmt = $dbh->prepare($sql);
 	$stmt->bindParam(':username', $username, PDO::PARAM_INT);
 	$stmt->execute();
@@ -203,7 +204,7 @@ if (isset($_GET["code"])) {
 									E-mail adres
 									<input type="text" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres" readonly><br/>
 									Gebruikersnaam
-									<input type="text" pattern="^[a-z0-9_]{5,25}$" required="required" title="Er mogen alleen kleine letters en cijfers hier staan. er mogen 6 tot 25 tekens hier staan." class="form-control" name="username"><br/>
+									<input type="text" pattern="^[a-zA-Z0-9_]{5,25}$" required="required" title="Er mogen alleen kleine letters en cijfers hier staan. er mogen 6 tot 25 tekens hier staan." class="form-control" name="username"><br/>
 									Wachtwoord
 									<input type="password" pattern=".{5,64}" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password"><br/>
 									Wachtwoord herhalen

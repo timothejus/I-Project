@@ -8,7 +8,7 @@
 require ("mssql.inc.php");
 
 function login($login, $wachtwoord){
-
+	$login = strtolower($login);
 	$dbh = getConnection();
 
 	$sql = "SELECT Achternaam FROM Gebruiker WHERE Gebruikersnaam=(:login)";
@@ -20,7 +20,7 @@ function login($login, $wachtwoord){
 			$achternaam = $row['Achternaam'];
 	}
 	if (isset($achternaam)) {
-		$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
+		$sql = "SELECT LOWER(Gebruikersnaam) FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
 		$stmt = $dbh->prepare($sql);
 		$stmt->bindParam(':login', $login, PDO::PARAM_INT);
 		$wachtwoord = hash('sha256', $achternaam . $wachtwoord);
