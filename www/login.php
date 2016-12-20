@@ -24,7 +24,9 @@ require("scripts/header.php");
 
 	<?php if (!isset($_SESSION["user"])) {
 		if (isset($_GET["geregistreerd"])) {
-			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent geregistreerd. Log hier onder in!</div></div></div>';
+			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center"> U bent al reeds geregistreerd met deze code. Log hier onder in!</div></div></div>';
+		} elseif ($_GET["registratie"]){
+			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center"> U bent geregistreerd. Log hier onder in!</div></div></div>';
 		}
 ?>
 

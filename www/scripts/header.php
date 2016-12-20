@@ -87,6 +87,7 @@ if (isset($_GET["uitloggen"])){
 					else {?>
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
+							<li><a>Welkom, <?php echo $_SESSION["user"]; ?></a></li>
 							<li><a>Mijn account</a></li>
 							<li><a href="?uitloggen"">Uitloggen</a></li>
 							<li><a href="#">Help</a></li>
