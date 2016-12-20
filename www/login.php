@@ -22,7 +22,11 @@ require("scripts/header.php");
 	}
 	?>
 
-	<?php if (!isset($_SESSION["user"])) { ?>
+	<?php if (!isset($_SESSION["user"])) {
+		if (isset($_GET["geregistreerd"])) {
+			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent geregistreerd. Log hier onder in!</div></div></div>';
+		}
+?>
 
 	<!--inloggen-->
 	<div class="row">
@@ -66,7 +70,9 @@ require("scripts/header.php");
 					</ul>
 				</div>
 				<div class="panel-footer">
-					<button type="button" class="btn btn-primary">Registreren</button>
+				<form action="verifierRegistratie.php" >
+					<input type="submit" class="btn btn-primary" value="Registreren">
+				</form>
 				</div>
 			</div>
 		</div>

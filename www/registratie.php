@@ -168,7 +168,7 @@ function isValid($mail){
 	$stmt->execute();
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
-		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent geregistreerd! klik op login om in te loggen!</div></div></div>';
+		header("Location: ../www/login.php?geregistreerd=1");
 		return false;
 	}
 	return true;
