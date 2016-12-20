@@ -33,7 +33,7 @@ function setTimer(elem_id, date) {
                 countDownElem.innerHTML =  hours + "h " + minutes + "m " + seconds + "s";
             }
         }else{
-            countDownElem.innerHTML = days + "d " + hours + ":" + minutes + ":" + seconds;
+            countDownElem.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
         }
 
     }, 1000);

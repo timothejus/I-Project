@@ -11,9 +11,9 @@ function getProductPagina($voorwerpNummer)
 	// Haalt het product op uit de database.
 	$voorwerp = getProduct($voorwerpNummer);
 	?>
-	<div class="row">
+	<!--<div class="row">
 
-		<!-- Categorie pager -->
+		<!-- Categorie pager
 		<div class="col-sm-12">
 			<ul class="breadcrumb">
 				<li><a href="#">Hoofdcategorie</a></li>
@@ -23,7 +23,7 @@ function getProductPagina($voorwerpNummer)
 			</ul>
 		</div>
 
-	</div>
+	</div>--!>
 
 	<div class="row">
 
@@ -72,8 +72,8 @@ function getProductPagina($voorwerpNummer)
 						<li class="list-group-item"><?= $voorwerp->getPlaatsnaam(); ?></li>
 						<li class="list-group-item"><?= $voorwerp->getLand(); ?><br></li>
 					</ul>
-					<button type="button" class="btn btn-primary btn-md">Geef Feedback</button>
-					<br><br>
+					<!--<button type="button" class="btn btn-primary btn-md">Geef Feedback</button>
+					<br><br>-->
 					<h5><b>Startprijs</b></h5>
 					<p class="text-muted">&euro;<?= number_format($voorwerp->getStartprijs(), 2, ",", ".") ?></p>
 					<h5><b>Ophalen of verzending</b></h5>
@@ -186,13 +186,13 @@ function getProductPagina($voorwerpNummer)
 						</div>
 					<?php } else { ?>
 						<p class="text-muted text-center">Log in om te kunnen bieden</p>
+						<div class="text-center"><a href="login.php" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
 					<?php } ?>
 				</div>
 
 			</div>
 
 		</div>
-	</div>
 
 	<!-- Productinformatie -->
 	<div class="row top-buffer">
