@@ -99,9 +99,9 @@ function getProductData($voorwerpNummer){
 	try {
 		$dbh = getConnection();
 
-		$sql = "EXEC spKrijgProductData :voorwerp";
+		$sql = "EXEC spKrijgProductData :VoorwerpNummer";
 		$stmt = $dbh->prepare($sql);
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
+		$stmt->bindParam(':VoorwerpNummer', $voorwerpNummer, PDO::PARAM_STR);
 		$stmt->execute();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -139,9 +139,9 @@ function getBiedingen($voorwerpNummer){
 	$Biedingen = Array();
 	try {
 		$dbh = getConnection();
-		$sql = "EXEC spKrijgBiedingen :voorwerp";
+		$sql = "EXEC spKrijgBiedingen :VoorwerpNummer";
 		$stmt = $dbh->prepare($sql);
-		$stmt->bindParam(':voorwerp', $voorwerpNummer, PDO::PARAM_STR);
+		$stmt->bindParam(':VoorwerpNummer', $voorwerpNummer, PDO::PARAM_STR);
 		$stmt->execute();
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -165,17 +165,16 @@ function getVoorwerpAfbeeldingen($voorwerpNummer){
 		//database connection
 		$dbh = getConnection();
 		//sql with named placeholder
-		$sql = "EXEC spKrijgVoorwerpAfbeeldingen :Voorwerp";
+		$sql = "EXEC spKrijgVoorwerpAfbeeldingen :VoorwerpNummer";
 		//prepare statement
 		$stmt = $dbh->prepare($sql);
 		//bind parameters named placeholder to variable
-		$stmt->bindParam(':Voorwerp', $voorwerpNummer, PDO::PARAM_STR);
+		$stmt->bindParam(':VoorwerpNummer', $voorwerpNummer, PDO::PARAM_STR);
 		//execute statement
 		$stmt->execute();
 
-
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$afbeeldingen[] = $row["filenaam"];
+			$afbeeldingen[] = $row["FileNaam"];
 		}
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
