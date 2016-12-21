@@ -5,7 +5,9 @@
  * Date: 21-12-2016
  * Time: 10:51
  */
-require("../scripts/header.php");
+require("scripts/DB.php");
+require("scripts/header.php");
+
 ?>
 
 <div class="container">
