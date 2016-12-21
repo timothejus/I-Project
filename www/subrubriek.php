@@ -36,7 +36,6 @@ require ("scripts/header.php");
 				$rubrieken = array ();
 
 				while (getRubriekParent ($rubriek) != 0) {
-					//echo $rubriek . "<br>";
 					$rubrieken [] = $rubriek;
 					$rubriek = getRubriekParent ($rubriek);
 				}
