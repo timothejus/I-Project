@@ -124,5 +124,5 @@ require("scripts/header.php");
 </div>
 
 <?php
-require("../scripts/footer.php");
+require("scripts/footer.php");
 ?>
