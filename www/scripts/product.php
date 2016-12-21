@@ -196,7 +196,7 @@ function getProductPagina($voorwerpNummer)
 							</form>
 						</div>
 					<?php } else { ?>
-						<div class="text-center"><a href="login.php" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
+						<div class="text-center"><a href="login.php?vid=<?php echo $_GET["voorwerpNummer"];?>" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
 					<?php } ?>
 				</div>
 

@@ -5,9 +5,11 @@ require("scripts/header.php");
 	<?php
 	require("scripts/login.php");
 	if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != "") {
-		if (login($_GET["login"], $_GET["password"]) == true) {
+		if (login($_GET["login"], $_GET["password"]) == true && isset($_GET["vid"])) {
+			header("Location: productDetailPagina.php?voorwerpNummer=" . $_GET["vid"]);
+		}
+	else if (login($_GET["login"], $_GET["password"]) == true) {
 			header("Location: index.php");
-			$_SESSION["user"] = $_GET["login"];
 		} else {
 			?>
 			<div class="row">
@@ -25,8 +27,10 @@ require("scripts/header.php");
 	<?php if (!isset($_SESSION["user"])) {
 		if (isset($_GET["geregistreerd"])) {
 			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center"> U bent al reeds geregistreerd met deze code. Log hier onder in!</div></div></div>';
-		} elseif ($_GET["registratie"]){
+		} elseif (isset($_GET["registratie"])){
 			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center"> U bent geregistreerd. Log hier onder in!</div></div></div>';
+		} else {
+
 		}
 ?>
 
@@ -44,6 +48,10 @@ require("scripts/header.php");
 						} ?>'><br/>
 						Wachtwoord
 						<input type='password' class='form-control' name='password'>
+						<?php if (isset($_GET["vid"])) { ?>
+						<input type="hidden" value="<?php echo $_GET["vid"]?>" name="vid">
+						<?php } ?>
+
 					</div>
 					<div class='panel-footer'>
 						<div class='row'>

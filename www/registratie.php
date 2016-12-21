@@ -207,9 +207,9 @@ if (isset($_GET["code"])) {
 									Gebruikersnaam
 									<input type="text" pattern="^[a-zA-Z0-9_]{5,25}$" required="required" title="Er mogen alleen kleine letters en cijfers hier staan. er mogen 6 tot 25 tekens hier staan." class="form-control" name="username"><br/>
 									Wachtwoord
-									<input type="password" pattern=".{5,64}" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password"><br/>
+									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password"><br/>
 									Wachtwoord herhalen
-									<input type="password" pattern=".{5,64}" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password2"><br/>
+									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required="required" title="er mogen 6 tot 64 tekens hier staan." class="form-control" name="password2"><br/>
 									Voornaam
 									<input type="text" pattern="[a-zA-Z\s]{0,20}" required="required" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. er mogen 1 tot 20 tekens hier staan." class="form-control" name="fname"><br/>
 									Achternaam

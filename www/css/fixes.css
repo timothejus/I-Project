@@ -67,3 +67,17 @@ a:visited.catlink {
 	height: 4.1em;
 	line-height: 1.5em;
 }
+
+.panel-margin {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.panel-body-account {
+	height: 200px;
+}
+
+ul.no-bullet {
+	list-style-type: none;
+	padding-left: 0px;
+}
+

@@ -20,7 +20,7 @@ function login($login, $wachtwoord){
 			$achternaam = $row['Achternaam'];
 	}
 	if (isset($achternaam)) {
-		$sql = "SELECT LOWER(Gebruikersnaam) FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
+		$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
 		$stmt = $dbh->prepare($sql);
 		$stmt->bindParam(':login', $login, PDO::PARAM_INT);
 		$wachtwoord = hash('sha256', $achternaam . $wachtwoord);
@@ -28,6 +28,7 @@ function login($login, $wachtwoord){
 		$stmt->execute();
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			if (isset($row)) {
+				$_SESSION["user"] = $row['Gebruikersnaam'];
 				return true;
 			} else {
 				return false;
