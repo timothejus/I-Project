@@ -7,7 +7,6 @@
  */
 
 require("scripts/header.php");
-require ("scripts/DB.php");
 ?>
 
 <!--inloggen-->
@@ -39,6 +38,4 @@ require ("scripts/DB.php");
 
 			</div>
 
-<?php
-echo getQuestion();
-?>
+

@@ -23,6 +23,24 @@ class user
 	private $isVerkoper;
 	private $geheimeVraag;
 	private $antwoordGV;
+	private $telefoonNummer;
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getTelefoon()
+	{
+		return $this->telefoonNummer;
+	}
+
+	/**
+	 * @param mixed $telefoonNummer
+	 */
+	public function setTelefoon()
+	{
+		$this->telefoonNummer = getTelefoonNummer($this->gebruikersnaam);
+	}
 
 
 
@@ -72,7 +90,7 @@ class user
 	 * @param $mailadres
 	 * @param $isVerkoper
 	 */
-	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV)
+	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV,$telefoonnummer)
 	{
 		$this->gebruikersnaam = $gebruikersnaam;
 		$this->voornaam = $voornaam;
@@ -86,6 +104,9 @@ class user
 		$this->mailadres = $mailadres;
 		$this->geheimeVraag = $geheimeVraag;
 		$this->antwoordGV = $antwoordGV;
+		$this->telefoonNummer = $telefoonnummer;
+
+		$this->setTelefoon();
 	}
 
 	/**
@@ -263,5 +284,11 @@ class user
 	{
 		$this->isVerkoper = $isVerkoper;
 	}
+
+	public function updateContacten($voornaam,$achternaam,$geboortedatum,$adres,$postcode,$plaatsnaam,$land,$telefoonnummer){
+
+	}
+
+
 
 }

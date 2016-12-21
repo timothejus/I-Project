@@ -10,7 +10,6 @@ require("voorwerp.php");
 require("mssql.inc.php");
 require("Bod.php");
 require ("user.php");
-require ("vraag.php");
 
 /**
  * @return array|Voorwerp
@@ -464,7 +463,7 @@ function getLoginGegevens($gebruikersnaam){
 				"",
 				"",
 				"",
-				$row["TekstVraag"],
+				$row["Tekstvraag"],
 				$row["Antwoordtekst"]
 			);
 		}
@@ -497,4 +496,28 @@ function getQuestions()
 		echo $e->errorInfo;
 	}
 	return $vragen ? $vragen : null;
+}
+
+function getTelefoonNummer($gebruiker){
+	try {
+
+		$telefoon = null;
+
+		$db = getConnection ();
+		$sql = "SELECT Telefoon FROM Gebruikerstelefoon WHERE Gebruiker = (:Gebruiker)";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_STR);
+
+		$stmt->execute ();
+		$user = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+				$telefoon = $row["Telefoon"];
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $telefoon ? $telefoon : null;
 }
