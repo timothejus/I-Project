@@ -9,7 +9,7 @@ require("scripts/header.php");
 			header("Location: productDetailPagina.php?voorwerpNummer=" . $_GET["vid"]);
 		}
 	else if (login($_GET["login"], $_GET["password"]) == true) {
-			header("Location: index.php");
+			header("Location: mijnaccount.php");
 		} else {
 			?>
 			<div class="row">
