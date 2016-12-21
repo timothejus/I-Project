@@ -14,12 +14,50 @@ class user
 	private $voornaam;
 	private $achternaam;
 	private $adresregel1;
+	private $adresregel2;
 	private $postcode;
 	private $plaatsnaam;
 	private $land;
 	private $geboortenaam;
 	private $mailadres;
 	private $isVerkoper;
+	private $geheimeVraag;
+	private $antwoordGV;
+
+
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getAntwoordGV()
+	{
+		return $this->antwoordGV;
+	}
+
+	/**
+	 * @param mixed $antwoordGV
+	 */
+	public function setAntwoordGV($antwoordGV)
+	{
+		$this->antwoordGV = $antwoordGV;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getGeheimeVraag()
+	{
+		return $this->geheimeVraag;
+	}
+
+	/**
+	 * @param mixed $geheimeVraag
+	 */
+	public function setGeheimeVraag($geheimeVraag)
+	{
+		$this->geheimeVraag = $geheimeVraag;
+	}
 
 	/**
 	 * user constructor.
@@ -34,18 +72,36 @@ class user
 	 * @param $mailadres
 	 * @param $isVerkoper
 	 */
-	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$isVerkoper)
+	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV)
 	{
 		$this->gebruikersnaam = $gebruikersnaam;
 		$this->voornaam = $voornaam;
 		$this->achternaam = $achternaam;
 		$this->adresregel1 = $adresregel1;
+		$this->adresregel2 = $adresregel2;
 		$this->postcode = $postcode;
 		$this->plaatsnaam = $plaatsnaam;
 		$this->land = $land;
 		$this->geboortenaam = $geboortenaam;
 		$this->mailadres = $mailadres;
-		$this->isVerkoper = $isVerkoper;
+		$this->geheimeVraag = $geheimeVraag;
+		$this->antwoordGV = $antwoordGV;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAdresregel2()
+	{
+		return $this->adresregel2;
+	}
+
+	/**
+	 * @param mixed $adresregel2
+	 */
+	public function setAdresregel2($adresregel2)
+	{
+		$this->adresregel2 = $adresregel2;
 	}
 
 	/**

@@ -5,7 +5,7 @@
  * Date: 21-12-2016
  * Time: 11:42
  */
-require("../scripts/header.php");
+require("scripts/header.php");
 ?>
 
 	<div class="container">
@@ -39,7 +39,7 @@ require("../scripts/header.php");
 							<div class="panel-footer">
 								<div class="row">
 									<div class="col-sm-6 text-center">
-										<a href="index.php" class="btn btn-default">Annuleer</a>
+										<a href="mijnaccount.php" class="btn btn-default">Annuleer</a>
 									</div>
 									<div class="col-sm-6 text-center">
 										<input class="btn btn-primary" type="submit" value="Verstuur">
@@ -55,4 +55,4 @@ require("../scripts/header.php");
 	</div>
 
 <?php
-require("../scripts/footer.php");
+require("scripts/footer.php");

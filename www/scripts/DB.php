@@ -192,7 +192,7 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 		$stmt = $db->prepare($sql);
 		$stmt->bindParam(':Voorwerp', $voorwerp, PDO::PARAM_INT);
 		$stmt->bindParam(':Bodbedrag', $bodbedrag, PDO::PARAM_INT);
-		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_STR);
+		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_INT);
 
 		$stmt->execute();
 		$db = null;
@@ -402,4 +402,74 @@ function verifyUser($email){
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 	}
+}
+
+function getAccountgegevens($gebruikersnaam){
+
+	try {
+
+		$db = getConnection ();
+		$sql = "EXEC spKrijgContactgegevens :Gebruikersnaam";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':Gebruikersnaam', $gebruikersnaam, PDO::PARAM_STR);
+
+		$stmt->execute ();
+		$user = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$user = new user(
+				$row["Gebruikersnaam"],
+				$row["Voornaam"],
+				$row["Achternaam"],
+				$row["Adresregel1"],
+				$row["Adresregel2"],
+				$row["Postcode"],
+				$row["Plaatsnaam"],
+				$row["LandNaam"],
+				$row["Geboortedatum"],
+				$row["Mailadres"],"",""
+			);
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $user ? $user : null;
+}
+
+function getLoginGegevens($gebruikersnaam){
+
+	try {
+
+		$db = getConnection ();
+		$sql = "EXEC spKrijgInloggegevens :Gebruikersnaam";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':Gebruikersnaam', $gebruikersnaam, PDO::PARAM_STR);
+
+		$stmt->execute ();
+		$user = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$user = new user(
+				$row["Gebruikersnaam"],
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				"",
+				$row["Tekstvraag"],
+				$row["Antwoordtekst"]
+			);
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $user ? $user : null;
 }
