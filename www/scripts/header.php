@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_GET["uitloggen"])){
 	session_destroy();
-	header("Location: ../www/index.php");
+	header("Location: /I-Project/www/index.php");
 }
 ?>
 
@@ -14,11 +14,11 @@ if (isset($_GET["uitloggen"])){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="../www/css/theme.min.css" rel="stylesheet">
-		<link href="../www/css/bootstrap-select.min.css" rel="stylesheet">
+		<link href="/I-Project/www/css/theme.min.css" rel="stylesheet">
+		<link href="/I-Project/www/css/bootstrap-select.min.css" rel="stylesheet">
 
 		<!-- Kleine CSS fixes -->
-		<link href="../www/css/fixes.css" rel="stylesheet">
+		<link href="/I-Project/www/css/fixes.css" rel="stylesheet">
 
 		<title>Home</title>
 
@@ -27,8 +27,8 @@ if (isset($_GET["uitloggen"])){
 
 		<!-- Scripts voor extra functionaliteit van Bootstrap -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="../www/js/bootstrap.min.js"></script>
-		<script src="../www/js/bootstrap-select.min.js"></script>
+		<script src="/I-Project/www/js/bootstrap.min.js"></script>
+		<script src="/I-Project/www/js/bootstrap-select.min.js"></script>
 
 		<!-- Navbar containers -->
 		<nav class="navbar navbar-default">
@@ -36,8 +36,8 @@ if (isset($_GET["uitloggen"])){
 
 				<!-- Navbar logo -->
 				<div class="navbar-header">
-					<a href="../www/index.php">
-					<img class="navbar-left" style="height: 80px" src="../www/images/logo.png" alt="EenmaalAndermaal">
+					<a href="/I-Project/www/index.php">
+					<img class="navbar-left" style="height: 80px" src="/I-Project/www/images/logo.png" alt="EenmaalAndermaal">
 					</a>
 						<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
 						<span class="icon-bar"></span>
@@ -78,8 +78,8 @@ if (isset($_GET["uitloggen"])){
 					<!-- Login/registreer/help knoppen -->
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
-							<li><a href="../www/login.php">Log in</a></li>
-							<li><a href="../www/verifierRegistratie.php">Registreer</a></li>
+							<li><a href="/I-Project/www/login.php">Log in</a></li>
+							<li><a href="/I-Project/www/verifierRegistratie.php">Registreer</a></li>
 							<li><a href="#">Help</a></li>
 						</ul>
 					</div>
