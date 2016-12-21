@@ -110,6 +110,7 @@ if (isset($_SESSION["user"])) {
 						$_GET["plaatsnaam"],
 				$_GET["land"]);
 			telefoonUpdate($_GET["telefoon"],$user->getTelefoon());
+			header("Location: ../www/login.php?mijnaccount?success=1");
 		}
 	}
 
@@ -195,7 +196,7 @@ if (isset($_SESSION["user"])) {
 							<div class="panel-footer">
 								<div class="row">
 									<div class="col-sm-6 text-center">
-										<a href="mijnaccount.php?fail=1" class="btn btn-default">Annuleer</a>
+										<a href="mijnaccount.php?failure=1" class="btn btn-default">Annuleer</a>
 									</div>
 									<div class="col-sm-6 text-center">
 										<input class="btn btn-primary" type="submit" value="Verstuur">

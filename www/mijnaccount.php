@@ -10,6 +10,11 @@ require("scripts/header.php");
 
 if (isset($_SESSION["user"])) {
 	$user = getAccountgegevens($_SESSION["user"]);
+	if (isset($_GET["succes"])){
+		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">Uw gegevens zijn succesvol gewijzigt</div></div></div>';
+	} else if (isset($_GET["failure"])){
+		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw gegevens zijn niet gewijzigt</div></div></div>';
+	}
 	?>
 
 	<div class="container">
