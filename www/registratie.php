@@ -18,7 +18,7 @@ if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
 	&& $_GET["password"] === $_GET["password2"]){
-	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"]) && hogerDan18()) {
+	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"])) {
 		registreren(
 			$_GET["emailadres"],
 			$_GET["username"],

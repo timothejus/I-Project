@@ -5,9 +5,89 @@
  * Date: 21-12-2016
  * Time: 11:42
  */
+
+function checkDatum($day,$month,$year){
+	if (checkdate($month,$day,$year) && hogerDan18($year,$month,$day)){
+		return true;
+	} else {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De geboortedatum klopt niet!</div></div></div>';
+		return false;
+	}
+}
+
+
+function telefoonUpdate($telephone, $tele){
+	$dbh = getConnection();
+	$sql = "UPDATE Gebruikerstelefoon SET Telefoon=(:telephone) WHERE Telefoon=(:tele) AND Gebruiker=(:gebruiker)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam("telephone", $telephone);
+	$stmt->bindParam("tele", $tele);
+	$stmt->bindParam("gebruiker", $_GET["user"]);
+	$stmt->execute();
+}
+
+function hogerDan18($year,$month,$day){
+	$d1 = new DateTime($year.'-'.$month.'-'.$day);
+	$dd = getdate();
+	$d2 = new DateTime($dd["year"].'-'.$dd["mon"].'-'.$dd["mday"]);
+	$diff = $d1->diff($d2);
+
+	if ($diff->y-18 < 0) {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum is lager dan 18. Onze site mag alleen bezocht worden door mensen die 18+ zijn.</div></div></div>';
+		return false;
+	} else {
+		return true;
+	}
+
+}
+
+
+function accountUpdate(
+	$fname,
+	$lname,
+	$day,
+	$month,
+	$year,
+	$street,
+	$postcode,
+	$place,
+	$land
+){
+	try
+	{
+		$db = getConnection();
+		$date = $year."-".$month."-".$day;
+		$stmt = $db->prepare("UPDATE Gebruiker SET 
+											Voornaam=(:Voornaam),
+											Achternaam=(:Achternaam),
+											Adresregel1=(Adresregel1), 
+											Postcode=(:Postcode),
+											Plaatsnaam=(:Plaatsnaam), 
+											GbaCode=(:Land), 
+											Geboortedatum=(:Geboortedatum)
+											WHERE Gebruikersnaam=(:Gebruikersnaam)
+													");
+		$stmt->bindParam("Gebruikersnaam", $_GET["user"]);
+		$stmt->bindParam("Voornaam", $fname);
+		$stmt->bindParam("Achternaam", $lname);
+		$stmt->bindParam("Adresregel1", $street);
+		$stmt->bindParam("Postcode", $postcode);
+		$stmt->bindParam("Plaatsnaam", $place);
+		$stmt->bindParam("Land", $land);
+		$stmt->bindParam("Geboortedatum", $date);
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
+}
+
 require("scripts/DB.php");
 require("scripts/header.php");
 if (isset($_SESSION["user"])) {
+	$user = getAccountgegevens($_SESSION["user"]);
 
 	if (isset($_GET["fname"])
 	&& isset($_GET["lname"])
@@ -19,36 +99,20 @@ if (isset($_SESSION["user"])) {
 	&& isset($_GET["plaatsnaam"])
 	&& isset($_GET["land"])
 	&& isset($_GET["telefoon"])){
-		if (checkDatum($_get["day"],$_GET["month"],$_GET["year"])){
-
+		if (checkDatum($_GET["day"],$_GET["month"],$_GET["year"])){
+			accountUpdate($_GET["fname"],
+						$_GET["lname"],
+						$_GET["day"],
+						$_GET["month"],
+						$_GET["year"],
+						$_GET["adres"],
+						$_GET["postcode"],
+						$_GET["plaatsnaam"],
+				$_GET["land"]);
+			telefoonUpdate($_GET["telefoon"],$user->getTelefoon());
 		}
 	}
-	function checkDatum($day,$month,$year){
-		if (checkdate($month,$day,$year) && hogerDan18($year,$month,$day)){
-			return true;
-		} else {
-			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De geboortedatum klopt niet!</div></div></div>';
-			return false;
-		}
-	}
 
-
-	function hogerDan18($year,$month,$day){
-		$d1 = new DateTime($year.'-'.$month.'-'.$day);
-		$dd = getdate();
-		$d2 = new DateTime($dd["year"].'-'.$dd["mon"].'-'.$dd["mday"]);
-		$diff = $d1->diff($d2);
-
-		if ($diff->y-18 < 0) {
-			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum is lager dan 18. Onze site mag alleen bezocht worden door mensen die 18+ zijn.</div></div></div>';
-			return false;
-		} else {
-			return true;
-		}
-
-	}
-
-	$user = getAccountgegevens($_SESSION["user"]);
 	$geboortedatum = explode("-",$user->getGeboortenaam());
 	$geboortedatum2 = explode(" ",$geboortedatum["2"]);
 	?>
@@ -126,7 +190,7 @@ if (isset($_SESSION["user"])) {
 									?>
 								</select><br>
 								Telefoonnummer
-								<input class="form-control" maxlength="10" name="telefoon" pattern="[0-9]{10,10}" value="<?php echo $user->getPostcode()?>" type="text">
+								<input class="form-control" maxlength="10" name="telefoon" pattern="[0-9]{10,10}" value="<?php echo $user->getTelefoon()?>" type="text">
 							</div>
 							<div class="panel-footer">
 								<div class="row">
