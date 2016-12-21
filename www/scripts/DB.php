@@ -474,3 +474,19 @@ function getLoginGegevens($gebruikersnaam){
 	}
 	return $user ? $user : null;
 }
+
+function getQuestions()
+{
+	$vragen[] = array();
+
+	$dbh = getConnection();
+	$sql = "SELECT Vraagnummer, Tekstvraag FROM GeheimeVraag";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute();
+
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		$vraag = new vraag($row['Vraagnummer'],$row['Tekstvraag']);
+		$vragen[] = $vraag;
+	}
+	return $vragen ? $vragen : null;
+}
