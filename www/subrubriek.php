@@ -30,13 +30,37 @@ require ("scripts/header.php");
 			</div>
 		</div>
 		<div class="col-sm-9">
+			<nav class="breadcrumb">
+				<?php
+				$rubriek = $_GET ['id'];
+				$rubrieken = array ();
+
+				while (getRubriekParent ($rubriek) != 0) {
+					//echo $rubriek . "<br>";
+					$rubrieken [] = $rubriek;
+					$rubriek = getRubriekParent ($rubriek);
+				}
+
+				$rubrieken = array_reverse ($rubrieken);
+				$counter = 1;
+
+				foreach ($rubrieken as $row) {
+					if ($counter != count ($rubrieken)) {
+						echo '<li class="breadcrumb-item"><a href="subrubriek.php?id=' . $row . '">' . getRubriek($row)[0]->getNaam() . '</a></li>' . "\n";
+					} else {
+						echo '<li class="breadcrumb-item active">' . getRubriek($row)[0]->getNaam() . '</li>' . "\n";
+					}
+					$counter++;
+				}
+				?>
+			</nav>
 			<div class="panel panel-default">
 				<?php
 				if (isset ($_GET ['id'])) {
 					if (!empty ($_GET ['id'])) {
 						$rubrieken = getSubrubrieken ($_GET ['id']);
 						if ($rubrieken != null) {
-				?>
+						?>
 				<div class="panel-heading text-center"><h3>Subrubrieken binnen "<?=getRubriek ($_GET ['id'])[0]->getNaam(); ?>"</h3></div>
 				<div class="panel-body">
 					<div class="col-sm-6">

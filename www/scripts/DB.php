@@ -228,6 +228,28 @@ function getHoofdrubrieken () {
 	return $rubrieken ? $rubrieken : null;
 }
 
+function getRubriekParent ($id) {
+	$rubrieken = null;
+
+	try {
+		$db = getConnection ();
+		$sql = "SELECT Parent FROM Rubriek WHERE ID = " . $id;
+		$stmt = $db->prepare ($sql);
+
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$rubriek = $row ['Parent'];
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $rubriek ? $rubriek : null;
+}
+
 function getSubrubrieken ($parent) {
 
 	$rubrieken = null;
