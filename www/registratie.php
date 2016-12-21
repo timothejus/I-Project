@@ -18,7 +18,7 @@ if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
 	&& $_GET["password"] === $_GET["password2"]){
-	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"])) {
+	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"]) && hogerDan18()) {
 		registreren(
 			$_GET["emailadres"],
 			$_GET["username"],
@@ -241,14 +241,14 @@ if (isset($_GET["code"])) {
 									</div>
 									<br/>
 									Straatnaam en huisnummer
-									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. er mogen hier 1 tot 50 tekens staan." required="required" class="form-control" name="street"><br/>
+									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" maxlength="50" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. er mogen hier 1 tot 50 tekens staan." required="required" class="form-control" name="street"><br/>
 									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
 										Postcode
-										<input type="text" class="form-control" required="required" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="Zet hier een valide nederlandse postcode neer bestaande uit 4 cijfers en 2 letters" name="postcode"><br/>
+										<input type="text" maxlength="6" class="form-control" required="required" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="Zet hier een valide nederlandse postcode neer bestaande uit 4 cijfers en 2 letters" name="postcode"><br/>
 									</div>
 									<div class="col-sm-6" style="padding: 0px; padding-left: 3px;">
 										Plaatsnaam
-										<input type="text" class="form-control" required="required" pattern="[a-zA-Z\s]{0,30}" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. Er morgen hier 1 tot 30 tekens staan." name="place"><br/>
+										<input type="text" class="form-control" maxlength="30" required="required" pattern="[a-zA-Z\s]{1,30}" title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. Er morgen hier 1 tot 30 tekens staan." name="place"><br/>
 									</div>
 									Land
 									<select name="land" required="required" class="form-control">
