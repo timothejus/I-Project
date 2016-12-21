@@ -80,6 +80,8 @@ function getProductPagina($voorwerpNummer)
 						?> </p>
 				</div>
 
+
+
 				<!-- Biedingen -->
 				<div class="col-sm-8">
 					<?php

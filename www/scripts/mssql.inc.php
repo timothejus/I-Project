@@ -11,18 +11,19 @@ function getConnection()
 	try {
 		//LOKAAL
 
-		/*$db_username = "sa";
+		$db_username = "sa";
 		$db_password = "iproject4";
 		$db_host = "10.0.2.5";
-		$db_name = "EenmaalAndermaal";*/
+		$db_name = "EenmaalAndermaal";
 
 
 		//SERVER VAN SCHOOL
+		/*
 		$db_username = "iproject4";
 		$db_password = "uK8VGTza";
 		$db_host = "mssql.iproject.icasites.nl";
 		$db_name = "iproject4";
-
+*/
 		$conn = new PDO("sqlsrv:Server=$db_host;Database=$db_name",$db_username,$db_password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException  $e) {
