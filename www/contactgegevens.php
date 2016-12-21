@@ -68,6 +68,8 @@ require("scripts/header.php");
 									<option>Optie 4</option>
 									<option>Optie 5</option>
 								</select><br><br>
+								E-mail
+								<input class="form-control" type="text"><br>
 								Telefoonnummer
 								<input class="form-control" type="text">
 							</div>
