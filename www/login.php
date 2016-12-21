@@ -7,11 +7,9 @@ require("scripts/header.php");
 	if (isset($_GET["login"]) && isset($_GET["password"]) && $_GET["login"] != "" && $_GET["password"] != "") {
 		if (login($_GET["login"], $_GET["password"]) == true && isset($_GET["vid"])) {
 			header("Location: productDetailPagina.php?voorwerpNummer=" . $_GET["vid"]);
-			$_SESSION["user"] = $_GET["login"];
 		}
 	else if (login($_GET["login"], $_GET["password"]) == true) {
 			header("Location: index.php");
-			$_SESSION["user"] = $_GET["login"];
 		} else {
 			?>
 			<div class="row">
