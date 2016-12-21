@@ -5,7 +5,12 @@
  * Date: 21-12-2016
  * Time: 11:42
  */
-require("scripts/header.php");
+require ("scripts/header.php");
+require ("scripts/DB.php");
+
+$gebruiker = getLoginGegevens ($_SESSION ['user']);
+$vragen = getQuestions();
+
 ?>
 
 	<div class="container">
@@ -18,7 +23,7 @@ require("scripts/header.php");
 						<form class="form-group" style="margin: 0px;">
 							<div class="panel-body">
 								Gebruikersnaam<br>
-								<input class="form-control" type="text" disabled><br>
+								<input class="form-control" type="text" value="<?=$gebruiker->getGebruikersnaam() ?>" disabled><br>
 								Oud wachtwoord *<br>
 								<input class="form-control" type="text"><br>
 								Nieuw wachtwoord<br>
@@ -27,14 +32,18 @@ require("scripts/header.php");
 								<input class="form-control" type="text"><br>
 								Geheime vraag<br>
 								<select class="selectpicker" data-width="100%">
-									<option selected>Optie 1</option>
-									<option>Optie 2</option>
-									<option>Optie 3</option>
-									<option>Optie 4</option>
-									<option>Optie 5</option>
+									<?php
+									foreach ($vragen as $row) {
+										if ($row->getTekstVraag() == $gebruiker->getGeheimeVraag()) {
+											echo '<option selected>' . $row->getTekstVraag() . '</option>';
+										} else {
+											echo '<option>' . $row->getTekstVraag() . '</option>';
+										}
+									}
+									?>
 								</select><br><br>
 								Antwoord
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" value="<?=$gebruiker->getAntwoordGV() ?>">
 							</div>
 							<div class="panel-footer">
 								<div class="row">

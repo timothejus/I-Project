@@ -10,6 +10,7 @@ require("voorwerp.php");
 require("mssql.inc.php");
 require("Bod.php");
 require ("user.php");
+require ("vraag.php");
 
 /**
  * @return array|Voorwerp
@@ -463,7 +464,7 @@ function getLoginGegevens($gebruikersnaam){
 				"",
 				"",
 				"",
-				$row["Tekstvraag"],
+				$row["TekstVraag"],
 				$row["Antwoordtekst"]
 			);
 		}
@@ -477,16 +478,23 @@ function getLoginGegevens($gebruikersnaam){
 
 function getQuestions()
 {
-	$vragen[] = array();
+	$vragen = null;
 
-	$dbh = getConnection();
-	$sql = "SELECT Vraagnummer, Tekstvraag FROM GeheimeVraag";
-	$stmt = $dbh->prepare($sql);
-	$stmt->execute();
+	try{
 
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$vraag = new vraag($row['Vraagnummer'],$row['Tekstvraag']);
-		$vragen[] = $vraag;
+		$dbh = getConnection();
+		$sql = "SELECT Vraagnummer, TekstVraag FROM GeheimeVraag";
+		$stmt = $dbh->prepare($sql);
+		$stmt->execute();
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$vraag = new vraag($row['Vraagnummer'],$row['TekstVraag']);
+			$vragen[] = $vraag;
+		}
+
+	} catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
 	}
 	return $vragen ? $vragen : null;
 }
