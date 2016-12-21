@@ -19,10 +19,10 @@ require("scripts/header.php");
 							<div class="panel-body">
 								<div class="form-group">
 									<div class="row">
-										<div class="col-sm-9">
+										<div class="col-sm-9 col-sm-offset-2">
 											<input type="email"  name="email" placeholder="Vul hier je e-mail in" class="form-control">
 										</div>
-									</div><br/>
+									</div>
 								</div>
 							</div>
 							<div class="panel-footer">
