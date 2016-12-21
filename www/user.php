@@ -21,6 +21,43 @@ class user
 	private $geboortenaam;
 	private $mailadres;
 	private $isVerkoper;
+	private $geheimeVraag;
+	private $antwoordGV;
+
+
+
+
+	/**
+	 * @return mixed
+	 */
+	public function getAntwoordGV()
+	{
+		return $this->antwoordGV;
+	}
+
+	/**
+	 * @param mixed $antwoordGV
+	 */
+	public function setAntwoordGV($antwoordGV)
+	{
+		$this->antwoordGV = $antwoordGV;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getGeheimeVraag()
+	{
+		return $this->geheimeVraag;
+	}
+
+	/**
+	 * @param mixed $geheimeVraag
+	 */
+	public function setGeheimeVraag($geheimeVraag)
+	{
+		$this->geheimeVraag = $geheimeVraag;
+	}
 
 	/**
 	 * user constructor.
@@ -35,7 +72,7 @@ class user
 	 * @param $mailadres
 	 * @param $isVerkoper
 	 */
-	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres)
+	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV)
 	{
 		$this->gebruikersnaam = $gebruikersnaam;
 		$this->voornaam = $voornaam;
@@ -47,6 +84,8 @@ class user
 		$this->land = $land;
 		$this->geboortenaam = $geboortenaam;
 		$this->mailadres = $mailadres;
+		$this->geheimeVraag = $geheimeVraag;
+		$this->antwoordGV = $antwoordGV;
 	}
 
 	/**
