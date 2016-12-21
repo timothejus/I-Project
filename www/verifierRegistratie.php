@@ -7,6 +7,7 @@
  */
 
 require("scripts/header.php");
+
 ?>
 
 <!--inloggen-->
@@ -37,4 +38,5 @@ require("scripts/header.php");
 				</div>
 
 			</div>
+
 

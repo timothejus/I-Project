@@ -9,6 +9,7 @@
 require("voorwerp.php");
 require("mssql.inc.php");
 require("Bod.php");
+require ("user.php");
 
 /**
  * @return array|Voorwerp
