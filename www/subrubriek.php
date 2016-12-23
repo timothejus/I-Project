@@ -118,14 +118,14 @@ require ("scripts/header.php");
 				?>
 				<p class="text-muted">Er zijn geen producten binnen deze categorie</p>
 			</div>
-			</div>
+		</div>
 			<?php
 			}
 			}
 			}
 			}
 			?>
-		</div>
+	</div>
 	</div>
 	<?php require ("scripts/footer.php"); ?>
 
