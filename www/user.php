@@ -90,7 +90,7 @@ class user
 	 * @param $mailadres
 	 * @param $isVerkoper
 	 */
-	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV,$telefoonnummer)
+	function __construct($gebruikersnaam,$voornaam,$achternaam,$adresregel1,$adresregel2,$postcode,$plaatsnaam,$land,$geboortenaam,$mailadres,$geheimeVraag,$antwoordGV)
 	{
 		$this->gebruikersnaam = $gebruikersnaam;
 		$this->voornaam = $voornaam;
@@ -104,7 +104,6 @@ class user
 		$this->mailadres = $mailadres;
 		$this->geheimeVraag = $geheimeVraag;
 		$this->antwoordGV = $antwoordGV;
-		$this->telefoonNummer = $telefoonnummer;
 
 		$this->setTelefoon();
 	}

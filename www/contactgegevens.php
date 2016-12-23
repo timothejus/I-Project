@@ -22,7 +22,7 @@ function telefoonUpdate($telephone, $tele){
 	$stmt = $dbh->prepare($sql);
 	$stmt->bindParam("telephone", $telephone);
 	$stmt->bindParam("tele", $tele);
-	$stmt->bindParam("gebruiker", $_GET["user"]);
+	$stmt->bindParam("gebruiker", $_SESSION["user"]);
 	$stmt->execute();
 }
 
@@ -57,6 +57,13 @@ function accountUpdate(
 	{
 		$db = getConnection();
 		$date = $year."-".$month."-".$day;
+		echo $fname;
+		echo $lname;
+		echo $year;
+		echo $street;
+		echo $postcode;
+		echo $place;
+		echo $land;
 		$stmt = $db->prepare("UPDATE Gebruiker SET 
 											Voornaam=(:Voornaam),
 											Achternaam=(:Achternaam),
@@ -65,16 +72,15 @@ function accountUpdate(
 											Plaatsnaam=(:Plaatsnaam), 
 											GbaCode=(:Land), 
 											Geboortedatum=(:Geboortedatum)
-											WHERE Gebruikersnaam=(:Gebruikersnaam)
-													");
-		$stmt->bindParam("Gebruikersnaam", $_GET["user"]);
+											WHERE Gebruikersnaam=(:Gebruikersnaam)");
 		$stmt->bindParam("Voornaam", $fname);
 		$stmt->bindParam("Achternaam", $lname);
 		$stmt->bindParam("Adresregel1", $street);
 		$stmt->bindParam("Postcode", $postcode);
 		$stmt->bindParam("Plaatsnaam", $place);
-		$stmt->bindParam("Land", $land);
+		$stmt->bindParam("GbaCode", $land);
 		$stmt->bindParam("Geboortedatum", $date);
+		$stmt->bindParam("Gebruikersnaam", $_SESSION["user"]);
 		$stmt->execute();
 		$db = null;
 	}
@@ -108,9 +114,9 @@ if (isset($_SESSION["user"])) {
 						$_GET["adres"],
 						$_GET["postcode"],
 						$_GET["plaatsnaam"],
-				$_GET["land"]);
+						$_GET["land"]);
 			telefoonUpdate($_GET["telefoon"],$user->getTelefoon());
-			header("Location: ../www/login.php?mijnaccount?success=1");
+			//header("Location: ../www/mijnaccount.php?success=1");
 		}
 	}
 
