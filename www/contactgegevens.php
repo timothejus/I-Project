@@ -57,17 +57,10 @@ function accountUpdate(
 	{
 		$db = getConnection();
 		$date = $year."-".$month."-".$day;
-		echo $fname;
-		echo $lname;
-		echo $year;
-		echo $street;
-		echo $postcode;
-		echo $place;
-		echo $land;
 		$stmt = $db->prepare("UPDATE Gebruiker SET 
 											Voornaam=(:Voornaam),
 											Achternaam=(:Achternaam),
-											Adresregel1=(Adresregel1), 
+											Adresregel1=(:Adresregel1), 
 											Postcode=(:Postcode),
 											Plaatsnaam=(:Plaatsnaam), 
 											GbaCode=(:Land), 
@@ -78,7 +71,7 @@ function accountUpdate(
 		$stmt->bindParam("Adresregel1", $street);
 		$stmt->bindParam("Postcode", $postcode);
 		$stmt->bindParam("Plaatsnaam", $place);
-		$stmt->bindParam("GbaCode", $land);
+		$stmt->bindParam("Land", $land);
 		$stmt->bindParam("Geboortedatum", $date);
 		$stmt->bindParam("Gebruikersnaam", $_SESSION["user"]);
 		$stmt->execute();
