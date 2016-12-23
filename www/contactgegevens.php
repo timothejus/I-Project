@@ -109,7 +109,7 @@ if (isset($_SESSION["user"])) {
 						$_GET["plaatsnaam"],
 						$_GET["land"]);
 			telefoonUpdate($_GET["telefoon"],$user->getTelefoon());
-			//header("Location: ../www/mijnaccount.php?success=1");
+			header("Location: ../www/mijnaccount.php?success=1");
 		}
 	}
 
@@ -159,7 +159,7 @@ if (isset($_SESSION["user"])) {
 										<input maxlength="6" class="form-control" name="postcode" value="<?php echo $user->getPostcode()?>" type="text">
 									</div>
 									<div class="col-sm-7">
-										<br>
+
 										Plaatsnaam<br>
 										<input class="form-control" maxlength="30" required="required" pattern="[a-zA-Z\s]{1,30}" name="plaatsnaam" value="<?php echo $user->getPlaatsnaam()?>" type="text">
 									</div>
@@ -189,8 +189,8 @@ if (isset($_SESSION["user"])) {
 
 									?>
 								</select><br>
-								Telefoonnummer
-								<input class="form-control" maxlength="10" name="telefoon" pattern="[0-9]{10,10}" value="<?php echo $user->getTelefoon()?>" type="text">
+								Telefoonnummer(+31 0*********)
+								<input class="form-control" maxlength="9" name="telefoon" pattern="[0-9]{9,9}" value="<?php echo $user->getTelefoon()?>" type="text">
 							</div>
 							<div class="panel-footer">
 								<div class="row">

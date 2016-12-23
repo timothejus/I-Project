@@ -10,6 +10,7 @@ require("voorwerp.php");
 require("mssql.inc.php");
 require("Bod.php");
 require ("user.php");
+require ("vraag.php");
 
 /**
  * @return array|Voorwerp
@@ -463,7 +464,7 @@ function getLoginGegevens($gebruikersnaam){
 				"",
 				"",
 				"",
-				$row["Tekstvraag"],
+				$row["TekstVraag"],
 				$row["Antwoordtekst"]
 			);
 		}
