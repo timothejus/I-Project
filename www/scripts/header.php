@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_GET["uitloggen"])){
 	session_destroy();
-	header("Location: /I-Project/www/mijnaccount.php");
+	header("Location: /I-Project/www/index.php?uitgelogd");
 }
 ?>
 
