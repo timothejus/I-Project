@@ -309,7 +309,7 @@ function getVoorwerpenVanRubriek ($id) {
 	try {
 		$voorwerpen = null;
 		$db = getConnection ();
-		$sql = "EXEC spKrijgVoorwerpenUitRubriek :RubriekNummer";
+		$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer";
 		$stmt = $db->prepare ($sql);
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
 
