@@ -62,6 +62,7 @@
 						</div>
 						<div class="panel-footer text-center">
 							<a href="#" class="btn btn-default">Terug</a>
+						</div>
 					</div>
 				</div>
 
