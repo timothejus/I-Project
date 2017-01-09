@@ -81,3 +81,18 @@ ul.no-bullet {
 	padding-left: 0px;
 }
 
+
+table.mijnbiedingen td,th {
+	text-align: center;
+}
+
+/*
+table.mijnbiedingen td {
+	padding-top: 200px;
+}
+*/
+
+table.mijnbiedingen {
+	margin-top: 20px;
+}
+
