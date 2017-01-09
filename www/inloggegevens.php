@@ -23,9 +23,7 @@ function changePassword($pw)
 		$achternaam = $row['Achternaam'];
 	}
 	$dbh = getConnection();
-	echo $achternaam.$pw;
 	$wachtwoord = hash('sha256', $achternaam . $pw);
-	echo $wachtwoord;
 	$stmt = $dbh->prepare("UPDATE Gebruiker SET Wachtwoord=(:password) WHERE Gebruikersnaam=(:username)");
 	$stmt->bindParam("password",$wachtwoord);
 	$stmt->bindParam("username", $login);
@@ -60,9 +58,20 @@ function oldPasswordCheck($login, $wachtwoord){
 		return false;
 	}
 }
+function veranderVraag($vraag, $antwoord){
+	$login = strtolower($_SESSION["user"]);
+	$dbh = getConnection();
+	$stmt = $dbh->prepare("UPDATE Gebruiker SET GeheimeVraag=(:vraag), Antwoordtekst=(:antwoord)  WHERE Gebruikersnaam=(:username)");
+	$stmt->bindParam("vraag",$vraag);
+	$stmt->bindParam("antwoord",$antwoord);
+	$stmt->bindParam("username", $login);
+	$stmt->execute();
+	$dbh = null;
+
+}
 
 function passwordCheck($pw,$pw1){
-	if($pw == $pw1 && !empty($pw)){
+	if($pw == $pw1 && $pw != ""){
 		return true;
 	} else {
 		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">Uw nieuw ingevoerde wachtwoorden komen niet overeen!</div></div></div>';
@@ -73,23 +82,24 @@ function passwordCheck($pw,$pw1){
 if (isset($_SESSION["user"])) {
 	$gebruiker = getLoginGegevens($_SESSION ['user']);
 	$vragen = getQuestions();
+	if (isset($_GET["oldpw"])){
+		if (oldPasswordCheck($_SESSION["user"], $_GET["oldpw"])) {
+			if (isset($_GET["oldpw"]) &&
+				!empty($_GET["newpw"]) &&
+				!empty($_GET["newpw2"])
+			) {
+				if (passwordCheck($_GET["newpw"], $_GET["newpw2"])) {
+					changePassword($_GET["newpw"]);
+					echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">Uw wachtwoord is succesvol veranderd!</div></div></div>';
+				}
+			}
 
-	if (isset($_GET["oldpw"]) &&
-		isset($_GET["newpw"]) &&
-		isset($_GET["newpw2"])){
-		if (oldPasswordCheck($_SESSION["user"], $_GET["oldpw"]) && passwordCheck($_GET["newpw"], $_GET["newpw2"])){
-			changePassword($_GET["newpw"]);
-			echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">jaja</div></div></div>';
+			if (isset($_GET["oldpw"]) && isset($_GET["gv"]) && isset($_GET["antwoord"])) {
+				veranderVraag($_GET["gv"], $_GET["antwoord"]);
+			}
+			header("Location: ../www/mijnaccount.php?success=1");
 		}
 	}
-
-	if (isset($_GET["oldpw"]) && isset($_GET["gv"]) && isset($_GET["antwoord"])){
-		if (oldPasswordCheck($_SESSION["user"], $_GET["oldpw"])){
-			veranderVraag($_GET["gv"], $_GET["antwoord"]);
-
-		}
-	}
-
 	?>
 
 	<div class="container">
