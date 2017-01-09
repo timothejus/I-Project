@@ -6,7 +6,7 @@
 			<div class="row">
 
 				<div class="col-sm-6 col-sm-offset-3">
-					<div class="panel panel-info">
+					<div class="panel panel-default">
 						<div class="panel-heading text-center"><h4>Geef feedback</h4></div>
 						<form>
 							<div class="panel-body">
