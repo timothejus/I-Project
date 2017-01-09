@@ -94,5 +94,6 @@ table.mijnbiedingen td {
 
 table.mijnbiedingen {
 	margin-top: 20px;
+	table-layout: fixed;
 }
 

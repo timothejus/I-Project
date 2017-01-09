@@ -11,40 +11,46 @@
 						<div class="panel-body">
 							<table class="table mijnbiedingen">
 								<tr>
-									<th>Productnummer</th>
+									<th>Productnaam</th>
 									<th>Eigen bod</th>
 									<th>Hoogste bod</th>
+									<th>Veiling gesloten/open</th>
 									<th>Bied minimaal bod</th>
 								</tr>
 								<tr>
-									<td><a href="#" class="catlink">192048903089</a></td>
+									<td style="overflow: hidden"><a href="#" class="catlink">DIT IS EEN HEEL HEEL LANG PRODUCT NAAM VOOR HET TESTEN</a></td>
 									<td>&euro;100,-</td>
 									<td>&euro;120,-</td>
+									<td>Open</td>
 									<td><a href="#" class="btn btn-danger btn-xs">Bied &euro;125,-</a></td>
 								</tr>
 								<tr>
-									<td><a href="#" class="catlink">192048903089</a></td>
+									<td style="overflow: hidden"><a href="#" class="catlink">DIT IS EEN HEEL HEEL LANG PRODUCT NAAM VOOR HET TESTEN</a></td>
 									<td>&euro;100,-</td>
 									<td>&euro;120,-</td>
+									<td>Open</td>
 									<td><a href="#" class="btn btn-danger btn-xs">Bied &euro;125,-</a></td>
 								</tr>
 								<tr>
-									<td><a href="#" class="catlink">192048903089</a></td>
+									<td style="overflow: hidden"><a href="#" class="catlink">DIT IS EEN HEEL HEEL LANG PRODUCT NAAM VOOR HET TESTEN</a></td>
 									<td>&euro;100,-</td>
 									<td>&euro;100,-</td>
+									<td>Open</td>
 									<td><a href="#" class="btn btn-danger btn-xs disabled">Bied</a></td>
 								</tr>
 								<tr>
-									<td><a href="#" class="catlink">192048903089</a></td>
+									<td style="overflow: hidden"><a href="#" class="catlink">DIT IS EEN HEEL HEEL LANG PRODUCT NAAM VOOR HET TESTEN</a></td>
 									<td>&euro;100,-</td>
 									<td>&euro;120,-</td>
-									<td><a href="#" class="btn btn-danger btn-xs">Bied &euro;125,-</a></td>
+									<td>Gesloten</td>
+									<td><a href="#" class="btn btn-danger btn-xs disabled">Bied &euro;125,-</a></td>
 								</tr>
 								<tr>
-									<td><a href="#" class="catlink">192048903089</a></td>
+									<td style="overflow: hidden"><a href="#" class="catlink">DIT IS EEN HEEL HEEL LANG PRODUCT NAAM VOOR HET TESTEN</a></td>
 									<td>&euro;100,-</td>
 									<td>&euro;120,-</td>
-									<td><a href="#" class="btn btn-danger btn-xs">Bied &euro;125,-</a></td>
+									<td>Gesloten</td>
+									<td><a href="#" class="btn btn-danger btn-xs disabled">Bied &euro;125,-</a></td>
 								</tr>
 							</table>
 							<div class="text-center">
