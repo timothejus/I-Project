@@ -16,6 +16,7 @@ if (isset($_GET["uitloggen"])){
 
 		<link href="/I-Project/www/css/theme.min.css" rel="stylesheet">
 		<link href="/I-Project/www/css/bootstrap-select.min.css" rel="stylesheet">
+		<link href="/I-Project/www/css/bootstrap-slider.min.css" rel="stylesheet">
 
 		<!-- Kleine CSS fixes -->
 		<link href="/I-Project/www/css/fixes.css" rel="stylesheet">
@@ -29,6 +30,7 @@ if (isset($_GET["uitloggen"])){
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="/I-Project/www/js/bootstrap.min.js"></script>
 		<script src="/I-Project/www/js/bootstrap-select.min.js"></script>
+		<script src="/I-Project/www/js/bootstrap-slider.min.js"></script>
 
 		<!-- Navbar containers -->
 		<nav class="navbar navbar-default">
