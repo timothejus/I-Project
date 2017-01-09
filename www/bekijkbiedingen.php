@@ -40,9 +40,9 @@ function toonBiedingen(){
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			 $ret .= 	'							<tr>
-									<td style="overflow: hidden"><a href="productDetailPagina.php?voorwerpNummer='. $row["Voorwerpnummer"] .'" class="catlink">'. $row["Titel"] .'</a></td>
-									<td>&euro;'. $row["GebodenBedrag"] .',-</td>
-									<td>&euro;'. $row["HoogsteBod"] .',-</td>';
+									<td style="overflow: hidden"><a href="productDetailPagina.php?voorwerpNummer='. $row["Voorwerpnummer"] .'">'. $row["Titel"] .'</a></td>
+									<td>&euro;'. number_format ($row["GebodenBedrag"],2,',','.') .'</td>
+									<td>&euro;'. number_format ($row["HoogsteBod"],2,',','.') .'</td>';
 			if ($row["Status"] == 0){
 				$ret .= '<td>Open</td>';
 			} else {
@@ -79,7 +79,7 @@ if (isset($_GET["voorwerp"]) && isset($_GET["bod"])){
 		<div class="row">
 
 			<div class="col-sm-10 col-sm-offset-1">
-				<div class="panel panel-info">
+				<div class="panel panel-default">
 					<div class="panel-heading text-center"><h4>Biedingen</h4></div>
 					<div class="panel-body">
 						<table class="table mijnbiedingen">
