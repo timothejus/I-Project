@@ -62,7 +62,7 @@ function oldPasswordCheck($login, $wachtwoord){
 }
 
 function passwordCheck($pw,$pw1){
-	if($pw == $pw1){
+	if($pw == $pw1 && !empty($pw)){
 		return true;
 	} else {
 		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">Uw nieuw ingevoerde wachtwoorden komen niet overeen!</div></div></div>';
