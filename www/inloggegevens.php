@@ -83,6 +83,12 @@ if (isset($_SESSION["user"])) {
 		}
 	}
 
+	if (isset($_GET["oldpw"]) && isset($_GET["gv"]) && isset($_GET["antwoord"])){
+		if (oldPasswordCheck($_SESSION["user"], $_GET["oldpw"])){
+			veranderVraag($_GET["gv"], $_GET["antwoord"]);
+
+		}
+	}
 
 	?>
 
@@ -111,9 +117,9 @@ if (isset($_SESSION["user"])) {
 									<?php
 									foreach ($vragen as $row) {
 										if ($row->getTekstVraag() == $gebruiker->getGeheimeVraag()) {
-											echo '<option selected >' . $row->getTekstVraag() . '</option>';
+											echo '<option selected value="' .$row->getVraagNummer() . '" >' . $row->getTekstVraag() . '</option>';
 										} else {
-											echo '<option>' . $row->getTekstVraag() . '</option>';
+											echo '<option value="' .$row->getVraagNummer() . '">' . $row->getTekstVraag() . '</option>';
 										}
 									}
 									?>
