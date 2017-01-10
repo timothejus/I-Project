@@ -98,14 +98,18 @@ function veilingPlaatsen(
 	$stmt->execute();
 }
 
-if (isset($_GET["gebruikersnaam"]) &&
-	isset($_GET["titel"]) &&
-	isset($_GET["beschrijving"]) &&
-	isset($_GET["rubriek"]) &&
-	isset($_GET["afbeelding1"]) &&
-	isset($_GET["startprijs"]) &&
-	isset($_GET["betalingswijze"]) &&
-	isset($_GET["looptijd"]) &&
+function afbeeldingPlaatsen(){
+
+}
+
+if (!empty($_GET["gebruikersnaam"]) &&
+	!empty($_GET["titel"]) &&
+	!empty($_GET["beschrijving"]) &&
+	!empty($_GET["rubriek"]) &&
+	!empty($_GET["afbeelding1"]) &&
+	!empty($_GET["startprijs"]) &&
+	!empty($_GET["betalingswijze"]) &&
+	!empty($_GET["looptijd"]) &&
 	isset($_GET["verzendkosten"]) &&
 	isset($_GET["verzendinstructies"])){
 		veilingPlaatsen($_GET["titel"],
@@ -139,24 +143,24 @@ if (isset($_GET["gebruikersnaam"]) &&
 								<input name="gebruikersnaam" type="text" class="form-control" value="<?= $_SESSION["user"] ?>" disabled><br>
 								<input name="gebruikersnaam" type="hidden" class="form-control" value="<?= $_SESSION["user"] ?>">
 								Titel
-								<input name="titel" type="text" class="form-control"><br>
+								<input name="titel" type="text" pattern="^[a-zA-Z0-9_]{1,100}$" class="form-control" required><br>
 								Beschrijving
-								<textarea name="beschrijving" class="form-control" rows="4"></textarea><br>
+								<textarea name="beschrijving" pattern="^[a-zA-Z0-9_]{1}$" class="form-control" rows="4" required></textarea><br>
 								Rubriek
 								<input name="rubriek" type="text" value="<?= getRubriekNaam($_GET["rubriek"]); ?>" class="form-control" disabled=""><br>
 								<input name="rubriek" type="hidden" value="<?= $_GET["rubriek"]; ?>" class="form-control">
 								Afbeelding1
-								<input name="afbeelding1" type="file" class="form-control-file"><br>
+								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file" required><br>
 								Afbeelding2
-								<input name="afbeelding2" type="file" class="form-control-file"><br>
+								<input name="afbeelding2" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
 								Afbeelding3
-								<input name="afbeelding3" type="file" class="form-control-file"><br>
+								<input name="afbeelding3" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
 								Afbeelding4
-								<input name="afbeelding4" type="file" class="form-control-file"><br>
+								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
 								Startprijs
-								<input name="startprijs" type="text" class="form-control"><br>
+								<input name="startprijs" type="text" class="form-control" required><br>
 								Betalingswijze
-								<table style="width: 100%; margin-top: 5px;" class="text-center">
+								<table style="width: 100%; margin-top: 5px;" class="text-center" required>
 									<tr>
 										<td><label><input name="betalingswijze" type="radio" value="bank" checked="checked">Bank</input></label></td>
 										<td> - of - </td>
@@ -164,7 +168,7 @@ if (isset($_GET["gebruikersnaam"]) &&
 									</tr>
 								</table><br>
 								Looptijd in dagen<br>
-								<select name="looptijd">
+								<select name="looptijd" required>
 									<?php
 									$dbh = getConnection();
 									$sql = "SELECT Dagen FROM VoorwerpLooptijd";
