@@ -522,3 +522,41 @@ function getTelefoonNummer($gebruiker){
 	}
 	return $telefoon ? $telefoon : null;
 }
+
+function geefFeedback (
+	$verkoper,
+	$koper,
+	$voorwerp,
+	$communicatiebeoordeling,
+	$communicatieopmerking,
+	$leveringbeoordeling,
+	$leveringopmerking,
+	$levertijdbeoordeling,
+	$levertijdopmerking,
+	$algemeneopmerking
+) {
+	try
+	{
+		$db = getConnection();
+		$sql = "EXEC spPlaatsFeedback :Verkoper,:Koper,:Voorwerp,:CommunicatieBeoordeling,:CommunicatieOpmerking,:LeveringBeoordeling,:LeveringOpmerking,:LevertijdBeoordeling,:LevertijdOpmerking,:AlgemeneOpmerking";
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam (':Verkoper', $verkoper, PDO::PARAM_STR);
+		$stmt->bindParam (':Koper', $koper, PDO::PARAM_STR);
+		$stmt->bindParam (':Voorwerp', $voorwerp, PDO::PARAM_INT);
+		$stmt->bindParam (':CommunicatieBeoordeling', $communicatiebeoordeling, PDO::PARAM_INT);
+		$stmt->bindParam (':CommunicatieOpmerking', $communicatieopmerking, PDO::PARAM_STR);
+		$stmt->bindParam (':LeveringBeoordeling', $leveringbeoordeling, PDO::PARAM_INT);
+		$stmt->bindParam (':LeveringOpmerking', $leveringopmerking, PDO::PARAM_STR);
+		$stmt->bindParam (':LevertijdBeoordeling', $levertijdbeoordeling, PDO::PARAM_INT);
+		$stmt->bindParam (':LevertijdOpmerking', $levertijdopmerking, PDO::PARAM_STR);
+		$stmt->bindParam (':AlgemeneOpmerking', $algemeneopmerking, PDO::PARAM_STR);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}
