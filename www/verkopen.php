@@ -112,26 +112,6 @@ function veilingPlaatsen(
 	$stmt->execute();
 }
 
-function afbeeldingPlaatsen(){
-
-}
-
-//TODO: Change to Stored Procedure AND place in DB.php
-function isVerkoper($user){
-	$dbh = getConnection();
-	$sql = "SELECT Verkoper FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
-	$stmt->execute();
-	$ret = "";
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		if ($row["Verkoper"] == 1){
-			return true;
-		}
-	}
-	return false;
-}
-
 //TODO: Change to Stored Procedure AND place in DB.php
 function getVoorwerpNummer($user)
 {
@@ -172,7 +152,7 @@ if (isset($_SESSION["user"])) {
 				$_GET["gebruikersnaam"],
 				$_GET["rubriek"]);
 			//AfbeeldingPlaatsen();
-			header("Location: /I-Project/www/productDetailPagina.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+			header("Location: /I-Project/www/fileupload.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
 		} else {
 
 		}

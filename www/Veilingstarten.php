@@ -13,6 +13,8 @@ $rubrieken = getSubrubrieken($_GET ['id']);
 if ($rubrieken == null){
 	header("Location: /I-Project/www/verkopen.php?rubriek=" . $_GET["id"]);
 }
+if (isset($_SESSION["user"])){
+if (isVerkoper($_SESSION["user"])){
 ?>
 
 <script src="js/timer.js" data-id="countdown"></script>
@@ -67,11 +69,11 @@ if ($rubrieken == null){
 				?>
 				<div class="panel-heading text-center">
 					<h3>Subrubrieken binnen "<?php
-						if ($_GET["id"] == -1){
+						if ($_GET["id"] == -1) {
 							echo "hoofdrubriek";
 						} else {
 							echo getRubriek($_GET ['id'])[0]->getNaam();
-						}?>"</h3></div>
+						} ?>"</h3></div>
 				<div class="panel-body">
 					<div class="col-sm-6">
 						<ul class="nav nav-pills nav-stacked">
@@ -117,5 +119,7 @@ if ($rubrieken == null){
 			?>
 		</div>
 	</div>
-	<?php require("scripts/footer.php"); ?>
+	<?php
+	}
+	}require("scripts/footer.php"); ?>
 

@@ -118,7 +118,7 @@ if (isset($_SESSION["user"])) {
 								</div>
 								<div class="panel-footer text-center">
 									<div class="row">
-										<div class="col-sm-12"><a class="btn btn-default" href="">Verkopen</a></div>
+										<div class="col-sm-12"><a class="btn btn-default" href="Veilingstarten.php?id=-1">Verkopen</a></div>
 									</div>
 								</div>
 							</div>

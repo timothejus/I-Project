@@ -17,7 +17,7 @@ if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["telephone1"]) &&
 	!empty($_GET["question"]) &&
 	!empty($_GET["answer"])
-	&& $_GET["password"] === $_GET["password2"]){
+	&& checkPassword($_GET["password"], $_GET["password2"])){
 	if (checkUsername($_GET["username"]) && checkDatum($_GET["day"],$_GET["month"],$_GET["year"])) {
 		registreren(
 			$_GET["emailadres"],
@@ -41,6 +41,15 @@ if (!empty($_GET["emailadres"]) &&
 			}
 		}
 		header("Location: ../www/login.php?registratie=1");
+	}
+}
+
+function checkPassword($pw,$pw2) {
+	if ($pw == $pw2){
+		return true;
+	} else {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De wachtwoorden zijn niet gelijk aan elkaar! Probeer het opnieuw</div></div></div>';
+		return false;
 	}
 }
 
@@ -97,6 +106,11 @@ function registreren(
 ){
 	try
 	{
+		if (!empty($_GET["street2"])){
+			$street2 = $_GET["street2"];
+		} else {
+			$street2 = NULL;
+		}
 		$verkoper = 0;
 		$db = getConnection();
 		$date = $year."-".$month."-".$day;
@@ -113,7 +127,8 @@ function registreren(
 											Wachtwoord, 
 											GeheimeVraag, 
 											Antwoordtekst, 
-											Verkoper)
+											Verkoper,
+											Adresregel2)
 											VALUES (:Gebruikersnaam,
 													:Voornaam,
 													:Achternaam,
@@ -126,7 +141,8 @@ function registreren(
 													:Wachtwoord,
 													:Vraag,
 													:Antwoordtekst,
-													:Verkoper
+													:Verkoper,
+													:Adresregel2
 													)
 													");
 		$stmt->bindParam("Gebruikersnaam", $username);
@@ -142,6 +158,7 @@ function registreren(
 		$stmt->bindParam("Vraag", $question);
 		$stmt->bindParam("Antwoordtekst", $answer);
 		$stmt->bindParam("Verkoper", $verkoper);
+		$stmt->bindParam("Adresregel2", $street2);
 		$stmt->execute();
 		$db = null;
 	}
@@ -246,6 +263,8 @@ if (isset($_GET["code"])) {
 									<br/>
 									Straatnaam en huisnummer
 									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" maxlength="50" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. er mogen hier 1 tot 50 tekens staan." required="required" class="form-control" name="street"><br/>
+									Extra adresregel
+									<input type="text" pattern="[a-zA-Z0-9\s]{0,50}" maxlength="50" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. er mogen hier 1 tot 50 tekens staan." class="form-control" name="street2"><br/>
 									<div class="col-sm-6" style="padding: 0px; padding-right: 3px;">
 										Postcode
 										<input type="text" maxlength="6" class="form-control" required="required" pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}" title="Zet hier een valide nederlandse postcode neer bestaande uit 4 cijfers en 2 letters" name="postcode"><br/>

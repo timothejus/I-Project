@@ -567,3 +567,18 @@ function geefFeedback (
 		echo $e->errorInfo;
 	}
 }
+
+function isVerkoper($user){
+	$dbh = getConnection();
+	$sql = "SELECT Verkoper FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		if ($row["Verkoper"] == 1){
+			return true;
+		}
+	}
+	return false;
+}
