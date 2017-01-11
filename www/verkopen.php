@@ -2,6 +2,16 @@
 require ("scripts/header.php");
 require ("scripts/DB.php");
 
+function numberFormat($pizza)
+{
+	if (substr_count($pizza, ".") && substr_count($pizza, ",")) {
+		$bodBedrag = str_replace(',', '.', str_replace('.', '', $pizza));
+	} else {
+		$bodBedrag = str_replace(',', '.', $pizza);
+	}
+	return $bodBedrag;
+}
+
 function getRubriekNaam($id){
 	$dbh = getConnection();
 	$sql = "SELECT RubriekNaam FROM Rubriek WHERE ID=:rubriek";
@@ -102,32 +112,65 @@ function afbeeldingPlaatsen(){
 
 }
 
-if (!empty($_GET["gebruikersnaam"]) &&
-	!empty($_GET["titel"]) &&
-	!empty($_GET["beschrijving"]) &&
-	!empty($_GET["rubriek"]) &&
-	!empty($_GET["afbeelding1"]) &&
-	!empty($_GET["startprijs"]) &&
-	!empty($_GET["betalingswijze"]) &&
-	!empty($_GET["looptijd"]) &&
-	isset($_GET["verzendkosten"]) &&
-	isset($_GET["verzendinstructies"])){
-		veilingPlaatsen($_GET["titel"],
-						$_GET["beschrijving"],
-						$_GET["startprijs"],
-						$_GET["betalingswijze"],
-						getPlaats($_GET["gebruikersnaam"]),
-						getGba($_GET["gebruikersnaam"]),
-						$_GET["looptijd"],
-						$_GET["verzendkosten"],
-						$_GET["verzendinstructies"],
-						$_GET["gebruikersnaam"],
-						$_GET["rubriek"]);
-		//AfbeeldingPlaatsen();
-} else {
-
+function isVerkoper($user){
+	$dbh = getConnection();
+	$sql = "SELECT Verkoper FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		if ($row["Verkoper"] == 1){
+			return true;
+		}
+	}
+	return false;
 }
-?>
+
+function getVoorwerpNummer($user)
+{
+	$dbh = getConnection();
+	$sql = "select Voorwerpnummer from Voorwerp where Verkoper=:gebruiker order by Voorwerpnummer DESC;";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return $row["Voorwerpnummer"];
+	}
+	return $ret;
+}
+if (isset($_SESSION["user"])) {
+	if (isVerkoper($_SESSION["user"])) {
+
+		if (!empty($_GET["gebruikersnaam"]) &&
+			!empty($_GET["titel"]) &&
+			!empty($_GET["beschrijving"]) &&
+			!empty($_GET["rubriek"]) &&
+			!empty($_GET["afbeelding1"]) &&
+			!empty($_GET["startprijs"]) &&
+			!empty($_GET["betalingswijze"]) &&
+			!empty($_GET["looptijd"]) &&
+			isset($_GET["verzendkosten"]) &&
+			isset($_GET["verzendinstructies"])
+		) {
+			veilingPlaatsen($_GET["titel"],
+				$_GET["beschrijving"],
+				$_GET["startprijs"],
+				$_GET["betalingswijze"],
+				getPlaats($_GET["gebruikersnaam"]),
+				getGba($_GET["gebruikersnaam"]),
+				$_GET["looptijd"],
+				$_GET["verzendkosten"],
+				$_GET["verzendinstructies"],
+				$_GET["gebruikersnaam"],
+				$_GET["rubriek"]);
+			//AfbeeldingPlaatsen();
+			header("Location: /I-Project/www/productDetailPagina.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+		} else {
+
+		}
+		?>
 
 		<div class="container">
 
@@ -139,35 +182,50 @@ if (!empty($_GET["gebruikersnaam"]) &&
 						<div class="panel-heading text-center"><h4>Verkopen</h4></div>
 						<form method="get">
 							<div class="panel-body">
+								Invoervelden met een * zijn verplicht!<br><br>
+
 								Gebruikersnaam
-								<input name="gebruikersnaam" type="text" class="form-control" value="<?= $_SESSION["user"] ?>" disabled><br>
-								<input name="gebruikersnaam" type="hidden" class="form-control" value="<?= $_SESSION["user"] ?>">
-								Titel
-								<input name="titel" type="text" pattern="^[a-zA-Z0-9_]{1,100}$" class="form-control" required><br>
-								Beschrijving
-								<textarea name="beschrijving" pattern="^[a-zA-Z0-9_]{1}$" class="form-control" rows="4" required></textarea><br>
+								<input name="gebruikersnaam" type="text" class="form-control"
+								       value="<?= $_SESSION["user"] ?>" disabled><br>
+								<input name="gebruikersnaam" type="hidden" class="form-control"
+								       value="<?= $_SESSION["user"] ?>">
+								Titel*
+								<input name="titel" type="text" pattern="[a-zA-Z0-9_\s]{4,100}" class="form-control"
+								       required><br>
+								Beschrijving*
+								<textarea name="beschrijving" pattern="^[a-zA-Z0-9_\s]$" class="form-control" rows="4"
+								          required></textarea><br>
 								Rubriek
-								<input name="rubriek" type="text" value="<?= getRubriekNaam($_GET["rubriek"]); ?>" class="form-control" disabled=""><br>
-								<input name="rubriek" type="hidden" value="<?= $_GET["rubriek"]; ?>" class="form-control">
-								Afbeelding1
-								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file" required><br>
+								<input name="rubriek" type="text" value="<?= getRubriekNaam($_GET["rubriek"]); ?>"
+								       class="form-control" disabled=""><br>
+								<input name="rubriek" type="hidden" value="<?= $_GET["rubriek"]; ?>"
+								       class="form-control">
+								Afbeelding1*
+								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg"
+								       class="form-control-file" required><br>
 								Afbeelding2
-								<input name="afbeelding2" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
+								<input name="afbeelding2" type="file" accept="image/x-png,image/gif,image/jpeg"
+								       class="form-control-file"><br>
 								Afbeelding3
-								<input name="afbeelding3" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
+								<input name="afbeelding3" type="file" accept="image/x-png,image/gif,image/jpeg"
+								       class="form-control-file"><br>
 								Afbeelding4
-								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control-file"><br>
-								Startprijs
-								<input name="startprijs" type="text" class="form-control" required><br>
-								Betalingswijze
+								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg"
+								       class="form-control-file"><br>
+								Startprijs* (bijv. 50.00)
+								<input name="startprijs" pattern="[-+]?[0-9]*[.,]?[0-9]+" type="text" class="form-control" required><br>
+								Betalingswijze*
 								<table style="width: 100%; margin-top: 5px;" class="text-center" required>
 									<tr>
-										<td><label><input name="betalingswijze" type="radio" value="bank" checked="checked">Bank</input></label></td>
-										<td> - of - </td>
-										<td><label><input name="betalingswijze" type="radio" value="giro">Giro</input></label></td>
+										<td><label><input name="betalingswijze" type="radio" value="bank"
+										                  checked="checked">Bank</input></label></td>
+										<td> - of -</td>
+										<td><label><input name="betalingswijze" type="radio" value="giro">Giro</input>
+											</label></td>
 									</tr>
-								</table><br>
-								Looptijd in dagen<br>
+								</table>
+								<br>
+								Looptijd in dagen*<br>
 								<select name="looptijd" required>
 									<?php
 									$dbh = getConnection();
@@ -175,11 +233,11 @@ if (!empty($_GET["gebruikersnaam"]) &&
 									$stmt = $dbh->prepare($sql);
 									$stmt->execute();
 									while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-										echo "<option value=".$row["Dagen"].">".$row["Dagen"]."</option>";
+										echo "<option value=" . $row["Dagen"] . ">" . $row["Dagen"] . "</option>";
 									}
 									?>
 								</select><br>
-								Verzendkosten
+								Verzendkosten (niet meer dan 99.99!)
 								<input name="verzendkosten" type="text" class="form-control"><br>
 								Verzendinstructies
 								<input name="verzendinstructies" type="text" class="form-control"><br>
@@ -198,5 +256,11 @@ if (!empty($_GET["gebruikersnaam"]) &&
 
 		</div>
 
-<?php require ("scripts/footer.php"); ?>
+	<?php } else {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">U bent geen verkoper!</div></div></div>';
+	}
+} else {
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">U bent niet ingelogd!</div></div></div>';
+}
+require ("scripts/footer.php"); ?>
 
