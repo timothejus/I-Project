@@ -4,13 +4,24 @@ require ("scripts/DB.php");
 
 // Bepalen van de geselecteerde rubrieken
 if (!isset ($_SESSION ['rubrieken'])) {
-	if ($_SESSION ['rubrieken'][0] == "") {
-		echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
-		require ("scripts/footer.php");
-		exit;
-	}
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
 }
 
+// Geef fout als er geen rubrieken opgegeven zijn
+if ($_SESSION ['rubrieken'][0] == "" && $_SESSION ['rubrieken'][1] == "") {
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
+
+// Zet de tweede rubriek terug naar de eerste als alleen de tweede is ingevuld
+} else if ($_SESSION ['rubrieken'][0] == "" && $_SESSION ['rubrieken'][1] != "") {
+	$_SESSION ['rubrieken'][0] = $_SESSION ['rubrieken'][1];
+	$_SESSION ['rubrieken'][1] = "";
+}
+
+// Stelt de eerste rubriek in, en de tweede alleen als die is ingevuld
 $rubrieknaam1 = getRubriekNaam ($_SESSION['rubrieken'][0]);
 $rubrieknaam2 = "";
 if ($_SESSION ['rubrieken'][1] != "") {
