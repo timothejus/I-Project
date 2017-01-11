@@ -74,7 +74,11 @@ function veilingPlaatsen(
 	if ($verzendinstructies == ""){
 		$verzendinstructies = NULL;
 	}
-
+	if ($_GET["rubriek2"] == ""){
+		$rubriek2 = NULL;
+	} else {
+		$rubriek2 = $_GET["rubriek2"];
+	}
 	$dbh = getConnection();
 	$sql = "INSERT INTO Voorwerp(Titel,
  								Beschrijving, 
@@ -86,7 +90,8 @@ function veilingPlaatsen(
  								VerzendKosten, 
  								VerzendInstructies, 
  								Verkoper, 
- 								Rubriek) VALUES (:titel,
+ 								Rubriek,
+ 								Rubriek2) VALUES (:titel,
  													:beschrijving,
  													:startprijs,
  													:betaalwijze,
@@ -96,7 +101,8 @@ function veilingPlaatsen(
  													:verzendkosten,
  													:verzendinstructies,
  													:verkoper,
- 													:rubriek)";
+ 													:rubriek,
+ 													:rubriek2)";
 	$stmt = $dbh->prepare($sql);
 	$stmt->bindParam(':titel', $titel);
 	$stmt->bindParam(':beschrijving', $beschrijving);
@@ -109,6 +115,7 @@ function veilingPlaatsen(
 	$stmt->bindParam(':verzendinstructies', $verzendinstructies);
 	$stmt->bindParam(':verkoper', $verkoper);
 	$stmt->bindParam(':rubriek', $rubriek);
+	$stmt->bindParam(':rubriek2', $rubriek2);
 	$stmt->execute();
 }
 
@@ -185,6 +192,11 @@ if (isset($_SESSION["user"])) {
 								<input name="rubriek" type="text" value="<?= getRubriekNaam($_GET["rubriek"]); ?>"
 								       class="form-control" disabled=""><br>
 								<input name="rubriek" type="hidden" value="<?= $_GET["rubriek"]; ?>"
+								       class="form-control">
+								2de Rubriek
+								<input name="rubriek2" type="text" value="<?= getRubriekNaam($_GET["rubriek2"]); ?>"
+								       class="form-control" disabled=""><br>
+								<input name="rubriek2" type="hidden" value="<?= $_GET["rubriek2"]; ?>"
 								       class="form-control">
 								Afbeelding1*
 								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg"
