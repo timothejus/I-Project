@@ -15,7 +15,7 @@ function checkDatum($day,$month,$year){
 	}
 }
 
-
+//TODO: Change to Stored Procedure AND place in DB.php
 function telefoonUpdate($telephone, $tele){
 	$dbh = getConnection();
 	$sql = "UPDATE Gebruikerstelefoon SET Telefoon=(:telephone) WHERE Telefoon=(:tele) AND Gebruiker=(:gebruiker)";
@@ -41,7 +41,7 @@ function hogerDan18($year,$month,$day){
 
 }
 
-
+//TODO: Change to Stored Procedure AND place in DB.php
 function accountUpdate(
 	$fname,
 	$lname,
@@ -167,6 +167,7 @@ if (isset($_SESSION["user"])) {
 								Land<br>
 								<select name="land" class="form-control" >
 									<?php
+									//TODO: Change to Stored Procedure AND place in DB.php
 									function getGba($land)
 									{
 										$dbh = getConnection();

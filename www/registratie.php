@@ -78,6 +78,7 @@ function telefoonRegistreren($telephone,$username,$volgnr){
 	$stmt->execute();
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function registreren(
 	$mail,
 	$username,
@@ -154,6 +155,7 @@ function returnNul(){
 	return "0";
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function checkUsername($username){
 	$dbh = getConnection();
 	$username = strtolower($username);
@@ -173,6 +175,7 @@ function checkUsername($username){
 
 <?php
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function codeInDatabase($code){
 	$dbh = getConnection();
 	$sql = "SELECT Mailadres FROM RegistratieCode WHERE RegistratieCode=(:code)";
@@ -186,6 +189,7 @@ function codeInDatabase($code){
 	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De ingevoerde code is fout!</div></div></div>';
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function isValid($mail){
 	$dbh = getConnection();
 	$sql = "SELECT Mailadres FROM Gebruiker WHERE Mailadres=(:mail)";
@@ -253,6 +257,7 @@ if (isset($_GET["code"])) {
 									Land
 									<select name="land" required="required" class="form-control">
 										<?php
+										//TODO: Change to Stored Procedure AND place in DB.php
 										function getGba()
 										{
 											$dbh = getConnection();
@@ -276,6 +281,7 @@ if (isset($_GET["code"])) {
 									Geheime vraag
 									<select name="question" required="required" class="form-control">
 										<?php
+										//TODO: Change to Stored Procedure AND place in DB.php
 										function getQuestion()
 										{
 											$dbh = getConnection();

@@ -25,7 +25,7 @@ $bodBedrag = $hoogsteBod;
 		$bodBedrag = $hoogsteBod + 50;
 	return $bodBedrag;
 }
-
+//TODO: place in DB.php
 function toonBiedingen(){
 
 	try {

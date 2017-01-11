@@ -12,6 +12,7 @@ function numberFormat($pizza)
 	return $bodBedrag;
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function getRubriekNaam($id){
 	$dbh = getConnection();
 	$sql = "SELECT RubriekNaam FROM Rubriek WHERE ID=:rubriek";
@@ -25,6 +26,7 @@ function getRubriekNaam($id){
 	return $ret;
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function getPlaats($user){
 	$dbh = getConnection();
 	$sql = "SELECT Plaatsnaam FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
@@ -38,6 +40,7 @@ function getPlaats($user){
 	return $ret;
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function getGba($user){
 	$dbh = getConnection();
 	$sql = "SELECT GbaCode FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
@@ -51,6 +54,7 @@ function getGba($user){
 	return $ret;
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function veilingPlaatsen(
 	$titel,
 	$beschrijving,
@@ -112,6 +116,7 @@ function afbeeldingPlaatsen(){
 
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function isVerkoper($user){
 	$dbh = getConnection();
 	$sql = "SELECT Verkoper FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
@@ -127,6 +132,7 @@ function isVerkoper($user){
 	return false;
 }
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function getVoorwerpNummer($user)
 {
 	$dbh = getConnection();

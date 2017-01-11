@@ -8,6 +8,7 @@
 require ("scripts/header.php");
 require ("scripts/DB.php");
 
+//TODO: Change to Stored Procedure AND place in DB.php
 function changePassword($pw)
 {
 	$login = strtolower($_SESSION["user"]);
@@ -58,6 +59,8 @@ function oldPasswordCheck($login, $wachtwoord){
 		return false;
 	}
 }
+
+//TODO: Change to Stored Procedure AND place in DB.php
 function veranderVraag($vraag, $antwoord){
 	$login = strtolower($_SESSION["user"]);
 	$dbh = getConnection();

@@ -206,6 +206,7 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 	}
 }
 
+//TODO: Change to Stored Procedure
 function getHoofdrubrieken () {
 
 	$rubrieken = null;
@@ -230,6 +231,7 @@ function getHoofdrubrieken () {
 	return $rubrieken ? $rubrieken : null;
 }
 
+//TODO: Change to Stored Procedure
 function getRubriekParent ($id) {
 	$rubrieken = null;
 
@@ -335,6 +337,7 @@ function getVoorwerpenVanRubriek ($id) {
 	return $voorwerpen ? $voorwerpen : null;
 }
 
+//TODO: Change to Stored Procedure
 function insertCode($code,$email){
 	try
 	{
@@ -354,6 +357,7 @@ function insertCode($code,$email){
 	}
 }
 
+//TODO: Change to Stored Procedure
 function verify($email){
 	try {
 		//database connection
@@ -380,6 +384,7 @@ function verify($email){
 	}
 }
 
+//TODO: Change to Stored Procedure
 function verifyUser($email){
 	try {
 		//database connection
@@ -476,6 +481,7 @@ function getLoginGegevens($gebruikersnaam){
 	return $user ? $user : null;
 }
 
+//TODO: Change to Stored Procedure
 function getQuestions()
 {
 	$vragen = null;
@@ -499,6 +505,7 @@ function getQuestions()
 	return $vragen ? $vragen : null;
 }
 
+//TODO: Change to Stored Procedure
 function getTelefoonNummer($gebruiker){
 	try {
 
