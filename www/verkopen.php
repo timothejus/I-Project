@@ -2,6 +2,22 @@
 require ("scripts/header.php");
 require ("scripts/DB.php");
 
+// Bepalen van de geselecteerde rubrieken
+if (!isset ($_SESSION ['rubrieken'])) {
+	if ($_SESSION ['rubrieken'][0] == "") {
+		echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
+		require ("scripts/footer.php");
+		exit;
+	}
+}
+
+$rubrieknaam1 = getRubriekNaam ($_SESSION['rubrieken'][0]);
+$rubrieknaam2 = "";
+if ($_SESSION ['rubrieken'][1] != "") {
+	$rubrieknaam2 = getRubriekNaam ($_SESSION['rubrieken'][1]);
+}
+
+
 function numberFormat($pizza)
 {
 	if (substr_count($pizza, ".") && substr_count($pizza, ",")) {
