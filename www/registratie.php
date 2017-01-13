@@ -280,7 +280,7 @@ if (isset($_GET["code"])) {
 										function getGba()
 										{
 											$dbh = getConnection();
-											$sql = "SELECT GbaCode, LandNaam FROM Land";
+											$sql = "SELECT GbaCode, LandNaam FROM Land ORDER BY LandNaam ASC";
 											$stmt = $dbh->prepare($sql);
 											$stmt->execute();
 											$ret = "";
