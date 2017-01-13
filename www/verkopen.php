@@ -178,7 +178,6 @@ if (isset($_SESSION["user"])) {
 			!empty($_GET["titel"]) &&
 			!empty($_GET["beschrijving"]) &&
 			!empty($_GET["rubriek"]) &&
-			!empty($_GET["afbeelding1"]) &&
 			!empty($_GET["startprijs"]) &&
 			!empty($_GET["betalingswijze"]) &&
 			!empty($_GET["looptijd"]) &&
