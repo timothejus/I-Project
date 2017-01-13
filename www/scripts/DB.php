@@ -284,7 +284,7 @@ function getHoofdrubrieken () {
 		$stmt = $db->prepare ($sql);
 
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
@@ -304,11 +304,12 @@ function getRubriekParent ($id) {
 
 	try {
 		$db = getConnection ();
-		$sql = "SELECT Parent FROM Rubriek WHERE ID = " . $id;
+		$sql = "SELECT Parent FROM Rubriek WHERE ID = :ID";
 		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':ID', $id, PDO::PARAM_INT);
 
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$rubriek = $row ['Parent'];
@@ -332,7 +333,7 @@ function getSubrubrieken ($parent) {
 		$stmt->bindParam(':RubriekNummer', $parent, PDO::PARAM_INT);
 
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
@@ -357,7 +358,7 @@ function getRubriek ($id) {
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
 
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$rubriek = new Rubriek ($row ['ID'], $row ['Rubrieknaam'], $row ['Volgnr'], $row ['Parent']);
@@ -381,7 +382,7 @@ function getVoorwerpenVanRubriekCount($id){
 		$stmt = $db->prepare ($sql);
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			return $row["count"];
@@ -406,7 +407,7 @@ function getVoorwerpenVanRubriek ($id, $top) {
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
 		$stmt->bindParam(':TopNummer', $top, PDO::PARAM_INT);
 		$stmt->execute ();
-		$db = null;
+		//$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$voorwerp = new Voorwerp(
