@@ -129,7 +129,38 @@ require("scripts/header.php");
 			<ul class="pagination">
 				<?php
 				echo count(getVoorwerpenVanRubriekCount($_GET["id"]));
-				if ($_GET["top"] == 0) {
+
+
+				if (count(getVoorwerpenVanRubriekCount($_GET["id"])) <= $_GET["top"]*18 + 18){
+					$top1 = $_GET["top"]-4;
+					$top2 = $_GET["top"]-3;
+					$top3 = $_GET["top"]-2;
+					$top4 = $_GET["top"]-1;
+					$top5 = $_GET["top"];
+					$top6 = $_GET["top"]+1;
+					echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+				}
+				else if (count(getVoorwerpenVanRubriekCount($_GET["id"])) <= $_GET["top"]*18 + 36){
+					$top0 = $_GET["top"]-4;
+					$top1 = $_GET["top"]-3;
+					$top2 = $_GET["top"]-2;
+					$top3 = $_GET["top"]-1;
+					$top4 = $_GET["top"];
+					$top5 = $_GET["top"]+1;
+					$top6 = $_GET["top"]+2;
+							echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+				}
+				else if ($_GET["top"] == 0) {
 					$top1 = $_GET["top"];
 					$top2 = $_GET["top"]+1;
 					$top3 = $_GET["top"]+2;
@@ -143,7 +174,7 @@ require("scripts/header.php");
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
 				}
 
-				if ($_GET["top"] == 1) {
+				else if ($_GET["top"] == 1) {
 					$top1 = $_GET["top"]-1;
 					$top2 = $_GET["top"];
 					$top3 = $_GET["top"]+1;
@@ -156,7 +187,7 @@ require("scripts/header.php");
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
 				}
-				if ($_GET["top"] >= 2) {
+				 else if ($_GET["top"] >= 2) {
 					$top1 = $_GET["top"]-2;
 					$top2 = $_GET["top"]-1;
 					$top3 = $_GET["top"];
