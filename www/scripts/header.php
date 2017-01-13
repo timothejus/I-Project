@@ -11,11 +11,11 @@ function verzendMail ($data) {
 	$to = $data["MailadresKoper"];
 	$subject="Gefeliciteerd! U hebt een bieding gewonnen!";
 	$from = 'noreacteenmaalandermaal@gmail.com';
-	$body = "Gefeliciteerd!\n\nU heeft een bieding gewonnen! Neem contact op met de verkoper. Hieronder zijn de gegevens van de bieding.\n\n"
-		. "Voorwerpnummer:     " . $data["VoorwerpNummer"] . "\n"
-		. "Titel:              " . $data["Titel"] . "\n"
-		. "Verkoper:           " . $data["Verkoper"] . "\n"
-		. "Mailadres verkoper: " . $data["MailadresVerkoper"] . "\n\n"
+	$body = "Gefeliciteerd!\n\nU heeft een bieding gewonnen! Neem contact op met de verkoper. Hieronder zijn de gegevens van de bieding.\n\n\n"
+		. "Voorwerpnummer:\n" . $data["VoorwerpNummer"] . "\n\n"
+		. "Titel:\n" . $data["Titel"] . "\n\n"
+		. "Verkoper:\n" . $data["Verkoper"] . "\n\n"
+		. "Mailadres verkoper:\n" . $data["MailadresVerkoper"] . "\n\n\n"
 		. "Bedankt voor het gebruiken van EenmaalAndermaal!";
 	$headers = "From:".$from;
 

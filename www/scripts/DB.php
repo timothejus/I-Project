@@ -16,6 +16,39 @@ require ("vraag.php");
  * @return array|Voorwerp
  */
 
+function getTeVerzendenMails () {
+	$items = array ();
+
+	try {
+		$dbh = getConnection ();
+		$sql = "EXEC spTeVersturenMails";
+
+		$stmt = $dbh->prepare ($sql);
+		$stmt->execute();
+
+		while ($row = $stmt->fetch (PDO::FETCH_ASSOC)) {
+			$items[] = $row;
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage ();
+	}
+	return $items;
+}
+
+function verwijderTeVerzendenMail ($voorwerpnummer) {
+	try {
+		$dbh = getConnection ();
+		$sql = "EXEC spVerwijderTeVersturenMail :VoorwerpNummer";
+
+		$stmt = $dbh->prepare ($sql);
+		$stmt->bindParam(':VoorwerpNummer', $voorwerpnummer, PDO::PARAM_INT);
+		$stmt->execute ();
+
+		$db = null;
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage ();
+	}
+}
 
 function getVoorwerpen()
 {
