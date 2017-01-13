@@ -6,34 +6,6 @@ if (isset($_GET["uitloggen"])){
 	header("Location: /I-Project/www/index.php?uitgelogd");
 }
 
-
-
-function veilingSluiten(){
-	$nul = 0;
-	$dbh = getConnection();
-	$sql = "SELECT Eindtijd,Voorwerpnummer FROM Voorwerp WHERE VeilingGesloten=:gesloten";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':gesloten',$nul, PDO::PARAM_INT);
-	$stmt->execute();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
-		if($row["Eindtijd"] >= date('Y/m/d h:i:s', time())){
-			sluitVeiling($row["Voorwerpnummer"]);
-		}
-	}
-}
-
-function sluitVeiling($vn){
-	$een = 1;
-	$dbh = getConnection();
-	$sql = "UPDATE Voorwerp SET VeilingGesloten=:gesloten WHERE Voorwerpnummer=:vn";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam("gesloten", $een);
-	$stmt->bindParam("vn", $vn);
-	$stmt->execute();
-}
-//veilingSluiten();
-
 ?>
 
 <!DOCTYPE html>
