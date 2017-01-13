@@ -2,6 +2,10 @@
 require ("scripts/header.php");
 require ("scripts/DB.php");
 
+$_SESSION["rubriek1"] = "";
+$_SESSION["rubriek2"] = "";
+
+
 function getVoorwerpNummer($user)
 {
 	$dbh = getConnection();

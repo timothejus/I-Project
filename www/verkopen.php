@@ -22,10 +22,11 @@ if ($_SESSION ['rubriek1'] == "" && $_SESSION ['rubriek2'] == "") {
 }
 
 // Stelt de eerste rubriek in, en de tweede alleen als die is ingevuld
-$rubrieknaam1 = getRubriekNaam ($_SESSION['rubriek1']);
+$rubrieknaam1 = $_SESSION['rubriek1'];
 $rubrieknaam2 = "";
+
 if ($_SESSION ['rubriek2'] != "") {
-	$rubrieknaam2 = getRubriekNaam ($_SESSION['rubriek2']);
+	$rubrieknaam2 = $_SESSION['rubriek2'];
 }
 
 if (isset($_GET["rubriek"])) {
