@@ -23,9 +23,6 @@ function verzendMail ($data) {
 }
 
 foreach (getTeVerzendenMails() as $row) {
-	// Hier moet de code voor het verzenden van de mail.
-	echo "\nVerzend nu de mail";
-
 	// Deze code moet uitgevoerd worden wanneer het mailen geslaagd is.
 	if (verzendMail ($row)) {
 		verwijderTeVerzendenMail(floatval ($row ["VoorwerpNummer"]));
