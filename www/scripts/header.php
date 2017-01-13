@@ -6,6 +6,32 @@ if (isset($_GET["uitloggen"])){
 	header("Location: /I-Project/www/index.php?uitgelogd");
 }
 
+// Dit blok verzend mails die nog verstuurd moeten worden voor afgelopen veilingen
+function verzendMail ($data) {
+	$to = $data["MailadresKoper"];
+	$subject="Gefeliciteerd! U hebt een bieding gewonnen!";
+	$from = 'noreacteenmaalandermaal@gmail.com';
+	$body = "Gefeliciteerd!\n\nU heeft een bieding gewonnen! Neem contact op met de verkoper. Hieronder zijn de gegevens van de bieding.\n\n"
+		. "Voorwerpnummer:     " . $data["VoorwerpNummer"] . "\n"
+		. "Titel:              " . $data["Titel"] . "\n"
+		. "Verkoper:           " . $data["Verkoper"] . "\n"
+		. "Mailadres verkoper: " . $data["MailadresVerkoper"] . "\n\n"
+		. "Bedankt voor het gebruiken van EenmaalAndermaal!";
+	$headers = "From:".$from;
+
+	return mail($to,$subject,$body,$headers);
+}
+
+foreach (getTeVerzendenMails() as $row) {
+	// Hier moet de code voor het verzenden van de mail.
+	echo "\nVerzend nu de mail";
+
+	// Deze code moet uitgevoerd worden wanneer het mailen geslaagd is.
+	if (verzendMail ($row)) {
+		verwijderTeVerzendenMail(floatval ($row ["VoorwerpNummer"]));
+	}
+}
+
 ?>
 
 <!DOCTYPE html>
