@@ -2,6 +2,33 @@
 require ("scripts/header.php");
 require ("scripts/DB.php");
 
+// Bepalen van de geselecteerde rubrieken
+if (!isset ($_SESSION ['rubriek1']) && !isset ($_SESSION ['rubriek2'])) {
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
+}
+
+// Geef fout als er geen rubrieken opgegeven zijn
+if ($_SESSION ['rubriek1'] == "" && $_SESSION ['rubriek2'] == "") {
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">Geen rubriek opgegeven</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
+
+// Zet de tweede rubriek terug naar de eerste als alleen de tweede is ingevuld
+} else if ($_SESSION ['rubriek1'] == "" && $_SESSION ['rubriek2'] != "") {
+	$_SESSION ['rubriek1'] = $_SESSION ['rubriek2'];
+	$_SESSION ['rubriek2'] = "";
+}
+
+// Stelt de eerste rubriek in, en de tweede alleen als die is ingevuld
+$rubrieknaam1 = getRubriekNaam ($_SESSION['rubriek1']);
+$rubrieknaam2 = "";
+if ($_SESSION ['rubriek2'] != "") {
+	$rubrieknaam2 = getRubriekNaam ($_SESSION['rubriek2']);
+}
+
+
 function numberFormat($pizza)
 {
 	if (substr_count($pizza, ".") && substr_count($pizza, ",")) {
