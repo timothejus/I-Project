@@ -83,7 +83,6 @@ function accountUpdate(
 	}
 }
 
-require("scripts/DB.php");
 require("scripts/header.php");
 if (isset($_SESSION["user"])) {
 	$user = getAccountgegevens($_SESSION["user"]);

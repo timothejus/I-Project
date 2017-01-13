@@ -1,7 +1,6 @@
 <?php
 
 // Includes
-require ("scripts/DB.php");
 require ("scripts/header.php");
 
 // Variabelen

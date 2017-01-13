@@ -5,7 +5,6 @@
  * Date: 21-12-2016
  * Time: 10:51
  */
-require("scripts/DB.php");
 require("scripts/header.php");
 
 if (isset($_SESSION["user"])) {
@@ -71,8 +70,7 @@ if (isset($_SESSION["user"])) {
 								</div>
 								<div class="panel-footer text-center">
 									<div class="row">
-										<div class="col-sm-6"><a class="btn btn-default" href="registreerVerkoper.php">Inschrijven</a></div>
-										<div class="col-sm-6"><a class="btn btn-default" href="">Activeren</a></div>
+										<div class="col-sm-12"><a class="btn btn-default" href="registreerVerkoper.php">Inschrijven</a></div>
 									</div>
 								</div>
 							</div>
@@ -118,7 +116,7 @@ if (isset($_SESSION["user"])) {
 								</div>
 								<div class="panel-footer text-center">
 									<div class="row">
-										<div class="col-sm-12"><a class="btn btn-default" href="Veilingstarten.php?id=-1">Verkopen</a></div>
+										<div class="col-sm-12"><a class="btn btn-default" href="kiesrubriek.php">Verkopen</a></div>
 									</div>
 								</div>
 							</div>

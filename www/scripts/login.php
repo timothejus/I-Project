@@ -5,7 +5,7 @@
  * @return bool
  */
 
-require ("mssql.inc.php");
+//require ("mssql.inc.php");
 
 function login($login, $wachtwoord){
 	$login = strtolower($login);

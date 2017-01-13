@@ -1,6 +1,5 @@
 <?php
 require ("scripts/header.php");
-require ("scripts/DB.php");
 
 function minimaleBedrag($hoogsteBod){
 $bodBedrag = $hoogsteBod;

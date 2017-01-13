@@ -6,7 +6,6 @@
  * Time: 11:42
  */
 require ("scripts/header.php");
-require ("scripts/DB.php");
 
 //TODO: Change to Stored Procedure AND place in DB.php
 function changePassword($pw)

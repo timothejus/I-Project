@@ -1,5 +1,5 @@
 <?php
-require "scripts/mssql.inc.php";
+//require "scripts/mssql.inc.php";
 require "scripts/header.php";
 if (!empty($_GET["emailadres"]) &&
 	!empty($_GET["username"]) &&

@@ -6,12 +6,9 @@
  * Time: 13:17
  */
 
-// Haalt de benodigde functies op (product v/d dag, klein product en de time formatter)
-require ("scripts/DB.php");
-require ("rubriek.php");
-
 // Include de header
 require ("scripts/header.php");
+require ("rubriek.php");
 
 if (isset($_GET["uitgelogd"])){
 	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent succesvol uitgelogd!</div></div></div>';

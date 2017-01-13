@@ -4,7 +4,6 @@
  * Date: 28-11-2016
  * Time: 14:12
  */
-require("DB.php");
 
 function getProductPagina($voorwerpNummer)
 {

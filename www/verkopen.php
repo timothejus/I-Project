@@ -1,6 +1,5 @@
 <?php
 require ("scripts/header.php");
-require ("scripts/DB.php");
 
 // Bepalen van de geselecteerde rubrieken
 if (!isset ($_SESSION ['rubriek1']) && !isset ($_SESSION ['rubriek2'])) {
@@ -215,6 +214,7 @@ if (isset($_SESSION["user"])) {
 						<form method="get">
 							<div class="panel-body">
 								Invoervelden met een * zijn verplicht!<br><br>
+								<!--
 								<table style="width: 100%; table-layout: fixed;">
 									<tr>
 
@@ -227,6 +227,7 @@ if (isset($_SESSION["user"])) {
 									</tr>
 								</table>
 								<BR>
+								-->
 
 								Gebruikersnaam
 								<input name="gebruikersnaam" type="text" class="form-control"
@@ -249,6 +250,7 @@ if (isset($_SESSION["user"])) {
 								       class="form-control" disabled=""><br>
 								<input name="rubriek2" type="hidden" value="<?= $rubrieknaam2; ?>"
 								       class="form-control">
+								<!--
 								Afbeelding1*
 								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg"
 								       class="form-control-file" required><br>
@@ -261,6 +263,7 @@ if (isset($_SESSION["user"])) {
 								Afbeelding4
 								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg"
 								       class="form-control-file"><br>
+						       -->
 								Startprijs* (bijv. 50.00)
 								<input name="startprijs" pattern="[-+]?[0-9]*[.,]?[0-9]+" type="text" class="form-control" required><br>
 								Betalingswijze*
@@ -285,8 +288,8 @@ if (isset($_SESSION["user"])) {
 										echo "<option value=" . $row["Dagen"] . ">" . $row["Dagen"] . "</option>";
 									}
 									?>
-								</select><br>
-								Verzendkosten (niet meer dan 99.99!)
+								</select><br><br>
+								Verzendkosten (niet meer dan &euro;99.99!)
 								<input name="verzendkosten" type="text" class="form-control"><br>
 								Verzendinstructies
 								<input name="verzendinstructies" type="text" class="form-control"><br>

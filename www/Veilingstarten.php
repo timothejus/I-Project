@@ -5,9 +5,8 @@
  * Date: 19-12-2016
  * Time: 14:22
  */
-require("scripts/DB.php");
-require("rubriek.php");
 require("scripts/header.php");
+require("rubriek.php");
 
 $rubrieken = getSubrubrieken($_GET ['id']);
 if ($rubrieken == null){

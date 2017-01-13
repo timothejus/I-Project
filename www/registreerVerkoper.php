@@ -7,7 +7,6 @@
  */
 
 require("scripts/header.php");
-require ("scripts/DB.php");
 
 $gebruiker = getAccountgegevens($_SESSION["user"]);
 
@@ -79,9 +78,7 @@ if(isset($_GET['rekeningnummer'])){
 }
 
 if(isset($_GET['radio'])){
-	echo 'test1';
 	$radio = $_GET['radio'];
-	echo $radio;
 	if($radio == 'creditcard'){
 		if(isset($_GET['credit'])&&!empty($_GET['credit'])){
 			$creditcard = $_GET['credit'];
@@ -108,7 +105,6 @@ if(isset($_GET['radio'])){
 	}
 	else if($radio == 'post')
 	{
-		echo $checkRekeningnummer;
 
 			if($checkRekeningnummer){
 				//sendmail

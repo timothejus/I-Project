@@ -5,9 +5,8 @@
  * Date: 19-12-2016
  * Time: 14:22
  */
-require("scripts/DB.php");
-require("rubriek.php");
 require("scripts/header.php");
+require("rubriek.php");
 ?>
 
 <script src="js/timer.js" data-id="countdown"></script>

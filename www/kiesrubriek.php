@@ -2,7 +2,6 @@
 
 // Includes
 require ("rubriek.php");
-require ("scripts/DB.php");
 require ("scripts/header.php");
 
 // Checkt of de gebruiker is ingelogd.
