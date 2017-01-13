@@ -7,11 +7,19 @@ require ("scripts/header.php");
 
 // Checkt of de gebruiker is ingelogd.
 if (!isset ($_SESSION ['user'])) {
-	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">U bent niet ingelogd</div></div></div></div>';
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">U bent niet ingelogd.</div></div></div></div>';
 	require ("scripts/footer.php");
 	exit;
 }
 
+// Checkt of de gebruiker een advertentie mag plaatsen.
+if (!isVerkoper ($_SESSION ['user'])) {
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">U bent niet ingeschreven als verkoper.</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
+}
+
+// Session variabelen worden eerst leeggemaakt.
 if (!isset ($_SESSION ['rubriek1'])) { $_SESSION ['rubriek1'] = ""; }
 if (!isset ($_SESSION ['rubriek2'])) { $_SESSION ['rubriek2'] = ""; }
 
