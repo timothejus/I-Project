@@ -28,6 +28,17 @@ if ($_SESSION ['rubriek2'] != "") {
 	$rubrieknaam2 = getRubriekNaam ($_SESSION['rubriek2']);
 }
 
+if (isset($_GET["rubriek"])) {
+	if (!empty($_GET["rubriek"])) {
+		$rubrieknaam1 = $_GET["rubriek"];
+	}
+}
+
+if (isset($_GET["rubriek2"])) {
+	if (!empty($_GET["rubriek2"])) {
+		$rubrieknaam2 = $_GET["rubriek2"];
+	}
+}
 
 function numberFormat($pizza)
 {
@@ -228,14 +239,14 @@ if (isset($_SESSION["user"])) {
 								<textarea name="beschrijving" pattern="^[a-zA-Z0-9_\s]$" class="form-control" rows="4"
 								          required></textarea><br>
 								Rubriek
-								<input name="rubriek" type="text" value="<?= getRubriekNaam($_GET["rubriek"]); ?>"
+								<input name="rubriek" type="text" value="<?= getRubriekNaam($rubrieknaam1); ?>"
 								       class="form-control" disabled=""><br>
-								<input name="rubriek" type="hidden" value="<?= $_GET["rubriek"]; ?>"
+								<input name="rubriek" type="hidden" value="<?= $rubrieknaam1; ?>"
 								       class="form-control">
 								2de Rubriek
-								<input name="rubriek2" type="text" value="<?= getRubriekNaam($_GET["rubriek2"]); ?>"
+								<input name="rubriek2" type="text" value="<?= getRubriekNaam($rubrieknaam2); ?>"
 								       class="form-control" disabled=""><br>
-								<input name="rubriek2" type="hidden" value="<?= $_GET["rubriek2"]; ?>"
+								<input name="rubriek2" type="hidden" value="<?= $rubrieknaam2; ?>"
 								       class="form-control">
 								Afbeelding1*
 								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg"

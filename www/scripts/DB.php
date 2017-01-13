@@ -317,15 +317,7 @@ function getVoorwerpenVanRubriekCount($id){
 		$db = null;
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			$voorwerp = new Voorwerp(
-				$row["Voorwerpnummer"],
-				$row["Titel"], '',
-				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
-				$row["Eindtijd"], '', '', ''
-			);
-			$voorwerp->setHoogsteBod($row['hoogsteBod']);
-			$voorwerp->setAfbeeldingen($row['afbeelding']);
-			$voorwerpen[] = $voorwerp;
+			return $row["count"];
 		}
 	}
 	catch (PDOException $e) {
