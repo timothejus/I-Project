@@ -45,7 +45,7 @@ if (isset($_GET["uitgelogd"])){
 						$rubrieken = getHoofdrubrieken ();
 
 						foreach ($rubrieken as $row) {
-							echo '<li><a href="subrubriek.php?id=' . $row->getID () . '" class="catlink">' . $row->getNaam () . "</a></li>\n";
+							echo '<li><a href="subrubriek.php?id=' . $row->getID () . '&top=0" class="catlink">' . $row->getNaam () . "</a></li>\n";
 						}
 						?>
 					</ul>
