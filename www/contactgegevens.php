@@ -170,7 +170,7 @@ if (isset($_SESSION["user"])) {
 									function getGba($land)
 									{
 										$dbh = getConnection();
-										$sql = "SELECT GbaCode, LandNaam FROM Land";
+										$sql = "SELECT GbaCode, LandNaam FROM Land ORDER BY LandNaam ASC";
 										$stmt = $dbh->prepare($sql);
 										$stmt->execute();
 										$ret = "";
