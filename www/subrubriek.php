@@ -22,7 +22,7 @@ require("scripts/header.php");
 						$rubrieken = getHoofdrubrieken();
 
 						foreach ($rubrieken as $row) {
-							echo '<li><a href="subrubriek.php?id=' . $row->getID() . '" class="catlink">' . $row->getNaam() . "</a></li>\n";
+							echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '" class="catlink">' . $row->getNaam() . "</a></li>\n";
 						}
 						?>
 					</ul>
@@ -45,7 +45,7 @@ require("scripts/header.php");
 
 				foreach ($rubrieken as $row) {
 					if ($counter != count($rubrieken)) {
-						echo '<li class="breadcrumb-item"><a href="subrubriek.php?id=' . $row . '">' . getRubriek($row)[0]->getNaam() . '</a></li>' . "\n";
+						echo '<li class="breadcrumb-item"><a href="subrubriek.php?id=' . $row . "&top=0" . '">' . getRubriek($row)[0]->getNaam() . '</a></li>' . "\n";
 					} else {
 						echo '<li class="breadcrumb-item active">' . getRubriek($row)[0]->getNaam() . '</li>' . "\n";
 					}
@@ -75,10 +75,10 @@ require("scripts/header.php");
 							}
 
 							foreach ($arrfirsthalf as $row) {
-								if (getVoorwerpenVanRubriek($row->getID()) != null) {
-									echo '<li><a href="subrubriek.php?id=' . $row->getID() . '">' . $row->getNaam() . " <span class='text-muted'>(" . count(getVoorwerpenVanRubriek($row->getID())) . ")</span></a></li>\n";
+								if (getVoorwerpenVanRubriek($row->getID(), $_GET["top"] * 18) != null) {
+									echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " <span class='text-muted'>(" . count(getVoorwerpenVanRubriekCount($row->getID())) . ")</span></a></li>\n";
 								} else {
-									echo '<li><a href="subrubriek.php?id=' . $row->getID() . '">' . $row->getNaam() . "</a></li>\n";
+									echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . "</a></li>\n";
 								}
 							}
 							?>
@@ -88,12 +88,13 @@ require("scripts/header.php");
 						<ul class="nav nav-pills nav-stacked">
 							<?php
 							foreach ($arrsecondhalf as $row) {
-								if (getVoorwerpenVanRubriek($row->getID()) != null) {
-									echo '<li><a href="subrubriek.php?id=' . $row->getID() . '">' . $row->getNaam() . " <span class='text-muted'>(" . count(getVoorwerpenVanRubriek($row->getID())) . ")</span></a></li>\n";
+								if (getVoorwerpenVanRubriek($row->getID(), $_GET["top"] * 18) != null) {
+									echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " <span class='text-muted'>(" . count(getVoorwerpenVanRubriekCount($row->getID())) . ")</span></a></li>\n";
 								} else {
-									echo '<li><a href="subrubriek.php?id=' . $row->getID() . '">' . $row->getNaam() . "</a></li>\n";
+									echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . "</a></li>\n";
 								}
 							}
+
 							?>
 						</ul>
 					</div>
@@ -104,9 +105,8 @@ require("scripts/header.php");
 					<h3>Producten binnen "<?= getRubriek($_GET ['id'])[0]->getNaam(); ?>"</h3></div>
 				<div class="panel-body">
 					<?php
-					$voorwerpen = getVoorwerpenVanRubriek($_GET['id']);
+					$voorwerpen = getVoorwerpenVanRubriek($_GET['id'], $_GET["top"] * 18);
 					$counter = 1;
-
 					if (isset ($voorwerpen)) {
 						foreach ($voorwerpen as $voorwerp) {
 							if ($counter % 3 == 1) {
@@ -125,6 +125,54 @@ require("scripts/header.php");
 			</div>
 			<?php
 			}
+			?>
+			<ul class="pagination">
+				<?php
+				echo count(getVoorwerpenVanRubriekCount($_GET["id"]));
+				if ($_GET["top"] == 0) {
+					$top1 = $_GET["top"];
+					$top2 = $_GET["top"]+1;
+					$top3 = $_GET["top"]+2;
+					$top4 = $_GET["top"]+3;
+					$top5 = $_GET["top"]+4;
+					echo "
+				<li class='active'><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
+				}
+
+				if ($_GET["top"] == 1) {
+					$top1 = $_GET["top"]-1;
+					$top2 = $_GET["top"];
+					$top3 = $_GET["top"]+1;
+					$top4 = $_GET["top"]+2;
+					$top5 = $_GET["top"]+3;
+					echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
+				}
+				if ($_GET["top"] >= 2) {
+					$top1 = $_GET["top"]-2;
+					$top2 = $_GET["top"]-1;
+					$top3 = $_GET["top"];
+					$top4 = $_GET["top"]+1;
+					$top5 = $_GET["top"]+2;
+					$top6 = $_GET["top"]+3;
+					echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>". $top2 ."</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>". $top3 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>". $top4 ."</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>". $top5 ."</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+				}
+				?>
+			</ul>
+			<?php
 			}
 			}
 			}

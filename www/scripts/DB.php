@@ -304,17 +304,48 @@ function getRubriek ($id) {
 	return $rubrieken ? $rubrieken : null;
 }
 
-function getVoorwerpenVanRubriek ($id) {
+function getVoorwerpenVanRubriekCount($id){
+	$rubrieken = null;
+
+	try {
+		$voorwerpen = null;
+		$db = getConnection ();
+		$sql = "EXEC spGetVoorwerpenVanRubriekCount :RubriekNummer";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
+		$stmt->execute ();
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"], '',
+				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
+				$row["Eindtijd"], '', '', ''
+			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
+			$voorwerp->setAfbeeldingen($row['afbeelding']);
+			$voorwerpen[] = $voorwerp;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $voorwerpen ? $voorwerpen : null;
+}
+
+function getVoorwerpenVanRubriek ($id, $top) {
 
 	$rubrieken = null;
 
 	try {
 		$voorwerpen = null;
 		$db = getConnection ();
-		$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer";
+		$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer, :TopNummer";
 		$stmt = $db->prepare ($sql);
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
-
+		$stmt->bindParam(':TopNummer', $top, PDO::PARAM_INT);
 		$stmt->execute ();
 		$db = null;
 

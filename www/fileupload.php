@@ -29,22 +29,6 @@ function isVerkoperVanVoorwerp($user,$voorwerp){
 	return false;
 }
 
-//TODO: Change to Stored Procedure AND place in DB.php
-function isVerkoper($user){
-	$dbh = getConnection();
-	$sql = "SELECT Verkoper FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
-	$stmt->execute();
-	$ret = "";
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		if ($row["Verkoper"] == 1){
-			return true;
-		}
-	}
-	return false;
-}
-
 function setFileSQL($path,$vn){
 	$dbh = getConnection();
 	$sql = "INSERT INTO Bestand(FileNaam,Voorwerp) 
@@ -114,6 +98,18 @@ if (isset($_SESSION["user"])) {
 						<div class="panel-heading text-center"><h4>Bestand uploaden voor </h4></div>
 						<form method="post" enctype="multipart/form-data" name="afbeelding">
 							<div class="panel-body">
+								<table style="width: 100%; table-layout: fixed;">
+									<tr>
+
+										<td>Rubriek kiezen</td>
+										<td class="text-center">Product informatie invullen</td>
+										<td class="text-right">Afbeeldingen uploaden</td>
+									</tr>
+									<tr>
+										<td colspan="3"><input name="levering" style="width: 100%" id="r2" type="text" data-slider-tooltip="hide" data-slider-enabled="false" data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="3" ></td>
+									</tr>
+								</table>
+								<BR>
 								Afbeelding1*
 								<input name="afbeelding1" type="file" accept="image/x-png,image/gif,image/jpeg"
 								       class="form-control-file" required><br>
@@ -140,6 +136,15 @@ if (isset($_SESSION["user"])) {
 			</div>
 
 		</div>
+		<script>
+
+			$('#r1').slider ({
+			});
+			$('#r2').slider ({
+			});
+			$('#r3').slider ({
+			});
+		</script>
 
 		<?php
 	}

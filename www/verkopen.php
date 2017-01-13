@@ -176,6 +176,18 @@ if (isset($_SESSION["user"])) {
 						<form method="get">
 							<div class="panel-body">
 								Invoervelden met een * zijn verplicht!<br><br>
+								<table style="width: 100%; table-layout: fixed;">
+									<tr>
+
+										<td>Rubriek kiezen</td>
+										<td class="text-center">Product informatie invullen</td>
+										<td class="text-right">Afbeeldingen uploaden</td>
+									</tr>
+									<tr>
+										<td colspan="3"><input name="levering" style="width: 100%" id="r2" type="text" data-slider-tooltip="hide" data-slider-enabled="false" data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="2" ></td>
+									</tr>
+								</table>
+								<BR>
 
 								Gebruikersnaam
 								<input name="gebruikersnaam" type="text" class="form-control"
@@ -253,6 +265,16 @@ if (isset($_SESSION["user"])) {
 			</div>
 
 		</div>
+		<script>
+
+			$('#r1').slider ({
+			});
+			$('#r2').slider ({
+			});
+			$('#r3').slider ({
+			});
+		</script>
+
 
 	<?php } else {
 		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">U bent geen verkoper!</div></div></div>';

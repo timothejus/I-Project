@@ -106,7 +106,7 @@ if (isset($_GET["voorwerp"]) && isset($_GET["bod"])){
 						</div>
 					</div>
 					<div class="panel-footer text-center">
-						<a href="#" class="btn btn-default">Terug</a>
+						<a href="mijnaccount.php" class="btn btn-default">Terug</a>
 					</div>
 				</div>
 			</div>
