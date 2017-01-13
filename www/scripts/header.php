@@ -54,9 +54,9 @@ if (isset($_GET["uitloggen"])){
 
 					<!-- Zoekbalk/filters -->
 					<div class="navbar-left">
-						<form class="navbar-form">
+						<form action="searchresults.php" method="get" class="navbar-form">
 							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Zoek">
+								<input type="text" name="zoektekst" class="form-control" placeholder="Zoek">
 								<!--
 								<div class="selectmenu">
 									<select class="form-control selectpicker">

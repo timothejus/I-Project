@@ -59,7 +59,7 @@ require("scripts/header.php");
 								<button type='submit' class='btn btn-primary'>Login</button>
 							</div>
 							<div class='col-sm-6 text-right'>
-								<a href='#'>Wachtwoord vergeten?</a>
+								<a href='resetPassword.php'>Wachtwoord vergeten?</a>
 							</div>
 						</div>
 					</div>

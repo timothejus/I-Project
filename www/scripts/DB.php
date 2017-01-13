@@ -157,6 +157,73 @@ function getBiedingen($voorwerpNummer){
 	return $Biedingen ? $Biedingen : null;
 }
 
+function getZoekresultaten($search){
+/*
+	$db = getConnection ();
+	// Get the keyword from query string
+	$keyword = $_GET['keyword'];
+// Prepare the command
+	$sth = $db->prepare('SELECT * FROM `users` WHERE `firstname` LIKE :keyword');
+// Put the percentage sing on the keyword
+	$keyword = "%".$keyword."%";
+// Bind the parameter
+	$sth->bindParam(':keyword', $keyword, PDO::PARAM_STR);
+*/
+
+
+
+
+	try {
+		$voorwerpen = null;
+		$db = getConnection ();
+
+		$queried = $search;
+
+		$keys = explode(" ",$queried);
+
+
+		$sql = "SELECT * FROM Voorwerp WHERE Titel LIKE :keyword";
+
+		$totalKeywords = count($keys);
+
+		for($i=1 ; $i < $totalKeywords; $i++){
+			$sql .= " OR Titel LIKE :keyword".$i;
+		}
+
+		$stmt = $db->prepare ($sql);
+
+		foreach($keys as $key => $keyword){
+			$keyword = "%".$keyword."%";
+			$stmt->bindParam($key+1, $keyword, PDO::PARAM_STR);
+		}
+
+		$stmt->execute();
+
+		$db = null;
+
+
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"], '',
+				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
+				$row["Eindtijd"], '', '', ''
+			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
+			$voorwerp->setAfbeeldingen($row['afbeelding']);
+			$voorwerpen[] = $voorwerp;
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $voorwerpen ? $voorwerpen : null;
+
+}
+
 /**
  * @param $voorwerpNummer
  * @return array
@@ -434,6 +501,34 @@ function verifyUser($email){
 	}
 }
 
+function getEmailFromUser($username){
+	$email = null;
+
+	try {
+		$email = null;
+		$db = getConnection ();
+		$sql = "SELECT Mailadres FROM Gebruiker WHERE Gebruikersnaam = (:gebruikersnaam)";
+		//prepare statement
+		$stmt = $db->prepare($sql);
+		//bind parameters named placeholder to variable
+		$stmt->bindParam(':gebruikersnaam', $username, PDO::PARAM_INT);
+
+		//execute statement
+		$stmt->execute();
+
+		$db = null;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$email = $row['Mailadres'];
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $email ? $email : null;
+}
+
 function getAccountgegevens($gebruikersnaam){
 
 	try {
@@ -553,6 +648,89 @@ function getTelefoonNummer($gebruiker){
 	return $telefoon ? $telefoon : null;
 }
 
+function checkResetpassword($gebruikersnaam,$geheimeVraag,$antwoord){
+	try {
+
+		$check = null;
+
+		$db = getConnection ();
+		$sql = "SELECT * FROM Gebruiker WHERE Gebruikersnaam = (:Gebruiker) AND GeheimeVraag = (:GeheimeVraag) AND antwoordtekst = (:antwoordtekst)";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':Gebruiker', $gebruikersnaam, PDO::PARAM_STR);
+		$stmt->bindParam(':GeheimeVraag', $geheimeVraag, PDO::PARAM_STR);
+		$stmt->bindParam(':antwoordtekst', $antwoord, PDO::PARAM_STR);
+
+		$stmt->execute ();
+		$db = null;
+
+		$matches = 0;
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$matches += 1;
+		}
+
+		if($matches == 1){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	//return $telefoon ? $telefoon : null;
+}
+
+function sendNewPassword($email,$gebruiker,$achternaam){
+
+	try {
+
+
+		$code=substr(md5(mt_rand()),0,7);
+		$hashedpassword = hash('sha256', $achternaam . $code);
+
+		$check = null;
+
+		$db = getConnection ();
+		$sql = "UPDATE Gebruiker SET Wachtwoord=(:wachtwoord) WHERE Gebruikersnaam=(:gebruikersnaam)";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':wachtwoord', $hashedpassword, PDO::PARAM_STR);
+		$stmt->bindParam(':gebruikersnaam', $gebruiker, PDO::PARAM_STR);
+
+
+		$stmt->execute ();
+		$db = null;
+
+		$matches = 0;
+
+/*
+		if($matches == 1){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+*/
+
+		$to=$email;
+		$subject="New password for EenmaalAndermaal";
+		$from = 'noreacteenmaalandermaal@gmail.com';
+		$body='Your new password is '.$code.' Please Click On This link  http://iproject4.icasites.nl/www/login.php';
+		$headers = "From:".$from;
+
+		mail($to,$subject,$body,$headers);
+
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+
+}
+
 function geefFeedback (
 	$verkoper,
 	$koper,
@@ -590,6 +768,68 @@ function geefFeedback (
 		echo $e->errorInfo;
 	}
 }
+
+function updateVerkoper($gebruikersnaam){
+	try {
+
+		$check = null;
+
+		$db = getConnection ();
+		$sql = "UPDATE Gebruiker SET Verkoper=1 WHERE Gebruikersnaam=(:gebruikersnaam)";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':gebruikersnaam', $gebruikersnaam, PDO::PARAM_STR);
+
+		$stmt->execute ();
+		$db = null;
+
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+}
+
+function registreerVerkoperViaCreditcard($gebruikersnaam,$bank,$rekeningnummer,$creditcard){
+	try
+	{
+		$db = getConnection();
+		$sql = "UPDATE Gebruiker SET Bank=(:bank),Rekeningnummer=(:rekeningnummer),Creditcardnummer=(:creditcard)  WHERE Gebruikersnaam = (:gebruiker)";
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam(':bank', $bank, PDO::PARAM_STR);
+		$stmt->bindParam(':rekeningnummer', $rekeningnummer, PDO::PARAM_STR);
+		$stmt->bindParam(':creditcard', $creditcard, PDO::PARAM_STR);
+		$stmt->bindParam(':gebruiker', $gebruikersnaam, PDO::PARAM_STR);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}
+
+function insertBankRekeningNummer($rekeningnummer,$gebruikersnaam,$bank){
+	try
+	{
+		$db = getConnection();
+		$sql= "UPDATE Gebruiker SET Rekeningnummer=(:rekeningnummer), Bank = (:bank) WHERE Gebruikersnaam=(:gebruikersnaam)";
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam(':rekeningnummer', $rekeningnummer, PDO::PARAM_STR);
+		$stmt->bindParam(':bank', $bank, PDO::PARAM_STR);
+		$stmt->bindParam(':gebruikersnaam', $gebruikersnaam, PDO::PARAM_STR);
+
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+		echo $e->errorInfo;
+	}
+}
+
 
 function isVerkoper($user){
 	$dbh = getConnection();
