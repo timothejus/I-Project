@@ -15,12 +15,12 @@ if (isset($_GET["uitloggen"])){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link href="/I-Project/www/css/theme.min.css" rel="stylesheet">
-		<link href="/I-Project/www/css/bootstrap-select.min.css" rel="stylesheet">
-		<link href="/I-Project/www/css/bootstrap-slider.min.css" rel="stylesheet">
+		<link href="css/theme.min.css" rel="stylesheet">
+		<link href="css/bootstrap-select.min.css" rel="stylesheet">
+		<link href="css/bootstrap-slider.min.css" rel="stylesheet">
 
 		<!-- Kleine CSS fixes -->
-		<link href="/I-Project/www/css/fixes.css" rel="stylesheet">
+		<link href="css/fixes.css" rel="stylesheet">
 
 		<title>Home</title>
 
@@ -29,9 +29,9 @@ if (isset($_GET["uitloggen"])){
 
 		<!-- Scripts voor extra functionaliteit van Bootstrap -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="/I-Project/www/js/bootstrap.min.js"></script>
-		<script src="/I-Project/www/js/bootstrap-select.min.js"></script>
-		<script src="/I-Project/www/js/bootstrap-slider.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-select.min.js"></script>
+		<script src="js/bootstrap-slider.min.js"></script>
 
 		<!-- Navbar containers -->
 		<nav class="navbar navbar-default">
@@ -39,8 +39,8 @@ if (isset($_GET["uitloggen"])){
 
 				<!-- Navbar logo -->
 				<div class="navbar-header">
-					<a href="/I-Project/www/index.php">
-					<img class="navbar-left" style="height: 80px" src="/I-Project/www/images/logo.png" alt="EenmaalAndermaal">
+					<a href="index.php">
+					<img class="navbar-left" style="height: 80px" src="images/logo.png" alt="EenmaalAndermaal">
 					</a>
 						<button type="button" class="navbar-toggle"  data-toggle="collapse" data-target="#loginNav">
 						<span class="icon-bar"></span>
@@ -81,8 +81,8 @@ if (isset($_GET["uitloggen"])){
 					<!-- Login/registreer/help knoppen -->
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
-							<li><a href="/I-Project/www/login.php">Log in</a></li>
-							<li><a href="/I-Project/www/verifierRegistratie.php">Registreer</a></li>
+							<li><a href="login.php">Log in</a></li>
+							<li><a href="verifierRegistratie.php">Registreer</a></li>
 							<li><a href="#">Help</a></li>
 						</ul>
 					</div>
@@ -91,7 +91,7 @@ if (isset($_GET["uitloggen"])){
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
 							<li><a>Welkom, <?php echo $_SESSION["user"]; ?></a></li>
-							<li><a href="/I-Project/www/mijnAccount.php">Mijn account</a></li>
+							<li><a href="mijnAccount.php">Mijn account</a></li>
 							<li><a href="?uitloggen">Uitloggen</a></li>
 							<li><a href="#">Help</a></li>
 						</ul>
