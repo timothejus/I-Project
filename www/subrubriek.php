@@ -53,13 +53,13 @@ require("scripts/header.php");
 				}
 				?>
 			</nav>
-			<div class="panel panel-default">
 				<?php
 				if (isset ($_GET ['id'])) {
 				if (!empty ($_GET ['id'])) {
 				$rubrieken = getSubrubrieken($_GET ['id']);
 				if ($rubrieken != null) {
 				?>
+				<div class="panel panel-default">
 				<div class="panel-heading text-center">
 					<h3>Subrubrieken binnen "<?= getRubriek($_GET ['id'])[0]->getNaam(); ?>"</h3></div>
 				<div class="panel-body">
@@ -94,12 +94,12 @@ require("scripts/header.php");
 									echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . "</a></li>\n";
 								}
 							}
-
 							?>
 						</ul>
 					</div>
 				</div>
 			</div>
+			<?php } ?>
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">
 					<h3>Producten binnen "<?= getRubriek($_GET ['id'])[0]->getNaam(); ?>"</h3></div>
@@ -173,7 +173,7 @@ require("scripts/header.php");
 				?>
 			</ul>
 			<?php
-			}
+			//}
 			}
 			}
 			?>
