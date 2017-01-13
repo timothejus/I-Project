@@ -186,12 +186,12 @@ if (isset($_SESSION["user"])) {
 		) {
 			veilingPlaatsen($_GET["titel"],
 				$_GET["beschrijving"],
-				$_GET["startprijs"],
+				numberFormat($_GET["startprijs"]),
 				$_GET["betalingswijze"],
 				getPlaats($_GET["gebruikersnaam"]),
 				getGba($_GET["gebruikersnaam"]),
 				$_GET["looptijd"],
-				$_GET["verzendkosten"],
+				numberFormat($_GET["verzendkosten"]),
 				$_GET["verzendinstructies"],
 				$_GET["gebruikersnaam"],
 				$_GET["rubriek"]);
