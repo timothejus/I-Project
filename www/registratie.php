@@ -215,7 +215,7 @@ function isValid($mail){
 	$stmt->execute();
 	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
 	{
-		header("Location: ../www/login.php?geregistreerd=1");
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Deze code is niet valid!</div></div></div>';
 		return false;
 	}
 	return true;
@@ -318,9 +318,9 @@ if (isset($_GET["code"])) {
 
 
 										?>
-									</select>
+									</select><br>
 									Antwoord
-									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" required="required" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. Er mogen hier 1 tot 20 tekens staan." class="form-control" name="answer"><br/>
+									<input type="text" pattern="[a-zA-Z0-9\s]{0-20}" maxlength="20" required="required" title="Er mogen hier alleen kleine letters, hoofd letters, cijfers en spatie's staan. Er mogen hier 1 tot 20 tekens staan." class="form-control" name="answer"><br/>
 								</div>
 							</div>
 							<div class="panel-footer">
