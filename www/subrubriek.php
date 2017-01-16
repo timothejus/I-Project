@@ -122,6 +122,7 @@ require("rubriek.php");
 			<ul class="pagination">
 				<?php
 				$voorwerpenVanRubiek = getVoorwerpenVanRubriekCount($_GET["id"]);
+
 				if ($voorwerpenVanRubiek <= $_GET["top"]*18 + 18){
 					$top1 = $_GET["top"]-4;
 					$top2 = $_GET["top"]-3;

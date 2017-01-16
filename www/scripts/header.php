@@ -83,6 +83,7 @@ foreach (getTeVerzendenMails() as $row) {
 						<form action="searchresults.php" method="get" class="navbar-form">
 							<div class="form-group">
 								<input type="text" name="zoektekst" class="form-control" placeholder="Zoek">
+								<input type="hidden" name="top" value="0">
 								<!--
 								<div class="selectmenu">
 									<select class="form-control selectpicker">
