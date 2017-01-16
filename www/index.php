@@ -7,11 +7,11 @@
  */
 
 // Include de header
-require ("scripts/header.php");
-require ("rubriek.php");
+require("scripts/header.php");
+require("rubriek.php");
 
-if (isset($_GET["uitgelogd"])){
-	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent succesvol uitgelogd!</div></div></div>';
+if (isset($_GET["uitgelogd"])) {
+	echo '< class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent succesvol uitgelogd!</div></div>';
 }
 ?>
 
@@ -25,7 +25,7 @@ if (isset($_GET["uitgelogd"])){
 		<?php
 		$voorwerp = getProductGroot();
 		//Als er geen voorwerp van de dag wordt opgehaald laat dan toch de website zien.
-		if(isset($voorwerp)) {
+		if (isset($voorwerp)) {
 			echo $voorwerp->geefProductGroot();
 		}
 		?>
@@ -39,10 +39,10 @@ if (isset($_GET["uitgelogd"])){
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-stacked">
 						<?php
-						$rubrieken = getHoofdrubrieken ();
+						$rubrieken = getHoofdrubrieken();
 
 						foreach ($rubrieken as $row) {
-							echo '<li><a href="subrubriek.php?id=' . $row->getID () . '&top=0" class="catlink">' . $row->getNaam () . "</a></li>\n";
+							echo '<li><a href="subrubriek.php?id=' . $row->getID() . '&top=0" class="catlink">' . $row->getNaam() . "</a></li>\n";
 						}
 						?>
 					</ul>
@@ -50,34 +50,66 @@ if (isset($_GET["uitgelogd"])){
 			</div>
 		</div>
 		<div class="col-sm-9">
-			<div class="panel panel-default"><div class="panel-heading text-center"><h3 class="text-danger">Laatste kans!</h3></div><div class="panel-body">
-			<?php
-			//Haal voorwerpen op voor homepagina
-			$voorwerpen = getVoorwerpen();
+			<div class="panel panel-default">
+				<div class="panel-heading text-center"><h3 class="text-danger">Laatste kans!</h3></div>
+				<div class="panel-body">
+					<?php
+					//Haal voorwerpen op voor homepagina
+					$voorwerpen = getVoorwerpen();
 
-			//creeër een counter zodat de producten op de pagina maar vier breed zijn.
-			$counter = 1;
+					//creeër een counter zodat de producten op de pagina maar vier breed zijn.
+					$counter = 1;
 
-			//loop door de array voorwerpen en laat de voorwerpen zien
-			foreach ($voorwerpen as $voorwerp) {
-				if ($counter%3 == 1) {
-					echo "<div class='row'>\n";
-				}
-				echo $voorwerp->geefProductKlein();
-				if ($counter%3 == 0) {
-					echo "</div>\n";
-				}
-				$counter++;
-			}
-			?>
+					//loop door de array voorwerpen en laat de voorwerpen zien
+					foreach ($voorwerpen as $voorwerp) {
+						if ($counter % 3 == 1) {
+							echo "<div class='row'>\n";
+						}
+						echo $voorwerp->geefProductKlein();
+						if ($counter % 3 == 0) {
+							echo "</div>\n";
+						}
+						$counter++;
+					}
+					?>
+				</div>
 			</div>
 		</div>
+		<div class="col-sm-9">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center"><h3 class="text-danger">Populaire producten binnen Munten en
+						Bankbiljetten</h3></div>
+				<div class="panel-body">
+					<?php
+					//Haal voorwerpen op voor homepagina
+					$voorwerpen = getPopVoorwerpenVanRubriek(11116);
 
+					//loop door de array voorwerpen en laat de voorwerpen zien
+					foreach ($voorwerpen as $voorwerp) {
+						echo $voorwerp->geefProductKlein();
+					}
+					?>
+				</div>
+			</div>
+		</div>
+		<div class="cal-sm-9">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center"><h3 class="text-danger">Populaire producten binnen Sport, fietsen en vakantie</h3></div>
+				<div class="panel-body">
+					<?php
+					//Haal voorwerpen op voor homepagina
+					$voorwerpen = getPopVoorwerpenVanRubriek(888);
+
+					//loop door de array voorwerpen en laat de voorwerpen zien
+					foreach ($voorwerpen as $voorwerp) {
+						echo $voorwerp->geefProductKlein();
+					}
+					?>
+				</div>
+			</div>
+		</div>
 	</div>
-
-</div>
-
-<?php
-// Include de footer
-require("scripts/footer.php");
-?>
+	<?php
+	// Include de footer
+	require("scripts/footer.php");
+	?>

@@ -1440,3 +1440,32 @@ function toonBiedingen(){
 	return $ret;
 }
 
+
+function getPopVoorwerpenVanRubriek($rubriek)
+{
+	$voorwerpen = array();
+
+	try {
+		$dbh = getConnection();
+		$sql = "EXEC spGetPopVoorwerpenVanRubriek :Rubriek";
+		$stmt = $dbh->prepare($sql);
+		$stmt->bindParam(':Rubriek', $rubriek, PDO::PARAM_STR);
+		$stmt->execute();
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$voorwerp = new Voorwerp(
+				$row["Voorwerpnummer"],
+				$row["Titel"], '',
+				$row["Startprijs"], '', '', '', '', '', '', '', '', '', '',
+				$row["Eindtijd"], '', '', ''
+			);
+			$voorwerp->setHoogsteBod($row['hoogsteBod']);
+			$voorwerp->setAfbeeldingen($row['afbeelding']);
+			$voorwerpen[] = $voorwerp;
+		}
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+	}
+	return $voorwerpen;
+
+}
