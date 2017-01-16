@@ -223,7 +223,7 @@ AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword0";
 		$totalKeywords = count($keys);
 
 		for($i=1 ; $i < $totalKeywords; $i++){
-			$sql .= " OR Titel LIKE :keyword".$i;
+			$sql .= " AND Titel LIKE :keyword".$i;
 		}
 		//$sql .= " ORDER BY V.Eindtijd ASC";
 
@@ -293,8 +293,8 @@ AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND V.Titel LIKE :keyword0"
 		$totalKeywords = count($keys);
 		$sqlpaginering = " AND V.Titel NOT IN (SELECT TOP (:top) Titel FROM Voorwerp WHERE Titel LIKE :keywoord0";
 		for($i=1 ; $i < $totalKeywords; $i++){
-			$sql .= " OR Titel LIKE :keyword".$i;
-			$sqlpaginering .= " OR Titel LIKE :keywoord".$i;
+			$sql .= " AND Titel LIKE :keyword".$i;
+			$sqlpaginering .= " AND Titel LIKE :keywoord".$i;
 		}
 		$sqlpaginering .= " AND VeilingGesloten = 0 AND Starttijd <GETDATE() AND Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af')) ORDER BY Eindtijd ASC)";
 		$sql .= $sqlpaginering;
