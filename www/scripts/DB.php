@@ -438,17 +438,24 @@ function getVoorwerpenVanRubriekCount($id){
 	return $voorwerpen ? $voorwerpen : null;
 }
 
-function getVoorwerpenVanRubriek ($id, $top) {
+function getVoorwerpenVanRubriek ($id, $top, $filter = null) {
 
 	$rubrieken = null;
 
 	try {
 		$voorwerpen = null;
 		$db = getConnection ();
-		$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer, :TopNummer";
+		if ($filter == null) {
+			$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer, :TopNummer";
+		} else {
+			$sql = "EXEC spGetVoorwerpenVanRubriek :RubriekNummer, :TopNummer, :Filter";
+		}
 		$stmt = $db->prepare ($sql);
 		$stmt->bindParam(':RubriekNummer', $id, PDO::PARAM_INT);
 		$stmt->bindParam(':TopNummer', $top, PDO::PARAM_INT);
+		if ($filter != null) {
+			$stmt->bindParam (':Filter', $top, PDO::PARAM_STR);
+		}
 		$stmt->execute ();
 		//$db = null;
 
