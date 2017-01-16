@@ -74,8 +74,9 @@ require("rubriek.php");
 							}
 
 							foreach ($arrfirsthalf as $row) {
-								echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " <span class='text-muted'>(" . getVoorwerpenVanRubriekCount($row->getID()) . ")</span></a></li>\n";
+								echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " </a></li>\n";
 							}
+							//<span class='text-muted'>(" . getVoorwerpenVanRubriekCount($row->getID()) . ")</span>
 							?>
 						</ul>
 					</div>
@@ -83,8 +84,9 @@ require("rubriek.php");
 						<ul class="nav nav-pills nav-stacked">
 							<?php
 							foreach ($arrsecondhalf as $row) {
-								echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " <span class='text-muted'>(" . getVoorwerpenVanRubriekCount($row->getID()) . ")</span></a></li>\n";
+								echo '<li><a href="subrubriek.php?id=' . $row->getID() . "&top=0" . '">' . $row->getNaam() . " </a></li>\n";
 							}
+							//<span class='text-muted'>(" . getVoorwerpenVanRubriekCount($row->getID()) . ")</span>
 							?>
 						</ul>
 					</div>
