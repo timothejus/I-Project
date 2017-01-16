@@ -13,6 +13,7 @@ require ("user.php");
 require ("vraag.php");
 
 /**
+ *
  * @return array|Voorwerp
  */
 
