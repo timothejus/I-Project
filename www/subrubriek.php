@@ -127,6 +127,22 @@ require("rubriek.php");
 					$top4 = $_GET["top"]-1;
 					$top5 = $_GET["top"];
 					$top6 = $_GET["top"]+1;
+					if ($top1 <= 0){
+						$top1 = 0;
+					}
+					if ($top2 <= 0){
+						$top2 = 0;
+					}
+					if ($top3 <= 0){
+						$top3 = 0;
+					}
+					if ($top4 <= 0){
+						$top4 = 0;
+					}
+					if ($top5 <= 0){
+						$top5 = 0;
+					}
+
 					echo "
 				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
@@ -142,6 +158,21 @@ require("rubriek.php");
 					$top4 = $_GET["top"];
 					$top5 = $_GET["top"]+1;
 					$top6 = $_GET["top"]+2;
+					if ($top0 <= 0){
+						$top0 = 0;
+					}
+					if ($top1 <= 0){
+						$top1 = 0;
+					}
+					if ($top2 <= 0){
+						$top2 = 0;
+					}
+					if ($top3 <= 0){
+						$top3 = 0;
+					}
+					if ($top4 <= 0){
+						$top4 = 0;
+					}
 							echo "
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
