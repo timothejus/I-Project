@@ -16,7 +16,9 @@ function verzendMail ($data) {
 		. "Voorwerpnummer:\n" . $data["VoorwerpNummer"] . "\n\n"
 		. "Titel:\n" . $data["Titel"] . "\n\n"
 		. "Verkoper:\n" . $data["Verkoper"] . "\n\n"
-		. "Mailadres verkoper:\n" . $data["MailadresVerkoper"] . "\n\n\n"
+		. "Mailadres verkoper:\n" . $data["MailadresVerkoper"] . "\n\n"
+		. "We zouden het erg op prijs stellen als u feedback geeft op de verkoper met de onderstaande link (zorg dat u ingelogd bent!):" . "\n"
+		. "http://iproject4.icasites.nl/www/geeffeedback.php?voorwerpnummer=" . $data ["VoorwerpNummer"] . "\n\n\n"
 		. "Bedankt voor het gebruiken van EenmaalAndermaal!";
 	$headers = "From:".$from;
 
