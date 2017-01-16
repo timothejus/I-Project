@@ -216,40 +216,41 @@ function getCountZoekresultaten($search){
 		$keys = explode(" ",$queried);
 
 
-		$sql = "  SELECT Count(*) as Count FROM Voorwerp V 
+		$sql = "SELECT Count(voorwerpnummer) as count FROM Voorwerp V 
 WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = V.Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af'))
-AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword";
+AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword0";
 
 		$totalKeywords = count($keys);
 
 		for($i=1 ; $i < $totalKeywords; $i++){
 			$sql .= " OR Titel LIKE :keyword".$i;
 		}
-		$sql .= " ORDER BY V.Eindtijd ASC";
+		//$sql .= " ORDER BY V.Eindtijd ASC";
 
 		$stmt = $db->prepare ($sql);
 
 		foreach($keys as $key => $keyword){
 			$keyword = "%".$keyword."%";
-			$stmt->bindParam($key+1, $keyword, PDO::PARAM_STR);
+			$stmt->bindParam("keyword".$key, $keyword, PDO::PARAM_STR);
 		}
 
 		$stmt->execute();
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			Return $row["count"];
+		}
 
 		$db = null;
 
 
 
 
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			Return $row["Count"];
-		}
 	}
 	catch (PDOException $e) {
 		echo $e->getMessage ();
 		echo $e->errorInfo;
 	}
-	return $voorwerpen ? $voorwerpen : null;
+	return 0;
 
 }
 

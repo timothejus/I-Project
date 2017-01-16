@@ -65,6 +65,7 @@ $zoektekst = $email = $_GET["zoektekst"];
 		<ul class="pagination">
 					<?php
 					$voorwerpenCount = getCountZoekresultaten($zoektekst);
+					echo $voorwerpenCount;
 					if ($voorwerpenCount <= $_GET["top"]*18 + 18){
 						$top1 = $_GET["top"]-4;
 						$top2 = $_GET["top"]-3;
