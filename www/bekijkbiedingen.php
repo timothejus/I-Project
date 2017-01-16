@@ -49,10 +49,10 @@ function toonBiedingen(){
 			}
 								if ($row["HoogsteBod"] != $row["GebodenBedrag"]) {
 									$ret .= '
-									<td><a href="?voorwerp=' . $row["Voorwerpnummer"] . '&bod=' . minimaleBedrag($row["HoogsteBod"]) . '" class="btn btn-danger btn-xs">Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
+									<td><a href="?voorwerp=' . $row["Voorwerpnummer"] . '&bod=' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . '" class="btn btn-danger btn-xs">Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
 								</tr>';
 								} else {
-									$ret .= '<td><a class="btn btn-danger btn-xs" disabled>Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
+									$ret .= '<td><a class="btn btn-danger btn-xs" disabled>Bied &euro;' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . ',-</a></td>
 								</tr>';
 								}
 			}
