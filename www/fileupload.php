@@ -4,60 +4,6 @@ require ("scripts/header.php");
 $_SESSION["rubriek1"] = "";
 $_SESSION["rubriek2"] = "";
 
-
-function getVoorwerpNummer($user)
-{
-	$dbh = getConnection();
-	$sql = "select Voorwerpnummer from Voorwerp where Verkoper=:gebruiker order by Voorwerpnummer DESC;";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
-	$stmt->execute();
-	$ret = "";
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		return $row["Voorwerpnummer"];
-	}
-	return $ret;
-}
-
-function isVerkoperVanVoorwerp($user,$voorwerp){
-	$dbh = getConnection();
-	$sql = "SELECT * FROM Voorwerp WHERE Verkoper=:gebruiker AND Voorwerpnummer=:voorwerp";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
-	$stmt->bindParam(':voorwerp', $voorwerp, PDO::PARAM_INT);
-	$stmt->execute();
-	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		return true;
-	}
-	return false;
-}
-
-function setFileSQL($path,$vn){
-	$dbh = getConnection();
-	$sql = "INSERT INTO Bestand(FileNaam,Voorwerp) 
-						VALUES (:path,
- 								:vn)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':path', $path);
-	$stmt->bindParam(':vn', $vn);
-	$stmt->execute();
-}
-
-function uploadImage($img_ff, $dst_path, $dst_img, $naam){
-	$dst_ext = strtolower(end(explode(".", $dst_img)));
-	$dst_img = $naam . '.' . $dst_ext;
-	$dst_cpl = $dst_path . $dst_img;
-	echo $dst_cpl;
-	move_uploaded_file($_FILES[$img_ff]['tmp_name'], $dst_cpl);
-	$dst_type = exif_imagetype($dst_cpl);
-	if(( (($dst_ext =="jpg") && ($dst_type =="2")) || (($dst_ext =="jpeg") && ($dst_type =="2")) || (($dst_ext =="gif") && ($dst_type =="1")) || (($dst_ext =="png") && ($dst_type =="3") )) == false){
-		unlink($dst_cpl);
-		die('<p>The file "'. $dst_img . '" with the extension "' . $dst_ext . '" and the imagetype "' . $dst_type . '" is not a valid image. Please upload an image with the extension JPG, JPEG, PNG or GIF and has a valid image filetype.</p>');
-		header("Location: /I-Project/www/fileupload.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
-	}
-	setFileSQL($dst_cpl, $_GET["voorwerpNummer"]);
-}
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if ($_FILES["afbeelding1"]["error"] != 4) {
 		$img_ff = 'afbeelding1'; // Form name of the image

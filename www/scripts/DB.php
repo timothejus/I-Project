@@ -879,3 +879,481 @@ function isVerkoper($user){
 	}
 	return false;
 }
+
+
+// Cees
+//TODO: Change to Stored Procedure AND place in DB.php
+function getRubriekNaam($id){
+	$dbh = getConnection();
+	$sql = "SELECT RubriekNaam FROM Rubriek WHERE ID=:rubriek";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':rubriek', $id, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		$ret = $row["RubriekNaam"];
+	}
+	return $ret;
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function getPlaats($user){
+	$dbh = getConnection();
+	$sql = "SELECT Plaatsnaam FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return $row["Plaatsnaam"];
+	}
+	return $ret;
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function getGba($user){
+	$dbh = getConnection();
+	$sql = "SELECT GbaCode FROM Gebruiker WHERE Gebruikersnaam=:gebruiker";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return $row["GbaCode"];
+	}
+	return $ret;
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function veilingPlaatsen(
+	$titel,
+	$beschrijving,
+	$startprijs,
+	$betaalwijze,
+	$plaatsnaam,
+	$GbaCode,
+	$Looptijd,
+	$verzendkosten,
+	$verzendinstructies,
+	$verkoper,
+	$rubriek
+){
+	if ($verzendkosten == ""){
+		$verzendkosten = NULL;
+	}
+	if ($verzendinstructies == ""){
+		$verzendinstructies = NULL;
+	}
+	if ($_GET["rubriek2"] == ""){
+		$rubriek2 = NULL;
+	} else {
+		$rubriek2 = $_GET["rubriek2"];
+	}
+	$dbh = getConnection();
+	$sql = "INSERT INTO Voorwerp(Titel,
+ 								Beschrijving, 
+ 								Startprijs, 
+ 								Betaalwijze, 
+ 								Plaatsnaam, 
+ 								GbaCode, 
+ 								Looptijd,
+ 								VerzendKosten, 
+ 								VerzendInstructies, 
+ 								Verkoper, 
+ 								Rubriek,
+ 								Rubriek2) VALUES (:titel,
+ 													:beschrijving,
+ 													:startprijs,
+ 													:betaalwijze,
+ 													:plaatsnaam,
+ 													:gbacode,
+ 													:looptijd,
+ 													:verzendkosten,
+ 													:verzendinstructies,
+ 													:verkoper,
+ 													:rubriek,
+ 													:rubriek2)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':titel', $titel);
+	$stmt->bindParam(':beschrijving', $beschrijving);
+	$stmt->bindParam(':startprijs', $startprijs);
+	$stmt->bindParam(':betaalwijze', $betaalwijze);
+	$stmt->bindParam(':plaatsnaam', $plaatsnaam);
+	$stmt->bindParam(':gbacode', $GbaCode);
+	$stmt->bindParam(':looptijd', $Looptijd);
+	$stmt->bindParam(':verzendkosten', $verzendkosten);
+	$stmt->bindParam(':verzendinstructies', $verzendinstructies);
+	$stmt->bindParam(':verkoper', $verkoper);
+	$stmt->bindParam(':rubriek', $rubriek);
+	$stmt->bindParam(':rubriek2', $rubriek2);
+	$stmt->execute();
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function getVoorwerpNummer($user)
+{
+	$dbh = getConnection();
+	$sql = "select Voorwerpnummer from Voorwerp where Verkoper=:gebruiker order by Voorwerpnummer DESC;";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return $row["Voorwerpnummer"];
+	}
+	return $ret;
+}
+
+function telefoonRegistreren($telephone,$username,$volgnr){
+	$dbh = getConnection();
+	$sql = "INSERT INTO Gebruikerstelefoon VALUES (:volgnr,:username,:telephone)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam("username", $username);
+	$stmt->bindParam("volgnr", $volgnr);
+	$stmt->bindParam("telephone", $telephone);
+	$stmt->execute();
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function registreren(
+	$mail,
+	$username,
+	$password,
+	$fname,
+	$lname,
+	$day,
+	$month,
+	$year,
+	$street,
+	$postcode,
+	$place,
+	$land,
+	$question,
+	$answer
+){
+	try
+	{
+		if (!empty($_GET["street2"])){
+			$street2 = $_GET["street2"];
+		} else {
+			$street2 = NULL;
+		}
+		$verkoper = 0;
+		$db = getConnection();
+		$date = $year."-".$month."-".$day;
+		$hashedpassword = hash('sha256', $lname . $password);
+		$stmt = $db->prepare("INSERT INTO Gebruiker(Gebruikersnaam, 
+											Voornaam,
+											Achternaam, 
+											Adresregel1, 
+											Postcode, 
+											Plaatsnaam, 
+											GbaCode, 
+											Geboortedatum, 
+											Mailadres, 
+											Wachtwoord, 
+											GeheimeVraag, 
+											Antwoordtekst, 
+											Verkoper,
+											Adresregel2)
+											VALUES (:Gebruikersnaam,
+													:Voornaam,
+													:Achternaam,
+													:Adresregel1,
+													:Postcode,
+													:Plaatsnaam,
+													:Land,
+													:Geboortedatum,
+													:Mailadres,
+													:Wachtwoord,
+													:Vraag,
+													:Antwoordtekst,
+													:Verkoper,
+													:Adresregel2
+													)
+													");
+		$stmt->bindParam("Gebruikersnaam", $username);
+		$stmt->bindParam("Voornaam", $fname);
+		$stmt->bindParam("Achternaam", $lname);
+		$stmt->bindParam("Adresregel1", $street);
+		$stmt->bindParam("Postcode", $postcode);
+		$stmt->bindParam("Plaatsnaam", $place);
+		$stmt->bindParam("Land", $land);
+		$stmt->bindParam("Geboortedatum", $date);
+		$stmt->bindParam("Mailadres", $mail);
+		$stmt->bindParam("Wachtwoord", $hashedpassword);
+		$stmt->bindParam("Vraag", $question);
+		$stmt->bindParam("Antwoordtekst", $answer);
+		$stmt->bindParam("Verkoper", $verkoper);
+		$stmt->bindParam("Adresregel2", $street2);
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function checkUsername($username){
+	$dbh = getConnection();
+	$username = strtolower($username);
+	$sql = "SELECT LOWER(Gebruikersnaam) FROM Gebruiker WHERE Gebruikersnaam=(:username)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':username', $username, PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Gebruikersnaam bestaat al, kies een andere gebruikersnaam!</div></div></div>';
+		return false;
+	}
+	return true;
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function codeInDatabase($code){
+	$dbh = getConnection();
+	$sql = "SELECT Mailadres FROM RegistratieCode WHERE RegistratieCode=(:code)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':code', $code, PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		return $row['Mailadres'];
+	}
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De ingevoerde code is fout!</div></div></div>';
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function isValid($mail){
+	$dbh = getConnection();
+	$sql = "SELECT Mailadres FROM Gebruiker WHERE Mailadres=(:mail)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':mail', $mail);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Deze code is niet valid!</div></div></div>';
+		return false;
+	}
+	return true;
+
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function changePassword($pw)
+{
+	$login = strtolower($_SESSION["user"]);
+	$dbh = getConnection();
+
+	$sql = "SELECT Achternaam FROM Gebruiker WHERE Gebruikersnaam=(:login)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':login', $login, PDO::PARAM_INT);
+	$stmt->execute();
+	$achternaam = "";
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		$achternaam = $row['Achternaam'];
+	}
+	$dbh = getConnection();
+	$wachtwoord = hash('sha256', $achternaam . $pw);
+	$stmt = $dbh->prepare("UPDATE Gebruiker SET Wachtwoord=(:password) WHERE Gebruikersnaam=(:username)");
+	$stmt->bindParam("password",$wachtwoord);
+	$stmt->bindParam("username", $login);
+	$stmt->execute();
+	$dbh = null;
+}
+function oldPasswordCheck($login, $wachtwoord){
+	$login = strtolower($login);
+	$dbh = getConnection();
+
+	$sql = "SELECT Achternaam FROM Gebruiker WHERE Gebruikersnaam=(:login)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':login', $login, PDO::PARAM_INT);
+	$stmt->execute();
+	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+	{
+		$achternaam = $row['Achternaam'];
+	}
+	if (isset($achternaam)) {
+		$sql = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam=(:login) AND Wachtwoord=(:wachtwoord)";
+		$stmt = $dbh->prepare($sql);
+		$stmt->bindParam(':login', $login, PDO::PARAM_INT);
+		$wachtwoord = hash('sha256', $achternaam . $wachtwoord);
+		$stmt->bindParam(':wachtwoord', $wachtwoord, PDO::PARAM_INT);
+		$stmt->execute();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			if (isset($row)) {
+				return true;
+			}
+		}
+		echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">Uw oude wachtwoord klopt niet!</div></div></div>';
+		return false;
+	}
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function veranderVraag($vraag, $antwoord){
+	$login = strtolower($_SESSION["user"]);
+	$dbh = getConnection();
+	$stmt = $dbh->prepare("UPDATE Gebruiker SET GeheimeVraag=(:vraag), Antwoordtekst=(:antwoord)  WHERE Gebruikersnaam=(:username)");
+	$stmt->bindParam("vraag",$vraag);
+	$stmt->bindParam("antwoord",$antwoord);
+	$stmt->bindParam("username", $login);
+	$stmt->execute();
+	$dbh = null;
+
+}
+
+function isVerkoperVanVoorwerp($user,$voorwerp){
+	$dbh = getConnection();
+	$sql = "SELECT * FROM Voorwerp WHERE Verkoper=:gebruiker AND Voorwerpnummer=:voorwerp";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':gebruiker', $user, PDO::PARAM_INT);
+	$stmt->bindParam(':voorwerp', $voorwerp, PDO::PARAM_INT);
+	$stmt->execute();
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return true;
+	}
+	return false;
+}
+
+function setFileSQL($path,$vn){
+	$dbh = getConnection();
+	$sql = "INSERT INTO Bestand(FileNaam,Voorwerp) 
+						VALUES (:path,
+ 								:vn)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam(':path', $path);
+	$stmt->bindParam(':vn', $vn);
+	$stmt->execute();
+}
+
+function uploadImage($img_ff, $dst_path, $dst_img, $naam){
+	$dst_ext = strtolower(end(explode(".", $dst_img)));
+	$dst_img = $naam . '.' . $dst_ext;
+	$dst_cpl = $dst_path . $dst_img;
+	echo $dst_cpl;
+	move_uploaded_file($_FILES[$img_ff]['tmp_name'], $dst_cpl);
+	$dst_type = exif_imagetype($dst_cpl);
+	if(( (($dst_ext =="jpg") && ($dst_type =="2")) || (($dst_ext =="jpeg") && ($dst_type =="2")) || (($dst_ext =="gif") && ($dst_type =="1")) || (($dst_ext =="png") && ($dst_type =="3") )) == false){
+		unlink($dst_cpl);
+		die('<p>The file "'. $dst_img . '" with the extension "' . $dst_ext . '" and the imagetype "' . $dst_type . '" is not a valid image. Please upload an image with the extension JPG, JPEG, PNG or GIF and has a valid image filetype.</p>');
+		header("Location: /I-Project/www/fileupload.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+	}
+	setFileSQL($dst_cpl, $_GET["voorwerpNummer"]);
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function getGbaList($land)
+{
+	$dbh = getConnection();
+	$sql = "SELECT GbaCode, LandNaam FROM Land ORDER BY LandNaam ASC";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute();
+	$ret = "";
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		if ($row["LandNaam"] == $land){
+			$ret .= '<option value="' . $row['GbaCode'] . '" Selected="selected">' . $row['LandNaam'] . '</option>';
+		} else {
+			$ret .= '<option value="' . $row['GbaCode'] . '">' . $row['LandNaam'] . '</option>';
+		}
+	}
+	return $ret;
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function telefoonUpdate($telephone, $tele){
+	$dbh = getConnection();
+	$sql = "UPDATE Gebruikerstelefoon SET Telefoon=(:telephone) WHERE Telefoon=(:tele) AND Gebruiker=(:gebruiker)";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam("telephone", $telephone);
+	$stmt->bindParam("tele", $tele);
+	$stmt->bindParam("gebruiker", $_SESSION["user"]);
+	$stmt->execute();
+}
+
+//TODO: Change to Stored Procedure AND place in DB.php
+function accountUpdate(
+	$fname,
+	$lname,
+	$day,
+	$month,
+	$year,
+	$street,
+	$postcode,
+	$place,
+	$land
+){
+	try
+	{
+		$db = getConnection();
+		$date = $year."-".$month."-".$day;
+		$stmt = $db->prepare("UPDATE Gebruiker SET 
+											Voornaam=(:Voornaam),
+											Achternaam=(:Achternaam),
+											Adresregel1=(:Adresregel1), 
+											Postcode=(:Postcode),
+											Plaatsnaam=(:Plaatsnaam), 
+											GbaCode=(:Land), 
+											Geboortedatum=(:Geboortedatum)
+											WHERE Gebruikersnaam=(:Gebruikersnaam)");
+		$stmt->bindParam("Voornaam", $fname);
+		$stmt->bindParam("Achternaam", $lname);
+		$stmt->bindParam("Adresregel1", $street);
+		$stmt->bindParam("Postcode", $postcode);
+		$stmt->bindParam("Plaatsnaam", $place);
+		$stmt->bindParam("Land", $land);
+		$stmt->bindParam("Geboortedatum", $date);
+		$stmt->bindParam("Gebruikersnaam", $_SESSION["user"]);
+		$stmt->execute();
+		$db = null;
+	}
+	catch(PDOException $e)
+	{
+		echo $e->getMessage();
+	}
+}
+
+//TODO: place in DB.php
+function toonBiedingen(){
+
+	try {
+
+		$db = getConnection();
+		$sql = "EXEC spGetGebruikerBiedingen :Gebruikersnaam";
+		$stmt = $db->prepare ($sql);
+		$stmt->bindParam(':Gebruikersnaam', $_SESSION["user"], PDO::PARAM_STR);
+		$stmt->execute ();
+		$user = null;
+		$ret = "";
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$ret .= 	'							<tr>
+									<td style="overflow: hidden"><a href="productDetailPagina.php?voorwerpNummer='. $row["Voorwerpnummer"] .'">'. $row["Titel"] .'</a></td>
+									<td>&euro;'. number_format ($row["GebodenBedrag"],2,',','.') .'</td>
+									<td>&euro;'. number_format ($row["HoogsteBod"],2,',','.') .'</td>';
+			if ($row["Status"] == 0){
+				$ret .= '<td>Open</td>';
+			} else {
+				$ret .= '<td>Gesloten</td>';
+			}
+			if ($row["HoogsteBod"] != $row["GebodenBedrag"]) {
+				$ret .= '
+									<td><a href="?voorwerp=' . $row["Voorwerpnummer"] . '&bod=' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . '" class="btn btn-danger btn-xs">Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
+								</tr>';
+			} else {
+				$ret .= '<td><a class="btn btn-danger btn-xs" disabled>Bied &euro;' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . ',-</a></td>
+								</tr>';
+			}
+		}
+
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $ret;
+}
+

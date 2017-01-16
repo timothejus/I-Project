@@ -77,150 +77,16 @@ function hogerDan18($year,$month,$day){
 
 }
 
-function telefoonRegistreren($telephone,$username,$volgnr){
-	$dbh = getConnection();
-	$sql = "INSERT INTO Gebruikerstelefoon VALUES (:volgnr,:username,:telephone)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam("username", $username);
-	$stmt->bindParam("volgnr", $volgnr);
-	$stmt->bindParam("telephone", $telephone);
-	$stmt->execute();
-}
-
-//TODO: Change to Stored Procedure AND place in DB.php
-function registreren(
-	$mail,
-	$username,
-	$password,
-	$fname,
-	$lname,
-	$day,
-	$month,
-	$year,
-	$street,
-	$postcode,
-	$place,
-	$land,
-	$question,
-	$answer
-){
-	try
-	{
-		if (!empty($_GET["street2"])){
-			$street2 = $_GET["street2"];
-		} else {
-			$street2 = NULL;
-		}
-		$verkoper = 0;
-		$db = getConnection();
-		$date = $year."-".$month."-".$day;
-		$hashedpassword = hash('sha256', $lname . $password);
-		$stmt = $db->prepare("INSERT INTO Gebruiker(Gebruikersnaam, 
-											Voornaam,
-											Achternaam, 
-											Adresregel1, 
-											Postcode, 
-											Plaatsnaam, 
-											GbaCode, 
-											Geboortedatum, 
-											Mailadres, 
-											Wachtwoord, 
-											GeheimeVraag, 
-											Antwoordtekst, 
-											Verkoper,
-											Adresregel2)
-											VALUES (:Gebruikersnaam,
-													:Voornaam,
-													:Achternaam,
-													:Adresregel1,
-													:Postcode,
-													:Plaatsnaam,
-													:Land,
-													:Geboortedatum,
-													:Mailadres,
-													:Wachtwoord,
-													:Vraag,
-													:Antwoordtekst,
-													:Verkoper,
-													:Adresregel2
-													)
-													");
-		$stmt->bindParam("Gebruikersnaam", $username);
-		$stmt->bindParam("Voornaam", $fname);
-		$stmt->bindParam("Achternaam", $lname);
-		$stmt->bindParam("Adresregel1", $street);
-		$stmt->bindParam("Postcode", $postcode);
-		$stmt->bindParam("Plaatsnaam", $place);
-		$stmt->bindParam("Land", $land);
-		$stmt->bindParam("Geboortedatum", $date);
-		$stmt->bindParam("Mailadres", $mail);
-		$stmt->bindParam("Wachtwoord", $hashedpassword);
-		$stmt->bindParam("Vraag", $question);
-		$stmt->bindParam("Antwoordtekst", $answer);
-		$stmt->bindParam("Verkoper", $verkoper);
-		$stmt->bindParam("Adresregel2", $street2);
-		$stmt->execute();
-		$db = null;
-	}
-	catch(PDOException $e)
-	{
-		echo $e->getMessage();
-	}
-}
 
 function returnNul(){
 	return "0";
 }
 
-//TODO: Change to Stored Procedure AND place in DB.php
-function checkUsername($username){
-	$dbh = getConnection();
-	$username = strtolower($username);
-	$sql = "SELECT LOWER(Gebruikersnaam) FROM Gebruiker WHERE Gebruikersnaam=(:username)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':username', $username, PDO::PARAM_INT);
-	$stmt->execute();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
-		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Gebruikersnaam bestaat al, kies een andere gebruikersnaam!</div></div></div>';
-		return false;
-	}
-	return true;
-}
 
 ?>
 
 <?php
 
-//TODO: Change to Stored Procedure AND place in DB.php
-function codeInDatabase($code){
-	$dbh = getConnection();
-	$sql = "SELECT Mailadres FROM RegistratieCode WHERE RegistratieCode=(:code)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':code', $code, PDO::PARAM_INT);
-	$stmt->execute();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
-		return $row['Mailadres'];
-	}
-	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De ingevoerde code is fout!</div></div></div>';
-}
-
-//TODO: Change to Stored Procedure AND place in DB.php
-function isValid($mail){
-	$dbh = getConnection();
-	$sql = "SELECT Mailadres FROM Gebruiker WHERE Mailadres=(:mail)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam(':mail', $mail);
-	$stmt->execute();
-	while($row = $stmt->fetch(PDO::FETCH_ASSOC))
-	{
-		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Deze code is niet valid!</div></div></div>';
-		return false;
-	}
-	return true;
-
-}
 
 if (isset($_GET["code"])) {
 	$mail = codeInDatabase($_GET["code"]);

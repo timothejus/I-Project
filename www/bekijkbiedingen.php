@@ -24,47 +24,6 @@ $bodBedrag = $hoogsteBod;
 		$bodBedrag = $hoogsteBod + 50;
 	return $bodBedrag;
 }
-//TODO: place in DB.php
-function toonBiedingen(){
-
-	try {
-
-		$db = getConnection();
-		$sql = "EXEC spGetGebruikerBiedingen :Gebruikersnaam";
-		$stmt = $db->prepare ($sql);
-		$stmt->bindParam(':Gebruikersnaam', $_SESSION["user"], PDO::PARAM_STR);
-		$stmt->execute ();
-		$user = null;
-		$ret = "";
-
-		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-			 $ret .= 	'							<tr>
-									<td style="overflow: hidden"><a href="productDetailPagina.php?voorwerpNummer='. $row["Voorwerpnummer"] .'">'. $row["Titel"] .'</a></td>
-									<td>&euro;'. number_format ($row["GebodenBedrag"],2,',','.') .'</td>
-									<td>&euro;'. number_format ($row["HoogsteBod"],2,',','.') .'</td>';
-			if ($row["Status"] == 0){
-				$ret .= '<td>Open</td>';
-			} else {
-			$ret .= '<td>Gesloten</td>';
-			}
-								if ($row["HoogsteBod"] != $row["GebodenBedrag"]) {
-									$ret .= '
-									<td><a href="?voorwerp=' . $row["Voorwerpnummer"] . '&bod=' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . '" class="btn btn-danger btn-xs">Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
-								</tr>';
-								} else {
-									$ret .= '<td><a class="btn btn-danger btn-xs" disabled>Bied &euro;' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . ',-</a></td>
-								</tr>';
-								}
-			}
-
-	}
-	catch (PDOException $e) {
-		echo $e->getMessage ();
-		echo $e->errorInfo;
-	}
-	return $ret;
-}
-
 if (isset($_GET["voorwerp"]) && isset($_GET["bod"])){
 	plaatsBod($_GET["voorwerp"], $_GET["bod"], $_SESSION["user"]);
 }

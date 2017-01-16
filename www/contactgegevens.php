@@ -15,17 +15,6 @@ function checkDatum($day,$month,$year){
 	}
 }
 
-//TODO: Change to Stored Procedure AND place in DB.php
-function telefoonUpdate($telephone, $tele){
-	$dbh = getConnection();
-	$sql = "UPDATE Gebruikerstelefoon SET Telefoon=(:telephone) WHERE Telefoon=(:tele) AND Gebruiker=(:gebruiker)";
-	$stmt = $dbh->prepare($sql);
-	$stmt->bindParam("telephone", $telephone);
-	$stmt->bindParam("tele", $tele);
-	$stmt->bindParam("gebruiker", $_SESSION["user"]);
-	$stmt->execute();
-}
-
 function hogerDan18($year,$month,$day){
 	$d1 = new DateTime($year.'-'.$month.'-'.$day);
 	$dd = getdate();
@@ -39,48 +28,6 @@ function hogerDan18($year,$month,$day){
 		return true;
 	}
 
-}
-
-//TODO: Change to Stored Procedure AND place in DB.php
-function accountUpdate(
-	$fname,
-	$lname,
-	$day,
-	$month,
-	$year,
-	$street,
-	$postcode,
-	$place,
-	$land
-){
-	try
-	{
-		$db = getConnection();
-		$date = $year."-".$month."-".$day;
-		$stmt = $db->prepare("UPDATE Gebruiker SET 
-											Voornaam=(:Voornaam),
-											Achternaam=(:Achternaam),
-											Adresregel1=(:Adresregel1), 
-											Postcode=(:Postcode),
-											Plaatsnaam=(:Plaatsnaam), 
-											GbaCode=(:Land), 
-											Geboortedatum=(:Geboortedatum)
-											WHERE Gebruikersnaam=(:Gebruikersnaam)");
-		$stmt->bindParam("Voornaam", $fname);
-		$stmt->bindParam("Achternaam", $lname);
-		$stmt->bindParam("Adresregel1", $street);
-		$stmt->bindParam("Postcode", $postcode);
-		$stmt->bindParam("Plaatsnaam", $place);
-		$stmt->bindParam("Land", $land);
-		$stmt->bindParam("Geboortedatum", $date);
-		$stmt->bindParam("Gebruikersnaam", $_SESSION["user"]);
-		$stmt->execute();
-		$db = null;
-	}
-	catch(PDOException $e)
-	{
-		echo $e->getMessage();
-	}
 }
 
 require("scripts/header.php");
@@ -166,27 +113,7 @@ if (isset($_SESSION["user"])) {
 								Land<br>
 								<select name="land" class="form-control" >
 									<?php
-									//TODO: Change to Stored Procedure AND place in DB.php
-									function getGba($land)
-									{
-										$dbh = getConnection();
-										$sql = "SELECT GbaCode, LandNaam FROM Land ORDER BY LandNaam ASC";
-										$stmt = $dbh->prepare($sql);
-										$stmt->execute();
-										$ret = "";
-										while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-											if ($row["LandNaam"] == $land){
-												$ret .= '<option value="' . $row['GbaCode'] . '" Selected="selected">' . $row['LandNaam'] . '</option>';
-											} else {
-												$ret .= '<option value="' . $row['GbaCode'] . '">' . $row['LandNaam'] . '</option>';
-											}
-										}
-										return $ret;
-									}
-									echo getGba($user->getLand());
-
-
-
+									echo getGbaList($user->getLand());
 									?>
 								</select><br>
 								Telefoonnummer(+31 0*********)
