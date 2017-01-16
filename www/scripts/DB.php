@@ -227,7 +227,7 @@ WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVV
 AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword";
 
 		$totalKeywords = count($keys);
-
+		//TESING CEES
 		for($i=1 ; $i < $totalKeywords; $i++){
 			$sql .= " OR Titel LIKE :keyword".$i;
 		}
