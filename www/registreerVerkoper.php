@@ -157,7 +157,7 @@ if(isset($_GET['radio'])){
 								<input class="form-control" name="rekeningnummer" required="required" type="text" value="<?php if(isset($_GET['rekeningnummer'])){echo $_GET['rekeningnummer'];} ?>"> <?php echo $errRekeningnummer ?>
 								<br>
 								Manier van controle<br>
-								<label class="radio-inline"><input type="radio" onclick="show()" checked name="radio" value="creditcard">Creditcard</label>
+								<label class="radio-inline"><input type="radio"  onclick="show()" checked name="radio" value="creditcard">Creditcard</label>
 								<label class="radio-inline"><input type="radio" onclick="hide()" name="radio" value="post">Post</label>
 
 								<div id="test3">
