@@ -215,13 +215,23 @@ function getZoekresultaten($search){
 		$keys = explode(" ",$queried);
 
 
-		$sql = "SELECT * FROM Voorwerp WHERE Titel LIKE :keyword";
+		$sql = "  SELECT TOP 20
+V.Voorwerpnummer,
+V.Titel,
+V.Eindtijd,
+(SELECT TOP 1 Bodbedrag FROM Bod WHERE Voorwerp = V.Voorwerpnummer ORDER BY Bodbedrag DESC) AS hoogsteBod,
+V.Startprijs,
+(SELECT TOP 1 FileNaam FROM Bestand WHERE voorwerp = V.Voorwerpnummer)AS afbeelding
+FROM Voorwerp V 
+WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = V.Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af'))
+AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword";
 
 		$totalKeywords = count($keys);
 
 		for($i=1 ; $i < $totalKeywords; $i++){
 			$sql .= " OR Titel LIKE :keyword".$i;
 		}
+		$sql .= " ORDER BY V.Eindtijd ASC";
 
 		$stmt = $db->prepare ($sql);
 

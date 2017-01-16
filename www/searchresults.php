@@ -6,7 +6,6 @@
  * Time: 23:14
  */
 
-require ("scripts/DB.php");
 require ("rubriek.php");
 require ("scripts/header.php");
 
@@ -54,6 +53,7 @@ $zoektekst = $email = $_GET["zoektekst"];
 							echo "</div>\n";
 						}
 						$counter++;
+
 					}
 				} else {
 				?>

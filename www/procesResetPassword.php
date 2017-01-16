@@ -7,7 +7,6 @@
  */
 
 require("scripts/header.php");
-require ("scripts/DB.php");
 
 $gebruikersnaam = $_GET["gebruikersnaam"];
 $geheimeVraag = $_GET["question"];
