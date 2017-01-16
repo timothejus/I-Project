@@ -191,7 +191,69 @@ function getBiedingen($voorwerpNummer){
 	return $Biedingen ? $Biedingen : null;
 }
 
-function getZoekresultaten($search){
+function getCountZoekresultaten($search){
+	/*
+		$db = getConnection ();
+		// Get the keyword from query string
+		$keyword = $_GET['keyword'];
+	// Prepare the command
+		$sth = $db->prepare('SELECT * FROM `users` WHERE `firstname` LIKE :keyword');
+	// Put the percentage sing on the keyword
+		$keyword = "%".$keyword."%";
+	// Bind the parameter
+		$sth->bindParam(':keyword', $keyword, PDO::PARAM_STR);
+	*/
+
+
+
+
+	try {
+		$voorwerpen = null;
+		$db = getConnection ();
+
+		$queried = $search;
+
+		$keys = explode(" ",$queried);
+
+
+		$sql = "  SELECT Count(*) as Count FROM Voorwerp V 
+WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = V.Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af'))
+AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword";
+
+		$totalKeywords = count($keys);
+
+		for($i=1 ; $i < $totalKeywords; $i++){
+			$sql .= " OR Titel LIKE :keyword".$i;
+		}
+		$sql .= " ORDER BY V.Eindtijd ASC";
+
+		$stmt = $db->prepare ($sql);
+
+		foreach($keys as $key => $keyword){
+			$keyword = "%".$keyword."%";
+			$stmt->bindParam($key+1, $keyword, PDO::PARAM_STR);
+		}
+
+		$stmt->execute();
+
+		$db = null;
+
+
+
+
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			Return $row["Count"];
+		}
+	}
+	catch (PDOException $e) {
+		echo $e->getMessage ();
+		echo $e->errorInfo;
+	}
+	return $voorwerpen ? $voorwerpen : null;
+
+}
+
+function getZoekresultaten($search, $top){
 /*
 	$db = getConnection ();
 	// Get the keyword from query string
@@ -216,7 +278,7 @@ function getZoekresultaten($search){
 		$keys = explode(" ",$queried);
 
 
-		$sql = "  SELECT TOP 20
+		$sql = "  SELECT TOP 18
 V.Voorwerpnummer,
 V.Titel,
 V.Eindtijd,
@@ -225,22 +287,24 @@ V.Startprijs,
 (SELECT TOP 1 FileNaam FROM Bestand WHERE voorwerp = V.Voorwerpnummer)AS afbeelding
 FROM Voorwerp V 
 WHERE V.Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = V.Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af'))
-AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND Titel LIKE :keyword";
+AND V.VeilingGesloten = 0 AND V.Starttijd <GETDATE() AND V.Titel LIKE :keyword0";
 
 		$totalKeywords = count($keys);
-		//TESING CEES
+		$sqlpaginering = " AND V.Titel NOT IN (SELECT TOP (:top) Titel FROM Voorwerp WHERE Titel LIKE :keywoord0";
 		for($i=1 ; $i < $totalKeywords; $i++){
 			$sql .= " OR Titel LIKE :keyword".$i;
+			$sqlpaginering .= " OR Titel LIKE :keywoord".$i;
 		}
+		$sqlpaginering .= " AND VeilingGesloten = 0 AND Starttijd <GETDATE() AND Voorwerpnummer NOT IN (SELECT voorwerp FROM ProductVanDag PVVD WHERE PVVD.voorwerp = Voorwerpnummer AND PVVD.ProductVanDag = FORMAT(GETDATE (),'d','af')) ORDER BY Eindtijd ASC)";
+		$sql .= $sqlpaginering;
 		$sql .= " ORDER BY V.Eindtijd ASC";
-
 		$stmt = $db->prepare ($sql);
-
 		foreach($keys as $key => $keyword){
 			$keyword = "%".$keyword."%";
-			$stmt->bindParam($key+1, $keyword, PDO::PARAM_STR);
+			$stmt->bindParam("keyword".$key, $keyword, PDO::PARAM_STR);
+			$stmt->bindParam("keywoord".$key, $keyword, PDO::PARAM_STR);
 		}
-
+		$stmt->bindParam(":top", $top, PDO::PARAM_INT);
 		$stmt->execute();
 
 		$db = null;

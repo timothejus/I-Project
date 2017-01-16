@@ -7,7 +7,7 @@
  */
 
 require("scripts/header.php");
-
+if (isset($_SESSION["user"])){
 $gebruiker = getAccountgegevens($_SESSION["user"]);
 
 $wachtwoord = hash('sha256', 'Brouwer' . 'admin');
@@ -130,57 +130,69 @@ if(isset($_GET['radio'])){
 
 	}
 }
+	?>
 
+	<!--inloggen-->
+	<div class="row">
 
-?>
-
-<!--inloggen-->
-<div class="row">
-
-	<div class="col-sm-6 col-sm-offset-3">
-		<div class="panel panel-default">
-			<div class="panel-heading"><a href="#" class="panelheader-link">Registreer als verkoper</a></div>
-			<form action="registreerVerkoper.php">
-				<div class="panel-body">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-sm-6">
-								Bank
-								<select class="form-control" name="bank" required="required">
-									<option value="ABN AMRO">ABN AMRO</option>
-									<option value="ING">ING</option>
-									<option value="RABOBANK">RABOBANK</option>
-									<option value="SNS">SNS</option>
-								</select>
-								<br>
-								Rekeningnummer
-								<input class="form-control" name="rekeningnummer" required="required" type="text" value="<?php if(isset($_GET['rekeningnummer'])){echo $_GET['rekeningnummer'];} ?>"> <?php echo $errRekeningnummer ?>
-								<br>
-								Manier van controle<br>
-								<label class="radio-inline"><input type="radio"  onclick="show()" checked name="radio" value="creditcard">Creditcard</label>
-								<label class="radio-inline"><input type="radio" onclick="hide()" name="radio" value="post">Post</label>
-
-								<div id="test3">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading"><a href="#" class="panelheader-link">Registreer als verkoper</a></div>
+				<form action="registreerVerkoper.php">
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6">
+									Bank
+									<select class="form-control" name="bank" required="required">
+										<option value="ABN AMRO">ABN AMRO</option>
+										<option value="ING">ING</option>
+										<option value="RABOBANK">RABOBANK</option>
+										<option value="SNS">SNS</option>
+									</select>
 									<br>
-								Creditcardnummer
-								<input class="form-control" name="credit" type="text" value=""> <?php echo $errCreditcard ?>
-								</div>
-								<br>
+									Rekeningnummer
+									<input class="form-control" name="rekeningnummer" required="required" type="text"
+									       value="<?php if (isset($_GET['rekeningnummer'])) {
+										       echo $_GET['rekeningnummer'];
+									       } ?>"> <?php echo $errRekeningnummer ?>
+									<br>
+									Manier van controle<br>
+									<label class="radio-inline"><input type="radio" onclick="show()" checked
+									                                   name="radio"
+									                                   value="creditcard">Creditcard</label>
+									<label class="radio-inline"><input type="radio" onclick="hide()" name="radio"
+									                                   value="post">Post</label>
 
+									<div id="test3">
+										<br>
+										Creditcardnummer
+										<input class="form-control" name="credit" type="text"
+										       value=""> <?php echo $errCreditcard ?>
+									</div>
+									<br>
+
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<div class="row">
-						<div class="col-sm-6">
-							<button type="submit" class="btn btn-default">Controleer</button>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-6">
+									<button type="submit" class="btn btn-default">Controleer</button>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
+
 	</div>
 
-</div>
 
+	<?php
+} else {
+	echo'<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-warning text-center">U bent niet ingelogd. Log in om uw account als verkoper te registreren!</div></div></div>';
+}
 
+require "scripts/footer.php";
+	?>
