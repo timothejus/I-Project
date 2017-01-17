@@ -76,11 +76,11 @@ if (isset($_SESSION["user"])) {
 								<div class="row">
 									<div class="col-sm-6">
 										Voornaam<br>
-										<input class="form-control" pattern="[a-zA-Z\s]{0,20}" maxlength="20" required="required" type="text" name="fname" value="<?php echo $user->getVoornaam() ?>" >
+										<input class="form-control" pattern="[a-zA-Z\s]{0,20}" maxlength="20" required="required" type="text" name="fname" value="<?php echo $user->getVoornaam() ?>" disabled>
 									</div>
 									<div class="col-sm-6">
 										Achternaam<br>
-										<input class="form-control" pattern="[a-zA-Z\s]{0,25}" maxlength="25" required="required" type="text" name="lname" value="<?php echo $user->getAchternaam()?>">
+										<input class="form-control" pattern="[a-zA-Z\s]{0,25}" maxlength="25" required="required" type="text" name="lname" value="<?php echo $user->getAchternaam()?>" disabled>
 									</div>
 								</div><br>
 								Geboortedatum<br>
