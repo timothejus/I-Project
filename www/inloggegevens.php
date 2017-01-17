@@ -34,7 +34,7 @@ if (isset($_SESSION["user"])) {
 			if (isset($_GET["oldpw"]) && isset($_GET["gv"]) && isset($_GET["antwoord"])) {
 				veranderVraag($_GET["gv"], $_GET["antwoord"]);
 			}
-			header("Location: ../www/mijnaccount.php?success=1");
+			header("Location: /www/mijnaccount.php?success=1");
 		}
 	}
 	?>

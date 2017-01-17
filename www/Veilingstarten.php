@@ -10,7 +10,7 @@ require("rubriek.php");
 
 $rubrieken = getSubrubrieken($_GET ['id']);
 if ($rubrieken == null){
-	header("Location: /I-Project/www/verkopen.php?rubriek=" . $_GET["id"]);
+	header("Location: /www/verkopen.php?rubriek=" . $_GET["id"]);
 }
 if (isset($_SESSION["user"])){
 if (isVerkoper($_SESSION["user"])){

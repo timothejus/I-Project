@@ -75,7 +75,7 @@ if (isset($_SESSION["user"])) {
 				$_GET["gebruikersnaam"],
 				$_GET["rubriek"]);
 			//AfbeeldingPlaatsen();
-			header("Location: /I-Project/www/fileupload.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+			header("Location: /www/fileupload.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
 		} else {
 
 		}
