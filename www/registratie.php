@@ -142,23 +142,7 @@ if (isset($_GET["code"])) {
 									Land
 									<select name="land" required="required" class="form-control">
 										<?php
-										//TODO: Change to Stored Procedure AND place in DB.php
-										function getGba()
-										{
-											$dbh = getConnection();
-											$sql = "SELECT GbaCode, LandNaam FROM Land ORDER BY LandNaam ASC";
-											$stmt = $dbh->prepare($sql);
-											$stmt->execute();
-											$ret = "";
-											while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-												$ret .= '<option value="' . $row['GbaCode'] . '">' . $row['LandNaam'] . '</option>';
-											}
-											return $ret;
-										}
-										echo getGba();
-
-
-
+										echo getGbaList("");
 										?>
 									</select><br/>
 									Telefoonnummer
