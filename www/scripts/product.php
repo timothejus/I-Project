@@ -148,6 +148,7 @@ function getProductPagina($voorwerpNummer)
 					}
 					// Laat alleen het bieformulier zien als er is ingelogd.
 					if (isset ($_SESSION ['user'])) {
+						if (!isVerkoperVanVoorwerp($_SESSION["user"],$_GET["voorwerpNummer"])){
 
 						// Neemt de startprijs als laatst hoge bod om overheen te bieden
 						if ($voorwerp->getBiedingen() == null) {
@@ -182,6 +183,7 @@ function getProductPagina($voorwerpNummer)
 						) {
 							$minimaalBod = $hoogsteBod + 50;
 						}
+
 						?>
 						<div class="form-inline">
 							<h5><b>Uw Bod:</b></h5>
@@ -201,7 +203,7 @@ function getProductPagina($voorwerpNummer)
 							</form>
 							<div class="text-muted">Minimaal bod: &euro;<?= number_format($minimaalBod, 2, ",", ".") ?></div>
 						</div>
-					<?php } else { ?>
+					<?php }} else { ?>
 						<div class="text-center"><a href="login.php?vid=<?php echo $_GET["voorwerpNummer"];?>" class="btn btn-danger btn-lg">Doe nu mee!</a></div>
 					<?php } ?>
 				</div>
