@@ -148,7 +148,7 @@ function getProductPagina($voorwerpNummer)
 					}
 					// Laat alleen het bieformulier zien als er is ingelogd.
 					if (isset ($_SESSION ['user'])) {
-						if (!isVerkoperVanVoorwerp($_SESSION["user"],$_GET["voorwerpNummer"])){
+						if (!isVerkoperVanVoorwerp($_SESSION["user"],$_GET["voorwerpNummer"]) && veilingGesloten($_GET["voorwerpNummer"])){
 
 						// Neemt de startprijs als laatst hoge bod om overheen te bieden
 						if ($voorwerp->getBiedingen() == null) {

@@ -1368,6 +1368,18 @@ function uploadImage($img_ff, $dst_path, $dst_img, $naam){
 	setFileSQL($dst_cpl, $_GET["voorwerpNummer"]);
 }
 
+function veilingGesloten($voorwerpNummer){
+	$dbh = getConnection();
+	$sql = "select veilingGesloten from Voorwerp where Voorwerpnummer=(:voorwerp) AND VeilingGesloten=0";
+	$stmt = $dbh->prepare($sql);
+	$stmt->bindParam("voorwerp", $voorwerpNummer);
+	$stmt->execute();
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		return true;
+	}
+	return false;
+}
+
 //TODO: Change to Stored Procedure AND place in DB.php
 function getGbaList($land)
 {
