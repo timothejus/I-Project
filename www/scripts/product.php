@@ -185,14 +185,21 @@ function getProductPagina($voorwerpNummer)
 						?>
 						<div class="form-inline">
 							<h5><b>Uw Bod:</b></h5>
-							<form class="form-group-sm" action="productDetailPagina.php" method="get">
+							<form class="form-group-sm" style="display: inline-block;" action="productDetailPagina.php" method="get">
 								<input name="voorwerpNummer" value="<?= $voorwerp->getVoorwerpnummer() ?>" hidden>
 								<input name="hoogsteBod" value="<?= $hoogsteBod ?>" hidden>
 
-								<input type="text" class="form-control" name="bedrag">
+								<input type="text" style="width: 80px;" class="form-control" name="bedrag">
 								<input type="submit" class="form-control btn btn-danger btn-sm" value="Plaats bod">
-								<div class="text-muted">Minimaal bod: &euro;<?= number_format($minimaalBod, 2, ",", ".") ?></div>
 							</form>
+							<form class="form-group-sm" style="display: inline-block;" action="productDetailPagina.php" method="get">
+								<input name="voorwerpNummer" value="<?= $voorwerp->getVoorwerpnummer() ?>" hidden>
+								<input name="hoogsteBod" value="<?= $hoogsteBod ?>" hidden>
+
+								<input type="hidden" class="form-control" value="<?=number_format($minimaalBod,2,".","")?>" name="bedrag">
+								<input type="submit" class="form-control btn btn-info btn-sm" value="Bied &euro;<?=number_format($minimaalBod, 2, ",", ".")?>">
+							</form>
+							<div class="text-muted">Minimaal bod: &euro;<?= number_format($minimaalBod, 2, ",", ".") ?></div>
 						</div>
 					<?php } else { ?>
 						<div class="text-center"><a href="login.php?vid=<?php echo $_GET["voorwerpNummer"];?>" class="btn btn-danger btn-lg">Doe nu mee!</a></div>

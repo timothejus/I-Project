@@ -49,8 +49,11 @@ if (isset ($_GET ['bedrag']) && isset ($_GET ['hoogsteBod'])) {
 				$bodBedrag >= $hoogsteBod + 50
 			)
 		) {
+			/*
 			$nieuwbod = new Bod ($voorwerpNummer, $bodBedrag, $_SESSION['user'], "");
 			$nieuwbod->plaatsBod();
+			*/
+			plaatsBod ($voorwerpNummer, floatval ($bodBedrag), $_SESSION ['user']);
 		} else if (is_float ($bodBedrag) || is_numeric ($bodBedrag)) {
 			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is verkeerd!</div></div></div>';
 		} else {

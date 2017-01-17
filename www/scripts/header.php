@@ -25,6 +25,11 @@ function verzendMail ($data) {
 	return mail($to,$subject,$body,$headers);
 }
 
+$array = getWinnaars ();
+foreach ($array as $row) {
+	setKoper ($row ["Gebruiker"], $row ["Voorwerpnummer"]);
+}
+
 foreach (getTeVerzendenMails() as $row) {
 	// Deze code moet uitgevoerd worden wanneer het mailen geslaagd is.
 	if (verzendMail ($row)) {

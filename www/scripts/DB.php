@@ -369,7 +369,7 @@ function plaatsBod($voorwerp,$bodbedrag,$gebruiker){
 		$sql = "EXEC spPlaatsBod :Voorwerp,:Bodbedrag,:Gebruiker";
 		$stmt = $db->prepare($sql);
 		$stmt->bindParam(':Voorwerp', $voorwerp, PDO::PARAM_INT);
-		$stmt->bindParam(':Bodbedrag', $bodbedrag, PDO::PARAM_INT);
+		$stmt->bindParam(':Bodbedrag', $bodbedrag, PDO::PARAM_STR);
 		$stmt->bindParam(':Gebruiker', $gebruiker, PDO::PARAM_INT);
 
 		$stmt->execute();
@@ -961,6 +961,46 @@ function isVerkoper($user){
 		}
 	}
 	return false;
+}
+
+function getWinnaars () {
+	$array = array ();
+	$dbh = getConnection();
+	$sql  = "
+SELECT V.Voorwerpnummer,
+	(SELECT TOP 1 Gebruiker
+	FROM Bod
+	WHERE Voorwerp = V.Voorwerpnummer)
+	AS Gebruiker,
+	(SELECT TOP 1 Bodbedrag
+	FROM Bod
+	WHERE Voorwerp = V.Voorwerpnummer
+	ORDER BY Bodbedrag DESC)
+	AS HoogsteBod
+FROM Voorwerp V
+WHERE V.VeilingGesloten = 1
+AND V.MailVerzonden = 0
+AND
+	(SELECT TOP 1 Gebruiker
+	FROM Bod
+	WHERE Voorwerp = V.Voorwerpnummer) IS NOT NULL;";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute();
+	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+		$array [] = $row;
+	}
+	return $array;
+}
+
+function setKoper ($koper, $voorwerpnummer) {
+	$dbh = getConnection();
+	$sql = "
+UPDATE Voorwerp
+SET Koper = :winnaar
+WHERE Voorwerpnummer = :voorwerp
+	";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute(array (":winnaar" => $koper, ":voorwerp" => $voorwerpnummer));
 }
 
 

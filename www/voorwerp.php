@@ -202,14 +202,14 @@ class Voorwerp {
 							<div class='panel-body panel-body-product text-center'>
 								<img src='/pics/" . $this->afbeeldingen . "' class='img-thumbnail img-responsive img-thumbnail-overview' alt='img'><br/>
 							</div>
-						<div class='panel-footer'>
-							<table class='table table-responsive'>
+						<div class='panel-footer' style='height: 109px;'>
+							<table style='width: 100%;'>
 								<tr>
 									<th class='text-center'>&euro;" . number_format($bedrag, 2, ",", ".") . "</th>
-									<th class='text-danger text-center'><i id='" . $this->voorwerpnummer . "'></i><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></th>
 									<th class='text-center'><a href='productDetailPagina.php?voorwerpNummer=" . $this->voorwerpnummer . "' class='btn btn-xs btn-danger'>Bied</a></th>
 								</tr>
 							</table>
+							<div class='text-danger text-center' style='margin-top: 15px;'><b><i id='" . $this->voorwerpnummer . "'></i></b><script type=\"text/javascript\">setTimer(" . $this->voorwerpnummer . ",'" . $this->looptijdEindeDag . "');</script></div>
 						</div>
 					</div>
 				</div>
