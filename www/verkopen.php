@@ -143,7 +143,7 @@ if (isset($_SESSION["user"])) {
 								       class="form-control-file"><br>
 						       -->
 								Startprijs* (bijv. 50.00)
-								<input name="startprijs" pattern="[-+]?[0-9]*[.,]?[0-9]+" type="text" class="form-control" required><br>
+								<input name="startprijs" pattern="[+]?[0-9]*[.,]?[0-9]+" type="text" class="form-control" required><br>
 								Betalingswijze*
 								<table style="width: 100%; margin-top: 5px;" class="text-center" required>
 									<tr>
