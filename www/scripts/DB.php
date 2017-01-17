@@ -1470,17 +1470,10 @@ function toonBiedingen(){
 									<td>&euro;'. number_format ($row["GebodenBedrag"],2,',','.') .'</td>
 									<td>&euro;'. number_format ($row["HoogsteBod"],2,',','.') .'</td>';
 			if ($row["Status"] == 0){
-				$ret .= '<td>Open</td>';
+				$ret .= '<td>Open</td></tr>';
 			} else {
-				$ret .= '<td>Gesloten</td>';
-			}
-			if ($row["HoogsteBod"] != $row["GebodenBedrag"]) {
-				$ret .= '
-									<td><a href="?voorwerp=' . $row["Voorwerpnummer"] . '&bod=' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . '" class="btn btn-danger btn-xs">Bied &euro;' . minimaleBedrag($row["HoogsteBod"]) . ',-</a></td>
-								</tr>';
-			} else {
-				$ret .= '<td><a class="btn btn-danger btn-xs" disabled>Bied &euro;' . number_format (minimaleBedrag($row["HoogsteBod"]),2,',','.') . ',-</a></td>
-								</tr>';
+				$ret .= '<td>Gesloten</td></tr>';
+
 			}
 		}
 

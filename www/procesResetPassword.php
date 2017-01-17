@@ -22,5 +22,5 @@ if(checkResetpassword($gebruikersnaam,$geheimeVraag,$antwoord) == 1){
 
 }
 else{
-	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Gewoon niet!</div></div></div>';
+	echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De ingevoerde gegevens zijn onjuist!</div></div></div>';
 }

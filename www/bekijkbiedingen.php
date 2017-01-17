@@ -46,7 +46,6 @@ if (isset($_GET["voorwerp"]) && isset($_GET["bod"])){
 								<th>Eigen bod</th>
 								<th>Hoogste bod</th>
 								<th>Veiling gesloten/open</th>
-								<th>Bied minimaal bod</th>
 							</tr>
 							<?php echo toonBiedingen() ?>
 						</table>
