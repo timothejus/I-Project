@@ -55,7 +55,7 @@ if (isset($_SESSION["user"])) {
 						$_GET["plaatsnaam"],
 						$_GET["land"]);
 			telefoonUpdate($_GET["telefoon"],$user->getTelefoon());
-			header("Location: ../www/mijnaccount.php?success=1");
+			header("Location: /www/mijnaccount.php?success=1");
 		}
 	}
 

@@ -40,7 +40,7 @@ if (!empty($_GET["emailadres"]) &&
 				telefoonRegistreren($_GET["telephone" . $i], $_GET["username"], $i);
 			}
 		}
-		header("Location: ../www/login.php?registratie=1");
+		header("Location: /www/login.php?registratie=1");
 	}
 }
 

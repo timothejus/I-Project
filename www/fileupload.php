@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$dst_path = '../www/afbeeldingen/'; // The path where the image will be moved to.
 		uploadImage($img_ff, $dst_path, $dst_img, getVoorwerpNummer($_session["user"]) . "_4");
 	}
-	header("Location: /I-Project/www/productDetailPagina.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+	header("Location: /www/productDetailPagina.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
 }
 
 if (isset($_SESSION["user"])) {

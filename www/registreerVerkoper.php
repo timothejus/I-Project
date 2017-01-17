@@ -100,7 +100,7 @@ if(isset($_GET['radio'])){
 			registreerVerkoperViaCreditcard($gebruiker->getGebruikersnaam(),$bank,$rekeningnummer,$creditcard);
 			updateVerkoper($gebruikersnaam);
 			//locate to new page
-			header('Location: iproject4.icasites.nl/www/mijnaccount.php');
+			header('Location: /www/mijnaccount.php');
 		}
 	}
 	else if($radio == 'post')

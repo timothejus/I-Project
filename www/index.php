@@ -11,7 +11,7 @@ require("scripts/header.php");
 require("rubriek.php");
 
 if (isset($_GET["uitgelogd"])) {
-	echo '< class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent succesvol uitgelogd!</div></div>';
+	echo '<class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-success text-center">U bent succesvol uitgelogd!</div></div></div>';
 }
 ?>
 
