@@ -124,39 +124,62 @@ require("rubriek.php");
 					<div class="text-center">
 			<ul class="pagination">
 				<?php
-				$voorwerpenVanRubiek = getVoorwerpenVanRubriekCount($_GET["id"]);
+				$voorwerpenVanRubriek = getVoorwerpenVanRubriekCount($_GET["id"]);
 
-				if ($voorwerpenVanRubiek <= $_GET["top"]*18 + 18){
-					$top1 = $_GET["top"]-4;
-					$top2 = $_GET["top"]-3;
-					$top3 = $_GET["top"]-2;
-					$top4 = $_GET["top"]-1;
+				if ($voorwerpenVanRubriek <= $_GET["top"]*18 + 18) {
+					$top1 = $_GET["top"] - 4;
+					$top2 = $_GET["top"] - 3;
+					$top3 = $_GET["top"] - 2;
+					$top4 = $_GET["top"] - 1;
 					$top5 = $_GET["top"];
-					$top6 = $_GET["top"]+1;
-					if ($top1 <= 0){
+					$top6 = $_GET["top"] + 1;
+					if ($top1 <= 0) {
 						$top1 = 0;
 					}
-					if ($top2 <= 0){
+					if ($top2 <= 0) {
 						$top2 = 0;
 					}
-					if ($top3 <= 0){
+					if ($top3 <= 0) {
 						$top3 = 0;
 					}
-					if ($top4 <= 0){
+					if ($top4 <= 0) {
 						$top4 = 0;
 					}
-					if ($top5 <= 0){
+					if ($top5 <= 0) {
 						$top5 = 0;
 					}
 
-					echo "
+					If ($top5 == 0) {
+						echo "
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+					} else If ($top4 == 0) {
+						echo "
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+					} else If ($top3 == 0) {
+						echo "
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+					} else If ($top2 == 0) {
+						echo "
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+					} else {
+						echo "
 				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
 				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+					}
 				}
-				else if ($voorwerpenVanRubiek <= $_GET["top"]*18 + 36){
+				else if ($voorwerpenVanRubriek <= $_GET["top"]*18 + 36){
 					$top0 = $_GET["top"]-4;
 					$top1 = $_GET["top"]-3;
 					$top2 = $_GET["top"]-2;
@@ -179,25 +202,61 @@ require("rubriek.php");
 					if ($top4 <= 0){
 						$top4 = 0;
 					}
-							echo "
+
+					If ($top4 == 0) {
+						echo "
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+					} else If ($top3 == 0) {
+						echo "
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+					} else If ($top2 == 0) {
+						echo "
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+					} else {
+						echo "
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
 				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+					}
+
 				}
 				else if ($_GET["top"] == 0) {
 					$top1 = $_GET["top"];
-					$top2 = $_GET["top"]+1;
-					$top3 = $_GET["top"]+2;
-					$top4 = $_GET["top"]+3;
-					$top5 = $_GET["top"]+4;
-					echo "
+					$top2 = $_GET["top"] + 1;
+					$top3 = $_GET["top"] + 2;
+					$top4 = $_GET["top"] + 3;
+					$top5 = $_GET["top"] + 4;
+					if ($voorwerpenVanRubriek <= $_GET["top"] * 18 + 54) {
+						echo "
+				<li class='active'><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>";
+					}
+					else if ($voorwerpenVanRubriek <= $_GET["top"] * 18 + 72) {
+						echo "
+				<li class='active'><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>";
+					}
+					else {
+						echo "
 				<li class='active'><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
 				<li ><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
+					}
 				}
 
 				else if ($_GET["top"] == 1) {
@@ -206,14 +265,28 @@ require("rubriek.php");
 					$top3 = $_GET["top"]+1;
 					$top4 = $_GET["top"]+2;
 					$top5 = $_GET["top"]+3;
-					echo "
+					if ($voorwerpenVanRubriek <= $_GET["top"] * 18 + 36) {
+						echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>";
+					} else if ($voorwerpenVanRubriek <= $_GET["top"] * 18 + 54) {
+						echo "
+				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
+				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>";
+					} else {
+						echo "
 				<li><a  href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top1 . "'>1</a></li>
 				<li class='active'><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top2 . "'>2</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top3 . "'>3</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top4 . "'>4</a></li>
 				<li><a href='subrubriek.php?id=" . $_GET["id"] . "&top=" . $top5 . "'>5</a></li>";
+
+					}
 				}
-				 else if ($_GET["top"] >= 2) {
+				else if ($_GET["top"] >= 2) {
 					$top1 = $_GET["top"]-2;
 					$top2 = $_GET["top"]-1;
 					$top3 = $_GET["top"];

@@ -173,16 +173,31 @@ $zoektekst = $email = $_GET["zoektekst"];
 					}
 					else if ($_GET["top"] == 0) {
 						$top1 = $_GET["top"];
-						$top2 = $_GET["top"]+1;
-						$top3 = $_GET["top"]+2;
-						$top4 = $_GET["top"]+3;
-						$top5 = $_GET["top"]+4;
-						echo "
+						$top2 = $_GET["top"] + 1;
+						$top3 = $_GET["top"] + 2;
+						$top4 = $_GET["top"] + 3;
+						$top5 = $_GET["top"] + 4;
+						if ($voorwerpenCount <= $_GET["top"] * 18 + 54) {
+							echo "
+				<li class='active'><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
+				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>";
+						}
+						else if ($voorwerpenCount <= $_GET["top"] * 18 + 72) {
+							echo "
+				<li class='active'><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
+				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>4</a></li>";
+						}
+						else {
+								echo "
 				<li class='active'><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
 				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>4</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>5</a></li>";
+						}
 					}
 
 					else if ($_GET["top"] == 1) {
@@ -191,12 +206,26 @@ $zoektekst = $email = $_GET["zoektekst"];
 						$top3 = $_GET["top"]+1;
 						$top4 = $_GET["top"]+2;
 						$top5 = $_GET["top"]+3;
+					if ($voorwerpenCount <= $_GET["top"] * 18 + 36) {
+						echo "
+				<li><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>";
+					} else if ($voorwerpenCount <= $_GET["top"] * 18 + 54) {
+						echo "
+				<li><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>4</a></li>";
+					} else {
 						echo "
 				<li><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>1</a></li>
 				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>2</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>3</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>4</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>5</a></li>";
+
+					}
 					}
 					else if ($_GET["top"] >= 2) {
 						$top1 = $_GET["top"]-2;
