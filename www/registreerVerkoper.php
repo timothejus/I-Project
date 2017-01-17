@@ -132,6 +132,7 @@ if(isset($_GET['radio'])){
 }
 	?>
 
+	<div class="container">
 	<!--inloggen-->
 	<div class="row">
 
@@ -175,6 +176,7 @@ if(isset($_GET['radio'])){
 								</div>
 							</div>
 						</div>
+					</div>
 						<div class="panel-footer">
 							<div class="row">
 								<div class="col-sm-6">
@@ -186,6 +188,7 @@ if(isset($_GET['radio'])){
 			</div>
 		</div>
 
+	</div>
 	</div>
 
 

@@ -25,7 +25,7 @@ function setTimer(elem_id, date) {
         if(days == 0){
             if(hours == 0) {
                 if (minutes == 0) {
-                    if (seconds <= 0) {
+                    if (seconds < 0) {
                         countDownElem.innerHTML = "AFGELOPEN";
                     } else {
 	                    countDownElem.innerHTML = seconds + "s";
