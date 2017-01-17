@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_GET["uitloggen"])){
 	session_destroy();
-	header("Location: /I-Project/www/index.php?uitgelogd");
+	header("Location: /www/index.php?uitgelogd");
 }
 
 // Dit blok verzend mails die nog verstuurd moeten worden voor afgelopen veilingen

@@ -74,8 +74,6 @@ if (isset($_GET["uitgelogd"])) {
 					?>
 				</div>
 			</div>
-		</div>
-		<div class="col-sm-9">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center"><h3 class="text-danger">Populaire producten binnen Munten en
 						Bankbiljetten</h3></div>
@@ -91,8 +89,6 @@ if (isset($_GET["uitgelogd"])) {
 					?>
 				</div>
 			</div>
-		</div>
-		<div class="cal-sm-9">
 			<div class="panel panel-default">
 				<div class="panel-heading text-center"><h3 class="text-danger">Populaire producten binnen Sport, fietsen en vakantie</h3></div>
 				<div class="panel-body">
