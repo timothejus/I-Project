@@ -119,6 +119,9 @@ require("rubriek.php");
 			<?php
 			}
 			?>
+			</div>
+	</div>
+					<div class="text-center">
 			<ul class="pagination">
 				<?php
 				$voorwerpenVanRubiek = getVoorwerpenVanRubriekCount($_GET["id"]);
@@ -233,5 +236,6 @@ require("rubriek.php");
 			?>
 		</div>
 	</div>
+</div>
 	<?php require("scripts/footer.php"); ?>
 
