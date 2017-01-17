@@ -62,6 +62,8 @@ $zoektekst = $email = $_GET["zoektekst"];
 		</div>
 		<?php
 		}?>
+			</div>
+		<div class="row text-center">
 		<ul class="pagination">
 					<?php
 					$voorwerpenCount = getCountZoekresultaten($zoektekst);
@@ -169,6 +171,7 @@ $zoektekst = $email = $_GET["zoektekst"];
 		?>
 
 			</ul>
+		</div>
 	</div>
 </div>
 <?php require ("scripts/footer.php"); ?>
