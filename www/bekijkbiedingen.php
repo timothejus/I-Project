@@ -50,18 +50,6 @@ if (isset($_GET["voorwerp"]) && isset($_GET["bod"])){
 							</tr>
 							<?php echo toonBiedingen() ?>
 						</table>
-						<div class="text-center">
-							<ul class="pagination">
-								<li class="active"><a>1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">6</a></li>
-								<li><a href="#">7</a></li>
-								<li><a href="#">8</a></li>
-							</ul>
-						</div>
 					</div>
 					<div class="panel-footer text-center">
 						<a href="mijnaccount.php" class="btn btn-default">Terug</a>
