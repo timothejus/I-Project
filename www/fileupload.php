@@ -9,27 +9,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$img_ff = 'afbeelding1'; // Form name of the image
 		$dst_img = strtolower($_FILES[$img_ff]['name']); // This name will be given to the image. (in this case: lowercased original image name uploaded by user).
 		$dst_path = '../www/afbeeldingen/'; // The path where the image will be moved to.
-		uploadImage($img_ff, $dst_path, $dst_img, getVoorwerpNummer($_session["user"]) . "_1");
+		uploadImage($img_ff, $dst_path, $dst_img, $_POST["voorwerpnummer"] . "_1");
 	}
 	if ($_FILES["afbeelding2"]["error"] != 4) {
 		$img_ff = 'afbeelding2';
 		$dst_img = strtolower($_FILES[$img_ff]['name']); // This name will be given to the image. (in this case: lowercased original image name uploaded by user).
 		$dst_path = '../www/afbeeldingen/'; // The path where the image will be moved to.
-		uploadImage($img_ff, $dst_path, $dst_img, getVoorwerpNummer($_session["user"]) . "_2");
+		uploadImage($img_ff, $dst_path, $dst_img, $_POST["voorwerpnummer"] . "_2");
 	}
 	if ($_FILES["afbeelding3"]["error"] != 4) {
 		$img_ff = 'afbeelding3';
 		$dst_img = strtolower($_FILES[$img_ff]['name']); // This name will be given to the image. (in this case: lowercased original image name uploaded by user).
 		$dst_path = '../www/afbeeldingen/'; // The path where the image will be moved to.
-		uploadImage($img_ff, $dst_path, $dst_img, getVoorwerpNummer($_session["user"]) . "_3");
+		uploadImage($img_ff, $dst_path, $dst_img, $_POST["voorwerpnummer"] . "_3");
 	}
 	if ($_FILES["afbeelding4"]["error"] != 4) {
 		$img_ff = 'afbeelding4';
 		$dst_img = strtolower($_FILES[$img_ff]['name']); // This name will be given to the image. (in this case: lowercased original image name uploaded by user).
 		$dst_path = '../www/afbeeldingen/'; // The path where the image will be moved to.
-		uploadImage($img_ff, $dst_path, $dst_img, getVoorwerpNummer($_session["user"]) . "_4");
+		uploadImage($img_ff, $dst_path, $dst_img, $_POST["voorwerpnummer"] . "_4");
 	}
-	header("Location: /www/productDetailPagina.php?voorwerpNummer=" . getVoorwerpNummer($_SESSION["user"]));
+	header("Location: /www/productDetailPagina.php?voorwerpNummer=" . $_POST["voorwerpnummer"]);
 }
 
 if (isset($_SESSION["user"])) {
@@ -71,6 +71,11 @@ if (isset($_SESSION["user"])) {
 								Afbeelding4
 								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg"
 								       class="form-control-file"><br>
+								<input name="voorwerpnummer" value="<?php if (isset($_GET["voorwerpNummer"])){
+									echo $_GET["voorwerpnummer"];
+								} else if (isset($_POST["voorwerpnummer"])){
+									echo $_POST["voorwerpnummer"];
+								} ?>"
 							</div>
 							<div class="panel-footer text-center">
 								<a href="#" class="btn btn-default">Terug</a>
