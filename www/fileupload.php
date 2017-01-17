@@ -4,6 +4,18 @@ require ("scripts/header.php");
 $_SESSION["rubriek1"] = "";
 $_SESSION["rubriek2"] = "";
 
+function voorwerpnummer(){
+	if (isset($_GET["voorwerpNummer"])){
+		return $_GET["voorwerpNummer"];
+	} else if (isset($_POST["voorwerpnummer"])){
+		Return $_POST["voorwerpnummer"];
+	} else {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Geen voorwerpnummer opgegeven.</div></div></div>';
+		require ("scripts/footer.php");
+		exit();
+	}
+}
+
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if ($_FILES["afbeelding1"]["error"] != 4) {
 		$img_ff = 'afbeelding1'; // Form name of the image
@@ -33,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if (isset($_SESSION["user"])) {
-	if (isVerkoper($_SESSION["user"]) && isVerkoperVanVoorwerp($_SESSION["user"], $_GET["voorwerpNummer"])) {
+	if (isVerkoper($_SESSION["user"]) && isVerkoperVanVoorwerp($_SESSION["user"], voorwerpNummer())) {
 
 		?>
 
@@ -72,7 +84,7 @@ if (isset($_SESSION["user"])) {
 								<input name="afbeelding4" type="file" accept="image/x-png,image/gif,image/jpeg"
 								       class="form-control-file"><br>
 								<input name="voorwerpnummer" value="<?php if (isset($_GET["voorwerpNummer"])){
-									echo $_GET["voorwerpnummer"];
+									echo $_GET["voorwerpNummer"];
 								} else if (isset($_POST["voorwerpnummer"])){
 									echo $_POST["voorwerpnummer"];
 								} ?>"

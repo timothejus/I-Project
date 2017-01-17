@@ -67,35 +67,58 @@ $zoektekst = $email = $_GET["zoektekst"];
 		<ul class="pagination">
 					<?php
 					$voorwerpenCount = getCountZoekresultaten($zoektekst);
-					if ($voorwerpenCount <= $_GET["top"]*18 + 18){
-						$top1 = $_GET["top"]-4;
-						$top2 = $_GET["top"]-3;
-						$top3 = $_GET["top"]-2;
-						$top4 = $_GET["top"]-1;
+					if ($voorwerpenCount <= $_GET["top"]*18 + 18) {
+						$top1 = $_GET["top"] - 4;
+						$top2 = $_GET["top"] - 3;
+						$top3 = $_GET["top"] - 2;
+						$top4 = $_GET["top"] - 1;
 						$top5 = $_GET["top"];
-						$top6 = $_GET["top"]+1;
-						if ($top1 <= 0){
+						$top6 = $_GET["top"] + 1;
+						if ($top1 <= 0) {
 							$top1 = 0;
 						}
-						if ($top2 <= 0){
+						if ($top2 <= 0) {
 							$top2 = 0;
 						}
-						if ($top3 <= 0){
+						if ($top3 <= 0) {
 							$top3 = 0;
 						}
-						if ($top4 <= 0){
+						if ($top4 <= 0) {
 							$top4 = 0;
 						}
-						if ($top5 <= 0){
+						if ($top5 <= 0) {
 							$top5 = 0;
 						}
 
-						echo "
+						If ($top5 == 0) {
+							echo "
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+						} else If ($top4 == 0) {
+							echo "
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+						} else If ($top3 == 0) {
+							echo "
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+						} else If ($top2 == 0) {
+							echo "
+				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+						} else {
+							echo "
 				<li><a  href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
 				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+						}
 					}
 					else if ($voorwerpenCount <= $_GET["top"]*18 + 36){
 						$top0 = $_GET["top"]-4;
@@ -120,12 +143,33 @@ $zoektekst = $email = $_GET["zoektekst"];
 						if ($top4 <= 0){
 							$top4 = 0;
 						}
-						echo "
+
+						If ($top4 == 0) {
+							echo "
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+						} else If ($top3 == 0) {
+							echo "
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+						} else If ($top2 == 0) {
+							echo "
+				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
+				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
+				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+
+						} else {
+							echo "
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top1 . "'>" . $top2 . "</a></li>
 				<li ><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top2 . "'>" . $top3 . "</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top3 . "'>" . $top4 . "</a></li>
 				<li class='active'><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top4 . "'>" . $top5 . "</a></li>
 				<li><a href='searchresults.php?zoektekst=" . $_GET["zoektekst"] . "&top=" . $top5 . "'>" . $top6 . "</a></li>";
+						}
+
 					}
 					else if ($_GET["top"] == 0) {
 						$top1 = $_GET["top"];

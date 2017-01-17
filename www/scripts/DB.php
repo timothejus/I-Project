@@ -1411,8 +1411,6 @@ function telefoonUpdate($telephone, $tele){
 
 //TODO: Change to Stored Procedure AND place in DB.php
 function accountUpdate(
-	$fname,
-	$lname,
 	$day,
 	$month,
 	$year,
@@ -1423,20 +1421,23 @@ function accountUpdate(
 ){
 	try
 	{
+		if (empty($_GET["adres2"])){
+			$street2 = NULL;
+		} else {
+			$street2 = $_GET["adres2"];
+		}
 		$db = getConnection();
 		$date = $year."-".$month."-".$day;
 		$stmt = $db->prepare("UPDATE Gebruiker SET 
-											Voornaam=(:Voornaam),
-											Achternaam=(:Achternaam),
 											Adresregel1=(:Adresregel1), 
+											Adresregel2=(:Adresregel2), 
 											Postcode=(:Postcode),
 											Plaatsnaam=(:Plaatsnaam), 
 											GbaCode=(:Land), 
 											Geboortedatum=(:Geboortedatum)
 											WHERE Gebruikersnaam=(:Gebruikersnaam)");
-		$stmt->bindParam("Voornaam", $fname);
-		$stmt->bindParam("Achternaam", $lname);
 		$stmt->bindParam("Adresregel1", $street);
+		$stmt->bindParam("Adresregel2", $street2);
 		$stmt->bindParam("Postcode", $postcode);
 		$stmt->bindParam("Plaatsnaam", $place);
 		$stmt->bindParam("Land", $land);
@@ -1513,4 +1514,40 @@ function getPopVoorwerpenVanRubriek($rubriek)
 	}
 	return $voorwerpen;
 
+}
+
+function checkDatum($day,$month,$year){
+	if (checkdate($month,$day,$year) && hogerDan18($year,$month,$day)){
+		return true;
+	} else if (!checkdate($month,$day,$year)) {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De geboortedatum klopt niet!</div></div></div>';
+		return false;
+	}
+	else {
+		return false;
+	}
+}
+
+function hogerDan18($year,$month,$day){
+	$d1 = new DateTime($year.'-'.$month.'-'.$day);
+	$dd = getdate();
+	$d2 = new DateTime($dd["year"].'-'.$dd["mon"].'-'.$dd["mday"]);
+	$diff = $d1->diff($d2);
+	echo $year;
+	echo $dd["year"];
+	echo $diff->y;
+
+	if ($year >= $dd["year"]) {
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum is hoger dan de datum van vandaag. Dit mag niet.</div></div></div>';
+		return false;
+	} else if ($diff->y-18 < 0){
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum is lager dan 18. Onze site mag alleen bezocht worden door mensen die 18+ zijn.</div></div></div>';
+		return false;
+	} else if ($dd["year"] - $year >= 150){
+		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum te laag.</div></div></div>';
+		return false;
+	}
+	else {
+		return true;
+	}
 }

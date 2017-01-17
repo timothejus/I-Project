@@ -6,37 +6,12 @@
  * Time: 11:42
  */
 
-function checkDatum($day,$month,$year){
-	if (checkdate($month,$day,$year) && hogerDan18($year,$month,$day)){
-		return true;
-	} else {
-		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">De geboortedatum klopt niet!</div></div></div>';
-		return false;
-	}
-}
-
-function hogerDan18($year,$month,$day){
-	$d1 = new DateTime($year.'-'.$month.'-'.$day);
-	$dd = getdate();
-	$d2 = new DateTime($dd["year"].'-'.$dd["mon"].'-'.$dd["mday"]);
-	$diff = $d1->diff($d2);
-
-	if ($diff->y-18 < 0) {
-		echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Uw geboortedatum is lager dan 18. Onze site mag alleen bezocht worden door mensen die 18+ zijn.</div></div></div>';
-		return false;
-	} else {
-		return true;
-	}
-
-}
-
 require("scripts/header.php");
+
 if (isset($_SESSION["user"])) {
 	$user = getAccountgegevens($_SESSION["user"]);
 
-	if (isset($_GET["fname"])
-	&& isset($_GET["lname"])
-	&& isset($_GET["day"])
+	if (isset($_GET["day"])
 	&& isset($_GET["month"])
 	&& isset($_GET["year"])
 	&& isset($_GET["adres"])
@@ -45,9 +20,7 @@ if (isset($_SESSION["user"])) {
 	&& isset($_GET["land"])
 	&& isset($_GET["telefoon"])){
 		if (checkDatum($_GET["day"],$_GET["month"],$_GET["year"])){
-			accountUpdate($_GET["fname"],
-						$_GET["lname"],
-						$_GET["day"],
+			accountUpdate($_GET["day"],
 						$_GET["month"],
 						$_GET["year"],
 						$_GET["adres"],
@@ -98,7 +71,7 @@ if (isset($_SESSION["user"])) {
 								Adres<br>
 								<input class="form-control" name="adres" pattern="[a-zA-Z0-9\s]{0,50}" maxlength="50" required="required" value="<?php echo $user->getAdresregel1()?>" type="text"><br>
 								Extra adresregel<br>
-								<input class="form-control" name="extraadres" pattern="[a-zA-Z0-9\s]{0,50}" value="<?php echo $user->getAdresregel2()?>" type="text"><br>
+								<input class="form-control" name="adres2" pattern="[a-zA-Z0-9\s]{0,50}" value="<?php echo $user->getAdresregel2()?>" type="text"><br>
 								<div class="row">
 									<div class="col-sm-5">
 										Postcode<br>
