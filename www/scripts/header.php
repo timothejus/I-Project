@@ -114,9 +114,8 @@ foreach (getTeVerzendenMails() as $row) {
 					<!-- Login/registreer/help knoppen -->
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
-							<li><a href="login.php">Log in</a></li>
-							<li><a href="verifierRegistratie.php">Registreer</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+							<li><a href="verifierRegistratie.php"><span class="glyphicon glyphicon-plus-sign"></span> Registreer</a></li>
 						</ul>
 					</div>
 				<?php }
@@ -124,9 +123,8 @@ foreach (getTeVerzendenMails() as $row) {
 					<div class="navbar-right">
 						<ul class="nav navbar-nav">
 							<li><a>Welkom, <?php echo $_SESSION["user"]; ?></a></li>
-							<li><a href="mijnAccount.php">Mijn account</a></li>
-							<li><a href="?uitloggen">Uitloggen</a></li>
-							<li><a href="#">Help</a></li>
+							<li><a href="mijnAccount.php"><span class="glyphicon glyphicon-user"></span> Mijn account</a></li>
+							<li><a href="?uitloggen"><span class="glyphicon glyphicon-log-out"></span> Uitloggen</a></li>
 						</ul>
 					</div>
 					<?php }?>
