@@ -83,11 +83,11 @@ if (isset($_GET["code"])) {
 									E-mail adres
 									<input type="text" value="<?php echo codeInDatabase($_GET["code"])?>" class="form-control" name="emailadres" readonly><br/>
 									Gebruikersnaam
-									<input type="text" pattern="^[a-zA-Z0-9_]{5,25}$" required title="Er mogen alleen kleine letters en cijfers hier staan. er mogen 6 tot 25 tekens hier staan." class="form-control" name="username" value="<?php if (isset ($_GET['username'])) {echo $_GET['username'];}?>"><br/>
+									<input type="text" pattern="^[a-zA-Z0-9_]{5,25}$" required title="Er mogen alleen letters, underscores en cijfers hier staan. Er mogen 6 tot 25 tekens hier staan." class="form-control" name="username" value="<?php if (isset ($_GET['username'])) {echo $_GET['username'];}?>"><br/>
 									Wachtwoord
-									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required title="er moeten 6 tot 64 tekens hier staan." class="form-control" name="password"><br/>
+									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required title="Er moeten 6 tot 64 tekens hier staan met minimaal een grote en kleine letter, en een cijfer" class="form-control" name="password"><br/>
 									Wachtwoord herhalen
-									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required title="er moeten 6 tot 64 tekens hier staan." class="form-control" name="password2"><br/>
+									<input type="password" pattern="(?=^.{7,64}$)^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" required title="Er moeten 6 tot 64 tekens hier staan met minimaal een grote en kleine letter, en een cijfer" class="form-control" name="password2"><br/>
 									Voornaam
 									<input type="text" pattern="[a-zA-Z\s]{0,20}" required title="Er mogen hier alleen kleine letters, hoofd letters en spatie's staan. er mogen 1 tot 20 tekens hier staan." class="form-control" name="fname" value="<?php if (isset ($_GET['fname'])) {echo $_GET['fname'];}?>"><br/>
 									Achternaam
@@ -121,7 +121,7 @@ if (isset($_GET["code"])) {
 										?>
 									</select><br/>
 									Telefoonnummer
-									<input type="text" class="form-control" required pattern="[0-9]{10,10}" title="er mogen hier alleen cijfers staan. Er mogen hier 10 tekens staan dus bijvoorbeeld 0612345678" name="telephone1" value="<?php if (isset ($_GET['telephone1'])) {echo $_GET['telephone1'];}?>"><br/>
+									<input type="text" class="form-control" required pattern="[0-9]{10,10}" title="Er mogen hier alleen cijfers staan. Er moeten hier 10 tekens staan dus bijvoorbeeld 0612345678" name="telephone1" value="<?php if (isset ($_GET['telephone1'])) {echo $_GET['telephone1'];}?>"><br/>
 									Geheime vraag
 									<select name="question" required class="form-control">
 										<?php

@@ -111,7 +111,7 @@ if (isset($_SESSION["user"])) {
 						<div class="col-sm-4">
 							<div class="panel panel-info panel-margin">
 								<div class="panel-body panel-body-account">
-									<h4 class="text-center">Verkoper</h4>
+									<h4 class="text-center">Verkopen</h4>
 									<p class="top-buffer text-muted">Voorwerpen ter verkoop aanbieden</p>
 								</div>
 								<div class="panel-footer text-center">
