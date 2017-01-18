@@ -97,7 +97,7 @@ if ($ingevuld == '1') {
 										<td colspan="3"><input name="communicatie" style="width: 100%" id="r1" type="text" data-slider-tooltip="hide" data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="2"></td>
 									</tr>
 								</table>
-								<textarea class="form-control" name="communicatiecomments" rows="3"></textarea><br>
+								<textarea class="form-control" name="communicatiecomments" rows="3" maxlength="100"></textarea><br>
 								<table style="width: 100%; table-layout: fixed;">
 									<tr>
 										<td style="width: 40%"></td>
@@ -110,7 +110,7 @@ if ($ingevuld == '1') {
 										<td colspan="3"><input name="levering" style="width: 100%" id="r2" type="text" data-slider-tooltip="hide" data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="2"></td>
 									</tr>
 								</table>
-								<textarea class="form-control" name="leveringcomments" rows="3"></textarea><br>
+								<textarea class="form-control" name="leveringcomments" rows="3" maxlength="100"></textarea><br>
 								<table style="width: 100%; table-layout: fixed;">
 									<tr>
 										<td style="width: 40%"></td>
@@ -123,9 +123,9 @@ if ($ingevuld == '1') {
 										<td colspan="3"><input name="levertijd" style="width: 100%" id="r3" type="text" data-slider-tooltip="hide" data-slider-min="1" data-slider-max="3" data-slider-step="1" data-slider-value="2"></td>
 									</tr>
 								</table>
-								<textarea class="form-control" name="levertijdcomments" rows="3"></textarea><br><br>
+								<textarea class="form-control" name="levertijdcomments" rows="3" maxlength="100"></textarea><br><br>
 								Overige opmerkingen
-								<textarea class="form-control" name="overigecomments" rows="3"></textarea>
+								<textarea class="form-control" name="overigecomments" rows="3" maxlength="100"></textarea>
 							</div>
 							<div class="panel-footer text-center">
 								<table class="text-center" style="width: 100%">
