@@ -19,9 +19,9 @@ if (isset($_GET["email"])){
 	if(verify($email)&& verifyUser($email)){
 
 		$to=$email;
-		$subject="Activation Code For EenmaalAndermaal";
+		$subject="Activatiecode voor EenmaalAndermaal";
 		$from = 'noreacteenmaalandermaal@gmail.com';
-		$body='Your Activation Code is '.$code.' Please Click On This link  http://iproject4.icasites.nl/www/registratie.php?code='.$code.' to activate your account.';
+		$body='Uw activatiecode is '.$code.' Klik op deze link  http://iproject4.icasites.nl/www/registratie.php?code='.$code.' om je account te activeren.';
 		$headers = "From:".$from;
 
 		insertCode($code,$email);
