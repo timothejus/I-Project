@@ -117,7 +117,7 @@ if (isset($_GET["code"])) {
 									Land
 									<select name="land" required="required" class="form-control">
 										<?php
-										echo getGbaList("");
+										echo getGbaList("Nederland");
 										?>
 									</select><br/>
 									Telefoonnummer
