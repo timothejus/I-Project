@@ -73,7 +73,7 @@ if (isset($_SESSION["user"])) {
 								</select><br><br>
 								Antwoord
 								<input class="form-control" type="text" name="antwoord"
-								       value="<?= $gebruiker->getAntwoordGV() ?>">
+								       value="<?= $gebruiker->getAntwoordGV() ?>" required>
 							</div>
 							<div class="panel-footer">
 								<div class="row">
