@@ -833,9 +833,9 @@ function sendNewPassword($email,$gebruiker,$achternaam){
 */
 
 		$to=$email;
-		$subject="New password for EenmaalAndermaal";
+		$subject="Nieuw wachtwoord voor EenmaalAndermaal";
 		$from = 'noreacteenmaalandermaal@gmail.com';
-		$body='Your new password is '.$code.' Please Click On This link  http://iproject4.icasites.nl/www/login.php';
+		$body='Je nieuwe wachtwoord is '.$code.' Klik op deze link om in te loggen  http://iproject4.icasites.nl/www/login.php';
 		$headers = "From:".$from;
 
 		mail($to,$subject,$body,$headers);
