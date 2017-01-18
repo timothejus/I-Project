@@ -27,7 +27,9 @@ require("scripts/header.php");
 // Parse het meegegeven bedrag
 if (isset ($_GET ['bedrag']) && isset ($_GET ['hoogsteBod'])) {
 	if ($_GET ['bedrag'] != "" && $_GET ['hoogsteBod'] != "") {
-		if (
+		if ($_GET ['bedrag'] > 99999999999.99) {
+			echo '<div class="container"><div class="row"><div class="col-sm-10 col-sm-offset-1 alert alert-danger text-center">Bod is te hoog!</div></div></div>';
+		} else if (
 			(
 				$hoogsteBod >= 1 &&
 				$hoogsteBod < 50 &&

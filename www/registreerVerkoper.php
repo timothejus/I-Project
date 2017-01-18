@@ -152,7 +152,7 @@ if(isset($_GET['radio'])){
 										<option value="SNS">SNS</option>
 									</select>
 									<br>
-									Rekeningnummer
+									Rekeningnummer (geen IBAN, maar een Nederlands rekeningnummer)
 									<input class="form-control" name="rekeningnummer" required="required" type="text"
 									       value="<?php if (isset($_GET['rekeningnummer'])) {
 										       echo $_GET['rekeningnummer'];
