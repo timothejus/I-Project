@@ -12,6 +12,12 @@ $gebruiker = getAccountgegevens($_SESSION["user"]);
 
 $wachtwoord = hash('sha256', 'Brouwer' . 'admin');
 
+if (isVerkoper ($_SESSION ['user'])) {
+	echo '<div class="container"><div class="row"><div class="col-sm-6 col-sm-offset-3"><div class="alert alert-danger text-center">U bent al verkoper!</div></div></div></div>';
+	require ("scripts/footer.php");
+	exit;
+}
+
 function elfProef($input) {
 	$return = '';
 	if ((!preg_match("!^[0-9]{9}$!ie", $input)) || (strlen($input) <> 9)) { return false; }
